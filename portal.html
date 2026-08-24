@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guard Portal | Bulwark SEC, Inc.</title>
+  <meta name="description" content="Bulwark SEC client and guard officer portal. View active posts, incident reports, guard tour logs, and billing â€” all in one secure dashboard."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231e40af'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z'/></svg>" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['Outfit','sans-serif'],mono:['JetBrains Mono','monospace']},colors:{brand:{50:'#E8EFEF',100:'#CAD4D4',200:'#94B0B0',300:'#7CB0AB',400:'#5D9490',500:'#486A6E',600:'#345458',700:'#072832',800:'#0B171E',900:'#050E13',950:'#02070A'},tactical:{emerald:'#10b981',amber:'#f59e0b',red:'#ef4444',slate:'#334155'},obsidian:{900:'#0B171E',800:'#072832',700:'#123945',600:'#1E4D5B'}}}}}</script>
+  <link rel="stylesheet" href="styles.css"/>
+  <script>(function(){ const t=localStorage.getItem('bulwark_theme')||'light'; if(t==='dark') document.documentElement.classList.add('dark'); })();</script>
+</head>
+<body class="text-slate-900 dark:text-slate-100 dark:text-slate-100 transition-colors duration-300 font-sans antialiased overflow-x-hidden flex flex-col min-h-screen">
+
+<!-- TICKER -->
+<aside class="bg-slate-900 dark:bg-black py-2 px-4 text-xs font-mono text-white border-b border-slate-800 z-50"><div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2"><div class="flex items-center gap-3"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span></span><span class="font-bold text-emerald-400 uppercase tracking-wider">GUARD DISPATCH ACTIVE Â· 24/7 PATROL OPS</span></div><div class="flex items-center gap-4"><a href="tel:+18005550911" class="text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1 transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>+1 (800) 555-0911</a><span class="hidden sm:inline text-slate-400" id="live-utc-clock">UTC 00:00:00</span></div></div></aside>
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 bg-white/95 dark:bg-obsidian-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-colors duration-300">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+    <a href="index.html" class="flex items-center gap-3 group flex-shrink-0"><div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-700 to-brand-900 p-0.5 shadow-md shadow-brand-600/20 group-hover:shadow-brand-600/40 transition-all"><div class="w-full h-full bg-white dark:bg-obsidian-900 rounded-[10px] flex items-center justify-center"><svg class="w-6 h-6 text-brand-600 dark:text-brand-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg></div></div><div class="flex flex-col leading-tight"><span class="font-display font-extrabold text-xl text-slate-900 dark:text-white tracking-tight">BULWARK <span class="text-brand-600 dark:text-brand-400">SEC</span> <span class="text-[10px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700">INC.</span></span><span class="text-[11px] font-medium tracking-widest text-slate-500 uppercase">Physical Security & Guard Forces</span></div></a>
+    <div class="hidden lg:flex items-center gap-0.5 text-sm font-medium text-slate-600 dark:text-slate-300">
+      <a href="index.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Home</a>
+      <a href="services.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Guard Services</a>
+      <a href="patrol.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Patrol Operations</a>
+      <a href="estimator.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Staffing Estimator</a>
+      <a href="vetting.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Officer Vetting</a>
+      <a href="hire.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Hire Guards</a>
+    </div>
+    <div class="hidden sm:flex items-center gap-3">
+      <button id="theme-toggle" aria-label="Toggle theme" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 transition-all"><svg id="theme-icon-sun" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg><svg id="theme-icon-moon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg></button>
+      <a href="hire.html" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-brand-700 to-brand-600 hover:from-brand-800 hover:to-brand-700 shadow-md shadow-brand-500/25 hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 transition-all duration-200">Request Guard Coverage <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+    </div>
+    <div class="flex items-center gap-2 lg:hidden"><button id="mobile-theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg></button><button id="mobile-menu-btn" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+  </nav>
+  <div id="mobile-drawer" class="fixed inset-0 z-50 translate-x-full transition-transform duration-300 lg:hidden"><div id="drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div><div class="relative w-4/5 max-w-sm ml-auto h-full bg-white dark:bg-obsidian-800 border-l border-slate-200 dark:border-slate-800 shadow-2xl p-6 flex flex-col z-10"><div class="flex items-center justify-between pb-5 border-b border-slate-200 dark:border-slate-800 mb-5"><span class="font-display font-bold text-slate-900 dark:text-white">Bulwark SEC</span><button id="close-drawer-btn" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div><div class="flex flex-col gap-2 font-medium text-slate-800 dark:text-slate-200 flex-1"><a href="index.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ   Home</a><a href="services.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ›¡ï¸  Guard Services</a><a href="patrol.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸš” Patrol Operations</a><a href="estimator.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ“Š Staffing Estimator</a><a href="vetting.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">âœ… Officer Vetting</a><a href="hire.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ“‹ Hire Guards</a><a href="portal.html" class="drawer-link py-3 px-4 rounded-xl bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-300 font-semibold">ðŸ”  Guard Portal</a></div><a href="hire.html" class="drawer-link mt-6 block text-center py-3.5 rounded-xl bg-brand-600 text-white font-bold shadow-lg shadow-brand-600/30">Deploy Guard Forces â†’</a></div></div>
+</header>
+
+<!-- PORTAL LOGIN GATE -->
+<div id="portal-login-screen" class="flex-1 flex items-center justify-center py-20 px-4 relative overflow-hidden bg-[#071922]">
+  <!-- Cinematic Background Image -->
+  <div class="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
+    <img src="assets/hero_bg.jpg" alt="Bulwark SEC Portal Gate" class="w-full h-full object-cover object-center filter brightness-75 contrast-125 saturate-110 opacity-75"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#071922] via-[#071922]/80 to-[#0B171E]/85"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(7,40,50,0.5)_0%,_rgba(11,23,30,0.92)_100%)]"></div>
+  </div>
+
+  <div class="w-full max-w-md space-y-8 relative z-10">
+    <div class="text-center space-y-4">
+      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 flex items-center justify-center mx-auto shadow-2xl shadow-[#7CB0AB]/20">
+        <svg class="w-9 h-9 text-[#7CB0AB]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+      </div>
+      <div>
+        <h1 class="font-display font-black text-3xl text-white drop-shadow-md">Guard Portal</h1>
+        <p class="text-sm text-slate-300 mt-2 font-medium">Bulwark SEC · Secure Client &amp; Officer Access</p>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-2xl bg-[#072832]/85 backdrop-blur-xl border border-[#7CB0AB]/35 shadow-2xl overflow-hidden text-white">
+      <div class="p-4 border-b border-[#486A6E]/40 bg-[#0B171E]/90">
+        <div class="flex gap-2">
+          <button id="portal-tab-client" class="portal-tab-btn active-portal-tab px-4 py-2 rounded-lg text-sm font-semibold flex-1">🏢 Client Access</button>
+          <button id="portal-tab-officer" class="portal-tab-btn px-4 py-2 rounded-lg text-sm font-semibold flex-1 text-slate-400">🛡️ Officer Access</button>
+        </div>
+      </div>
+
+      <form id="portal-form" class="p-8 space-y-5" novalidate>
+        <div>
+          <label class="hire-form-label text-slate-200" for="portal-user">Account Username / Email</label>
+          <input id="portal-user" type="text" class="hire-form-input bg-[#0B171E]/80 border-[#486A6E]/50 text-white placeholder-slate-400 focus:border-[#7CB0AB]" placeholder="client@company.com"/>
+        </div>
+        <div>
+          <label class="hire-form-label text-slate-200" for="portal-pass">Password</label>
+          <input id="portal-pass" type="password" class="hire-form-input bg-[#0B171E]/80 border-[#486A6E]/50 text-white placeholder-slate-400 focus:border-[#7CB0AB]" placeholder="••••••••••••"/>
+        </div>
+        <div>
+          <label class="hire-form-label text-slate-200" for="portal-pin">Site PIN / Badge ID</label>
+          <input id="portal-pin" type="text" class="hire-form-input bg-[#0B171E]/80 border-[#486A6E]/50 text-white placeholder-slate-400 focus:border-[#7CB0AB]" placeholder="Enter your 6-digit PIN"/>
+        </div>
+        <button type="submit" class="btn-primary w-full justify-center py-4 bg-gradient-to-r from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 shadow-xl hover:shadow-[#7CB0AB]/20 text-white font-bold">
+          <svg class="w-5 h-5 text-[#7CB0AB]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+          Access Portal
+        </button>
+        <p class="text-center text-xs text-slate-300">Demo: any username / password / PIN → <button id="portal-demo-btn" type="button" class="text-[#7CB0AB] hover:text-white underline font-semibold">Use Demo Credentials</button></p>
+      </form>
+    </div>
+    <p class="text-center text-xs text-slate-400">🔒 AES-256 Encrypted · Zero-Knowledge Auth · SOC 2 Type II Compliant</p>
+  </div>
+</div>
+
+<!-- PORTAL DASHBOARD (hidden until login) -->
+<div id="portal-dashboard" class="flex-1 flex flex-col hidden">
+  <!-- Dashboard Header -->
+  <div class="bg-slate-900 border-b border-slate-800 px-4 py-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-brand-600 flex items-center justify-center text-white font-bold font-display">JM</div>
+        <div>
+          <div class="font-bold text-white text-sm">Morrison &amp; Reed Properties LLC</div>
+          <div class="text-xs font-mono text-slate-400">CLIENT-ID: MRP-0041 Â· CLEARANCE: STANDARD</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-mono text-emerald-400">Session: ACTIVE</span>
+        <button id="portal-logout-btn" class="px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 border border-slate-700 hover:border-red-500 hover:text-red-400 transition-colors">Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard Tabs -->
+  <div class="bg-white dark:bg-obsidian-900 border-b border-slate-200 dark:border-slate-800 sticky top-20 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-1 overflow-x-auto">
+      <button data-tab="overview" class="dash-tab active-dash-tab px-5 py-4 font-semibold text-sm whitespace-nowrap border-b-2 border-brand-600 text-brand-600">Overview</button>
+      <button data-tab="reports" class="dash-tab px-5 py-4 font-semibold text-sm whitespace-nowrap border-b-2 border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white">Guard Reports</button>
+      <button data-tab="incidents" class="dash-tab px-5 py-4 font-semibold text-sm whitespace-nowrap border-b-2 border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white">Incidents</button>
+      <button data-tab="schedule" class="dash-tab px-5 py-4 font-semibold text-sm whitespace-nowrap border-b-2 border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white">Shift Schedule</button>
+      <button data-tab="billing" class="dash-tab px-5 py-4 font-semibold text-sm whitespace-nowrap border-b-2 border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-white">Billing</button>
+    </div>
+  </div>
+
+  <!-- TAB CONTENT -->
+  <div class="flex-1 dark:bg-obsidian-900/40/50">
+
+    <!-- OVERVIEW TAB -->
+    <div id="tab-overview" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="stat-card text-center"><div class="text-3xl font-display font-black text-slate-900 dark:text-white">6</div><p class="text-xs font-bold text-brand-600 uppercase tracking-wider mt-2">Guards On Post</p></div>
+        <div class="stat-card text-center"><div class="text-3xl font-display font-black text-emerald-600">99.8%</div><p class="text-xs font-bold text-brand-600 uppercase tracking-wider mt-2">Post Uptime This Month</p></div>
+        <div class="stat-card text-center"><div class="text-3xl font-display font-black text-slate-900 dark:text-white">2</div><p class="text-xs font-bold text-brand-600 uppercase tracking-wider mt-2">Open Incidents</p></div>
+        <div class="stat-card text-center"><div class="text-3xl font-display font-black text-slate-900 dark:text-white">248</div><p class="text-xs font-bold text-brand-600 uppercase tracking-wider mt-2">NFC Scans This Week</p></div>
+      </div>
+
+      <!-- Active Posts Table -->
+      <div>
+        <h2 class="font-display font-bold text-2xl text-slate-900 dark:text-white mb-6">Active Guard Posts</h2>
+        <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 shadow-lg">
+          <table class="portal-table w-full">
+            <thead><tr><th>Post #</th><th>Location</th><th>Officer</th><th>Type</th><th>Shift Hours</th><th>Status</th><th>Last Check-In</th></tr></thead>
+            <tbody>
+              <tr><td class="font-mono font-bold">P-401</td><td>Main Lobby â€” North Tower</td><td>Officer D. Reeves</td><td>Unarmed Concierge</td><td>06:00 â€“ 22:00</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">ON DUTY</span></td><td class="font-mono text-xs">2 min ago</td></tr>
+              <tr><td class="font-mono font-bold">P-402</td><td>Loading Dock â€” Level B2</td><td>Officer M. Tanaka</td><td>Armed Static</td><td>06:00 â€“ 18:00</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">ON DUTY</span></td><td class="font-mono text-xs">7 min ago</td></tr>
+              <tr><td class="font-mono font-bold">P-403</td><td>Parking Structure â€” Gates 1â€“3</td><td>Officer S. Williams</td><td>Armed Gate</td><td>06:00 â€“ 22:00</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">ON DUTY</span></td><td class="font-mono text-xs">12 min ago</td></tr>
+              <tr><td class="font-mono font-bold">P-404</td><td>South Tower Lobby</td><td>Officer F. Coleman</td><td>Unarmed Concierge</td><td>22:00 â€“ 06:00</td><td><span class="badge-amber px-2 py-0.5 rounded-full text-xs font-bold">INCOMING</span></td><td class="font-mono text-xs">â€”</td></tr>
+              <tr><td class="font-mono font-bold">P-405</td><td>Executive Floor 40â€“45</td><td>CPO J. Harrington</td><td>Executive Protection</td><td>08:00 â€“ 20:00</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">ON DUTY</span></td><td class="font-mono text-xs">1 min ago</td></tr>
+              <tr><td class="font-mono font-bold">MBU-7</td><td>Perimeter â€” All Lots</td><td>Unit Bravo-7</td><td>Mobile Patrol Vehicle</td><td>18:00 â€“ 06:00</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">ACTIVE</span></td><td class="font-mono text-xs">3 min ago</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUARD REPORTS TAB -->
+    <div id="tab-reports" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8 hidden">
+      <h2 class="font-display font-bold text-2xl text-slate-900 dark:text-white">Daily Activity Reports (DAR)</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 shadow-lg">
+        <table class="portal-table w-full">
+          <thead><tr><th>Date</th><th>Post</th><th>Officer</th><th>Activity Summary</th><th>Incidents</th><th>DAR Status</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono">2026-08-24</td><td>P-401 Lobby</td><td>D. Reeves</td><td>48 visitors logged. 2 deliveries screened. No anomalies.</td><td>0</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">FILED</span></td></tr>
+            <tr><td class="font-mono">2026-08-24</td><td>P-402 Dock</td><td>M. Tanaka</td><td>12 vehicles inspected. 1 unauthorized vendor turned away.</td><td>1</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">FILED</span></td></tr>
+            <tr><td class="font-mono">2026-08-23</td><td>MBU-7 Patrol</td><td>Unit Bravo-7</td><td>4 full perimeter sweeps. 1 suspicious vehicle â€” plate logged and reported.</td><td>1</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">FILED</span></td></tr>
+            <tr><td class="font-mono">2026-08-23</td><td>P-405 Exec</td><td>CPO J. Harrington</td><td>Principal protection. 2 external meetings with advance completed.</td><td>0</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">FILED</span></td></tr>
+            <tr><td class="font-mono">2026-08-22</td><td>P-403 Parking</td><td>S. Williams</td><td>Gate access verified for 87 vehicles. 1 tailgate incident logged.</td><td>1</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">FILED</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- INCIDENTS TAB -->
+    <div id="tab-incidents" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8 hidden">
+      <h2 class="font-display font-bold text-2xl text-slate-900 dark:text-white">Incident Report Log</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 shadow-lg">
+        <table class="portal-table w-full">
+          <thead><tr><th>ID</th><th>Date/Time</th><th>Location</th><th>Category</th><th>Description</th><th>Resolution</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono text-brand-600 font-bold">IR-2441</td><td class="font-mono text-xs">08/24 13:22</td><td>Loading Dock B2</td><td>Access Violation</td><td>Vendor without valid credentials attempted to enter restricted zone.</td><td>Vendor turned away. Credentials flagged. Site manager notified.</td><td><span class="badge-amber px-2 py-0.5 rounded-full text-xs font-bold">OPEN</span></td></tr>
+            <tr><td class="font-mono text-brand-600 font-bold">IR-2440</td><td class="font-mono text-xs">08/23 21:45</td><td>Parking Lot C</td><td>Suspicious Person</td><td>Unidentified individual loitering near Vehicle Bay 3 for 45 minutes.</td><td>Individual warned and departed. Plate of accompanying vehicle logged.</td><td><span class="badge-amber px-2 py-0.5 rounded-full text-xs font-bold">OPEN</span></td></tr>
+            <tr><td class="font-mono text-brand-600 font-bold">IR-2439</td><td class="font-mono text-xs">08/22 09:17</td><td>Main Lobby</td><td>Unauthorized Entry Attempt</td><td>Individual using expired visitor badge attempted lobby access.</td><td>Access denied. Individual escorted out. Badge deactivated in system.</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">CLOSED</span></td></tr>
+            <tr><td class="font-mono text-brand-600 font-bold">IR-2438</td><td class="font-mono text-xs">08/20 03:55</td><td>Perimeter North</td><td>Trespasser</td><td>One individual found sleeping against fence on north perimeter.</td><td>Police called. Individual removed. Incident report filed with NYPD (Report# 2026-04412).</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">CLOSED</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SCHEDULE TAB -->
+    <div id="tab-schedule" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8 hidden">
+      <h2 class="font-display font-bold text-2xl text-slate-900 dark:text-white">This Week's Shift Schedule</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 shadow-lg">
+        <table class="portal-table w-full">
+          <thead><tr><th>Officer</th><th>Mon 08/25</th><th>Tue 08/26</th><th>Wed 08/27</th><th>Thu 08/28</th><th>Fri 08/29</th><th>Sat 08/30</th><th>Sun 08/31</th></tr></thead>
+          <tbody>
+            <tr><td class="font-semibold text-slate-900 dark:text-white">D. Reeves</td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td class="text-slate-400 text-xs">OFF</td><td class="text-slate-400 text-xs">OFF</td></tr>
+            <tr><td class="font-semibold text-slate-900 dark:text-white">M. Tanaka</td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“18</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“18</span></td><td class="text-slate-400 text-xs">OFF</td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“18</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“18</span></td><td><span class="badge-amber px-2 py-0.5 rounded text-xs font-bold">06â€“18</span></td><td class="text-slate-400 text-xs">OFF</td></tr>
+            <tr><td class="font-semibold text-slate-900 dark:text-white">S. Williams</td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td class="text-slate-400 text-xs">OFF</td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">06â€“22</span></td><td class="text-slate-400 text-xs">OFF</td></tr>
+            <tr><td class="font-semibold text-slate-900 dark:text-white">CPO J. Harrington</td><td><span class="badge-amber px-2 py-0.5 rounded text-xs font-bold">08â€“20</span></td><td><span class="badge-amber px-2 py-0.5 rounded text-xs font-bold">08â€“20</span></td><td><span class="badge-amber px-2 py-0.5 rounded text-xs font-bold">08â€“20</span></td><td><span class="badge-amber px-2 py-0.5 rounded text-xs font-bold">08â€“20</span></td><td><span class="badge-amber px-2 py-0.5 rounded text-xs font-bold">08â€“20</span></td><td class="text-slate-400 text-xs">OFF</td><td class="text-slate-400 text-xs">OFF</td></tr>
+            <tr><td class="font-semibold text-slate-900 dark:text-white">Unit Bravo-7</td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">18â€“06</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">18â€“06</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">18â€“06</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">18â€“06</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">18â€“06</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">18â€“06</span></td><td><span class="badge-green px-2 py-0.5 rounded text-xs font-bold">18â€“06</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BILLING TAB -->
+    <div id="tab-billing" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8 hidden">
+      <h2 class="font-display font-bold text-2xl text-slate-900 dark:text-white">Billing &amp; Invoices</h2>
+      <div class="grid grid-cols-3 gap-6 mb-4">
+        <div class="stat-card text-center"><div class="text-2xl font-display font-black text-emerald-600">$0.00</div><p class="text-xs font-bold text-brand-600 uppercase tracking-wider mt-2">Balance Due</p></div>
+        <div class="stat-card text-center"><div class="text-2xl font-display font-black text-slate-900 dark:text-white">$48,200</div><p class="text-xs font-bold text-brand-600 uppercase tracking-wider mt-2">YTD Invoiced</p></div>
+        <div class="stat-card text-center"><div class="text-2xl font-display font-black text-slate-900 dark:text-white">Aug 31</div><p class="text-xs font-bold text-brand-600 uppercase tracking-wider mt-2">Next Invoice Date</p></div>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 shadow-lg">
+        <table class="portal-table w-full">
+          <thead><tr><th>Invoice #</th><th>Period</th><th>Description</th><th>Amount</th><th>Status</th><th>Download</th></tr></thead>
+          <tbody>
+            <tr><td class="font-mono font-bold text-brand-600">INV-2024-08</td><td class="font-mono text-xs">Aug 1 â€“ Aug 31, 2026</td><td>6 Guard Posts + Mobile Patrol â€” Monthly</td><td class="font-bold">$16,400.00</td><td><span class="badge-amber px-2 py-0.5 rounded-full text-xs font-bold">PENDING</span></td><td><button onclick="showToast('Invoice PDF generating...', 'info')" class="text-xs text-brand-600 hover:underline font-semibold">â¬‡ PDF</button></td></tr>
+            <tr><td class="font-mono font-bold text-brand-600">INV-2024-07</td><td class="font-mono text-xs">Jul 1 â€“ Jul 31, 2026</td><td>6 Guard Posts + Mobile Patrol â€” Monthly</td><td class="font-bold">$16,400.00</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">PAID</span></td><td><button onclick="showToast('Invoice PDF generating...', 'info')" class="text-xs text-brand-600 hover:underline font-semibold">â¬‡ PDF</button></td></tr>
+            <tr><td class="font-mono font-bold text-brand-600">INV-2024-06</td><td class="font-mono text-xs">Jun 1 â€“ Jun 30, 2026</td><td>6 Guard Posts + Mobile Patrol â€” Monthly</td><td class="font-bold">$15,400.00</td><td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold">PAID</span></td><td><button onclick="showToast('Invoice PDF generating...', 'info')" class="text-xs text-brand-600 hover:underline font-semibold">â¬‡ PDF</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER (when not in dashboard mode, show small footer) -->
+<footer class="site-footer" id="portal-footer"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600 border-t border-slate-800"><p>Â© 2026 Bulwark SEC, Inc. â€” Secure Guard Portal</p><a href="index.html" class="hover:text-slate-400 transition-colors">â† Back to Main Site</a></div></div></footer>
+
+<div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="utils.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loginScreen = document.getElementById('portal-login-screen');
+  const dashboard   = document.getElementById('portal-dashboard');
+  const portalFooter = document.getElementById('portal-footer');
+  const logoutBtn   = document.getElementById('portal-logout-btn');
+  const demoBtn     = document.getElementById('portal-demo-btn');
+  const portalForm  = document.getElementById('portal-form');
+  const tabClient   = document.getElementById('portal-tab-client');
+  const tabOfficer  = document.getElementById('portal-tab-officer');
+
+  async function loadSupabasePortalData() {
+    if (!window.BulwarkDB) return;
+    try {
+      const { data: posts } = await window.BulwarkDB.fetchActivePosts();
+      if (posts && posts.length > 0) {
+        const tbody = document.querySelector('#tab-overview table tbody');
+        if (tbody) {
+          tbody.innerHTML = posts.map(p => `
+            <tr>
+              <td class="font-mono font-bold">${p.post_code}</td>
+              <td>${p.location_name}</td>
+              <td>${p.officer_name}</td>
+              <td>${p.guard_type}</td>
+              <td>${p.shift_schedule}</td>
+              <td><span class="${p.status === 'ON_DUTY' || p.status === 'ACTIVE' ? 'badge-green' : 'badge-amber'} px-2 py-0.5 rounded-full text-xs font-bold">${p.status}</span></td>
+              <td class="font-mono text-xs">Live Sync</td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      const { data: incidents } = await window.BulwarkDB.fetchIncidents();
+      if (incidents && incidents.length > 0) {
+        const incTbody = document.querySelector('#tab-incidents table tbody');
+        if (incTbody) {
+          incTbody.innerHTML = incidents.map(inc => `
+            <tr>
+              <td class="font-mono font-bold text-red-500">${inc.incident_number || 'INC-LIVE'}</td>
+              <td>${inc.post_code}</td>
+              <td class="font-semibold">${inc.title}</td>
+              <td><span class="badge-${inc.severity === 'high' || inc.severity === 'critical' ? 'red' : 'amber'} px-2 py-0.5 rounded-full text-xs font-bold uppercase">${inc.severity}</span></td>
+              <td>${inc.officer_name}</td>
+              <td><span class="badge-green px-2 py-0.5 rounded-full text-xs font-bold uppercase">${inc.status}</span></td>
+              <td class="font-mono text-xs">${new Date(inc.logged_at).toLocaleTimeString()}</td>
+            </tr>
+          `).join('');
+        }
+      }
+    } catch (e) {
+      console.warn('Supabase data load notice:', e);
+    }
+  }
+
+  function showDashboard() {
+    loginScreen?.classList.add('hidden');
+    dashboard?.classList.remove('hidden');
+    portalFooter?.classList.add('hidden');
+    showToast('Welcome, Morrison & Reed Properties. Portal access granted.', 'success');
+    loadSupabasePortalData();
+  }
+
+  function showLogin() {
+    dashboard?.classList.add('hidden');
+    loginScreen?.classList.remove('hidden');
+    portalFooter?.classList.remove('hidden');
+    showToast('Signed out successfully', 'info');
+  }
+
+  demoBtn?.addEventListener('click', () => {
+    document.getElementById('portal-user').value = 'client@morrisonreed.com';
+    document.getElementById('portal-pass').value = 'Demo2026!';
+    document.getElementById('portal-pin').value = '401041';
+    showToast('Demo credentials filled in â€” click Access Portal', 'info');
+  });
+
+  portalForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    showDashboard();
+  });
+
+  logoutBtn?.addEventListener('click', showLogin);
+
+  [tabClient, tabOfficer].forEach(btn => {
+    btn?.addEventListener('click', () => {
+      [tabClient, tabOfficer].forEach(b => b?.classList.remove('active-portal-tab'));
+      btn.classList.add('active-portal-tab');
+    });
+  });
+
+  // Dashboard tab switching
+  document.querySelectorAll('.dash-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.dash-tab').forEach(t => {
+        t.classList.remove('active-dash-tab', 'border-brand-600', 'text-brand-600');
+        t.classList.add('border-transparent', 'text-slate-500');
+      });
+      tab.classList.add('active-dash-tab', 'border-brand-600', 'text-brand-600');
+      tab.classList.remove('border-transparent', 'text-slate-500');
+
+      ['overview','reports','incidents','schedule','billing'].forEach(id => {
+        document.getElementById(`tab-${id}`)?.classList.add('hidden');
+      });
+      document.getElementById(`tab-${tab.dataset.tab}`)?.classList.remove('hidden');
+    });
+  });
+});
+</script>
+</body>
+</html>
+

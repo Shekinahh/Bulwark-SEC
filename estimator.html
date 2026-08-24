@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staffing Estimator | Bulwark SEC, Inc.</title>
+  <meta name="description" content="Use our guard staffing estimator to calculate exactly how many security officers your property needs based on size, shifts, and requirements."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231e40af'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z'/></svg>" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['Outfit','sans-serif'],mono:['JetBrains Mono','monospace']},colors:{brand:{50:'#E8EFEF',100:'#CAD4D4',200:'#94B0B0',300:'#7CB0AB',400:'#5D9490',500:'#486A6E',600:'#345458',700:'#072832',800:'#0B171E',900:'#050E13',950:'#02070A'},tactical:{emerald:'#10b981',amber:'#f59e0b',red:'#ef4444',slate:'#334155'},obsidian:{900:'#0B171E',800:'#072832',700:'#123945',600:'#1E4D5B'}}}}}</script>
+  <link rel="stylesheet" href="styles.css"/>
+  <script>(function(){ const t=localStorage.getItem('bulwark_theme')||'light'; if(t==='dark') document.documentElement.classList.add('dark'); })();</script>
+</head>
+<body class="text-slate-900 dark:text-slate-100 dark:text-slate-100 transition-colors duration-300 font-sans antialiased overflow-x-hidden flex flex-col min-h-screen">
+
+<!-- TICKER -->
+<aside class="bg-slate-900 dark:bg-black py-2 px-4 text-xs font-mono text-white border-b border-slate-800 z-50"><div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2"><div class="flex items-center gap-3"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span></span><span class="font-bold text-emerald-400 uppercase tracking-wider">GUARD DISPATCH ACTIVE Â· 24/7 PATROL OPS</span></div><div class="flex items-center gap-4"><a href="tel:+18005550911" class="text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1 transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>+1 (800) 555-0911</a><span class="hidden sm:inline text-slate-400" id="live-utc-clock">UTC 00:00:00</span></div></div></aside>
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 bg-white/95 dark:bg-obsidian-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-colors duration-300">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+    <a href="index.html" class="flex items-center gap-3 group flex-shrink-0"><div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-700 to-brand-900 p-0.5 shadow-md shadow-brand-600/20 group-hover:shadow-brand-600/40 transition-all"><div class="w-full h-full bg-white dark:bg-obsidian-900 rounded-[10px] flex items-center justify-center"><svg class="w-6 h-6 text-brand-600 dark:text-brand-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg></div></div><div class="flex flex-col leading-tight"><span class="font-display font-extrabold text-xl text-slate-900 dark:text-white tracking-tight">BULWARK <span class="text-brand-600 dark:text-brand-400">SEC</span> <span class="text-[10px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-500 px-1.5 py-0.5 rounded border border-slate-200 dark:border-slate-700">INC.</span></span><span class="text-[11px] font-medium tracking-widest text-slate-500 uppercase">Physical Security & Guard Forces</span></div></a>
+    <div class="hidden lg:flex items-center gap-0.5 text-sm font-medium text-slate-600 dark:text-slate-300">
+      <a href="index.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Home</a>
+      <a href="services.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Guard Services</a>
+      <a href="patrol.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Patrol Operations</a>
+      <a href="estimator.html" class="nav-link active-nav px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Staffing Estimator</a>
+      <a href="vetting.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Officer Vetting</a>
+      <a href="hire.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all">Hire Guards</a>
+    </div>
+    <div class="hidden sm:flex items-center gap-3">
+      <button id="theme-toggle" aria-label="Toggle theme" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 transition-all"><svg id="theme-icon-sun" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg><svg id="theme-icon-moon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg></button>
+      <a href="portal.html" class="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-slate-800/80 hover:border-brand-500 hover:text-brand-600 flex items-center gap-2 transition-all shadow-sm"><svg class="w-4 h-4 text-brand-600 dark:text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>Guard Portal</a>
+      <a href="hire.html" class="px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-brand-700 to-brand-600 hover:from-brand-800 hover:to-brand-700 shadow-md shadow-brand-500/25 hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2 transition-all duration-200">Request Guard Coverage <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+    </div>
+    <div class="flex items-center gap-2 lg:hidden"><button id="mobile-theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg></button><button id="mobile-menu-btn" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+  </nav>
+  <div id="mobile-drawer" class="fixed inset-0 z-50 translate-x-full transition-transform duration-300 lg:hidden"><div id="drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div><div class="relative w-4/5 max-w-sm ml-auto h-full bg-white dark:bg-obsidian-800 border-l border-slate-200 dark:border-slate-800 shadow-2xl p-6 flex flex-col z-10"><div class="flex items-center justify-between pb-5 border-b border-slate-200 dark:border-slate-800 mb-5"><span class="font-display font-bold text-slate-900 dark:text-white">Bulwark SEC</span><button id="close-drawer-btn" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div><div class="flex flex-col gap-2 font-medium text-slate-800 dark:text-slate-200 flex-1"><a href="index.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ  Home</a><a href="services.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ›¡ï¸ Guard Services</a><a href="patrol.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸš” Patrol Operations</a><a href="estimator.html" class="drawer-link py-3 px-4 rounded-xl bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-300 font-semibold">ðŸ“Š Staffing Estimator</a><a href="vetting.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">âœ… Officer Vetting</a><a href="hire.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ“‹ Hire Guards</a><a href="portal.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ” Guard Portal</a></div><a href="hire.html" class="drawer-link mt-6 block text-center py-3.5 rounded-xl bg-brand-600 text-white font-bold shadow-lg shadow-brand-600/30">Deploy Guard Forces â†’</a></div></div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="relative pt-24 pb-28 md:pt-32 md:pb-36 overflow-hidden bg-[#071922] text-white border-b border-[#486A6E]/50 shadow-2xl">
+  <!-- Cinematic Estimator Background Image -->
+  <div class="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
+    <img src="assets/estimator_hero_bg.jpg" alt="Bulwark SEC Security Staffing Dispatch" class="w-full h-full object-cover object-center filter brightness-90 contrast-115 saturate-110 opacity-80"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#071922] via-[#071922]/75 to-[#0B171E]/80"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(7,40,50,0.5)_0%,_rgba(11,23,30,0.92)_100%)]"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(rgba(124,176,171,0.03)_50%,_rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px] opacity-35"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#072832]/90 border border-[#7CB0AB]/40 text-[#7CB0AB] text-xs font-bold uppercase tracking-wider backdrop-blur-md shadow-lg mx-auto">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+      Interactive Staffing Engine
+    </div>
+    <h1 class="font-display font-black text-5xl sm:text-6xl xl:text-7xl text-white leading-tight drop-shadow-md">
+      How Many Officers<br/><span class="bg-gradient-to-r from-white via-[#CAD4D4] to-[#7CB0AB] bg-clip-text text-transparent">Does Your Site Need?</span>
+    </h1>
+    <p class="text-lg sm:text-xl text-slate-200 max-w-3xl mx-auto leading-relaxed drop-shadow-sm">Use our interactive staffing calculator to determine the exact number of security officers, shifts, and guard types required for your specific property — then send us the results directly.</p>
+  </div>
+</section>
+
+<!-- MULTI-STEP ESTIMATOR WIZARD -->
+<section class="py-24 md:py-32 dark:bg-obsidian-900/40/50">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Wizard Steps Progress -->
+    <div class="flex items-center gap-2 mb-16">
+      <div class="flex flex-col items-center gap-2">
+        <div class="wizard-step-indicator active" id="step-ind-1">1</div>
+        <span class="text-xs font-semibold text-brand-600 dark:text-brand-400">Property</span>
+      </div>
+      <div class="wizard-connector completed" id="conn-1"></div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="wizard-step-indicator" id="step-ind-2">2</div>
+        <span class="text-xs font-semibold text-slate-400">Coverage</span>
+      </div>
+      <div class="wizard-connector" id="conn-2"></div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="wizard-step-indicator" id="step-ind-3">3</div>
+        <span class="text-xs font-semibold text-slate-400">Add-Ons</span>
+      </div>
+      <div class="wizard-connector" id="conn-3"></div>
+      <div class="flex flex-col items-center gap-2">
+        <div class="wizard-step-indicator" id="step-ind-4">4</div>
+        <span class="text-xs font-semibold text-slate-400">Results</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+      <!-- LEFT: CONTROLS -->
+      <div class="lg:col-span-2 space-y-10">
+
+        <!-- STEP 1: Property Type -->
+        <div class="glass-card rounded-2xl p-8 border border-slate-200 dark:border-slate-800 space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-brand-600 text-white font-display font-black flex items-center justify-center">1</div>
+            <div>
+              <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">Property Type &amp; Size</h3>
+              <p class="text-sm text-slate-500">Select the type of facility you need secured</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <button data-type="office" data-points="2" class="scale-btn calc-btn rounded-xl p-3 text-center text-sm font-semibold active-calc-btn"><div class="text-2xl mb-1">ðŸ¢</div>Corporate Office</button>
+            <button data-type="retail" data-points="2" class="scale-btn calc-btn rounded-xl p-3 text-center text-sm font-semibold"><div class="text-2xl mb-1">ðŸª</div>Retail / Mall</button>
+            <button data-type="warehouse" data-points="3" class="scale-btn calc-btn rounded-xl p-3 text-center text-sm font-semibold"><div class="text-2xl mb-1">ðŸ­</div>Industrial / Warehouse</button>
+            <button data-type="residential" data-points="1" class="scale-btn calc-btn rounded-xl p-3 text-center text-sm font-semibold"><div class="text-2xl mb-1">ðŸ˜ï¸</div>Residential Complex</button>
+            <button data-type="event" data-points="4" class="scale-btn calc-btn rounded-xl p-3 text-center text-sm font-semibold"><div class="text-2xl mb-1">ðŸŽ­</div>Event / Venue</button>
+            <button data-type="construction" data-points="2" class="scale-btn calc-btn rounded-xl p-3 text-center text-sm font-semibold"><div class="text-2xl mb-1">ðŸ—ï¸</div>Construction Site</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Shift Coverage -->
+        <div class="glass-card rounded-2xl p-8 border border-slate-200 dark:border-slate-800 space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-brand-600 text-white font-display font-black flex items-center justify-center">2</div>
+            <div>
+              <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">Coverage Hours &amp; Shift Schedule</h3>
+              <p class="text-sm text-slate-500">How many hours per day do you require security coverage?</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button data-points="8" class="sector-btn calc-btn rounded-xl p-4 text-center active-calc-btn">
+              <div class="font-display font-black text-3xl text-brand-600 dark:text-brand-400">8</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white mt-1">Business Hours</div>
+              <div class="text-xs text-slate-500 mt-1">Concierge / Front-Desk</div>
+            </button>
+            <button data-points="12" class="sector-btn calc-btn rounded-xl p-4 text-center">
+              <div class="font-display font-black text-3xl text-amber-600 dark:text-amber-400">12</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white mt-1">Extended Shift</div>
+              <div class="text-xs text-slate-500 mt-1">Overnight / Weekend</div>
+            </button>
+            <button data-points="24" class="sector-btn calc-btn rounded-xl p-4 text-center">
+              <div class="font-display font-black text-3xl text-emerald-600 dark:text-emerald-400">24/7</div>
+              <div class="text-sm font-bold text-slate-900 dark:text-white mt-1">Round-the-Clock</div>
+              <div class="text-xs text-slate-500 mt-1">Continuous post coverage</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Add-Ons -->
+        <div class="glass-card rounded-2xl p-8 border border-slate-200 dark:border-slate-800 space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-brand-600 text-white font-display font-black flex items-center justify-center">3</div>
+            <div>
+              <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">Service Add-Ons</h3>
+              <p class="text-sm text-slate-500">Check all additional services required at your site</p>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <label class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-900/30 cursor-pointer hover:border-brand-400 transition-colors">
+              <input type="checkbox" class="calc-check w-5 h-5 accent-brand-600 mt-0.5 flex-shrink-0"/>
+              <div><div class="font-semibold text-slate-900 dark:text-white text-sm">Armed Officers Required</div><div class="text-xs text-slate-500 mt-0.5">High-value assets or elevated risk environment</div></div>
+            </label>
+            <label class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-900/30 cursor-pointer hover:border-brand-400 transition-colors">
+              <input type="checkbox" class="calc-check w-5 h-5 accent-brand-600 mt-0.5 flex-shrink-0"/>
+              <div><div class="font-semibold text-slate-900 dark:text-white text-sm">Mobile Patrol Vehicle</div><div class="text-xs text-slate-500 mt-0.5">Supplemental patrol unit for exterior perimeter sweeps</div></div>
+            </label>
+            <label class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-900/30 cursor-pointer hover:border-brand-400 transition-colors">
+              <input type="checkbox" class="calc-check w-5 h-5 accent-brand-600 mt-0.5 flex-shrink-0"/>
+              <div><div class="font-semibold text-slate-900 dark:text-white text-sm">K-9 Detection Team</div><div class="text-xs text-slate-500 mt-0.5">Explosive/contraband scent detection during shifts</div></div>
+            </label>
+            <label class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-900/30 cursor-pointer hover:border-brand-400 transition-colors">
+              <input type="checkbox" class="calc-check w-5 h-5 accent-brand-600 mt-0.5 flex-shrink-0"/>
+              <div><div class="font-semibold text-slate-900 dark:text-white text-sm">CCTV Monitoring Station Operator</div><div class="text-xs text-slate-500 mt-0.5">Dedicated officer at security monitoring console</div></div>
+            </label>
+            <label class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/50 dark:bg-slate-900/30 cursor-pointer hover:border-brand-400 transition-colors">
+              <input type="checkbox" class="calc-check w-5 h-5 accent-brand-600 mt-0.5 flex-shrink-0"/>
+              <div><div class="font-semibold text-slate-900 dark:text-white text-sm">Roving Supervisor (Field Sergeant)</div><div class="text-xs text-slate-500 mt-0.5">Senior officer conducting field quality audits</div></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: RESULTS PANEL -->
+      <div class="space-y-6 sticky top-28 self-start">
+        <div class="glass-card rounded-2xl p-8 border-2 border-brand-200 dark:border-brand-800/80 shadow-xl shadow-brand-500/10 space-y-6">
+          <div class="section-label">Your Estimate</div>
+          <div class="text-center space-y-2 py-4">
+            <div class="text-xs font-mono text-slate-500 uppercase tracking-wider">Recommended Staffing</div>
+            <div id="calc-score-display" class="font-display font-black text-3xl text-brand-600 dark:text-brand-400 mt-1">2 CONCIERGE OFFICERS (8-HR)</div>
+            <div id="calc-tier-display" class="text-sm text-slate-600 dark:text-slate-400">Bulwark Business Hours Front-Desk Detail</div>
+          </div>
+          <div class="space-y-3 text-xs font-mono border-t border-slate-200 dark:border-slate-800 pt-5">
+            <div class="flex justify-between text-slate-600 dark:text-slate-400"><span>Shift Type:</span><span class="font-bold text-slate-800 dark:text-slate-200" id="est-shift">8-hour / Business Hours</span></div>
+            <div class="flex justify-between text-slate-600 dark:text-slate-400"><span>Guards Per Shift:</span><span class="font-bold text-slate-800 dark:text-slate-200" id="est-per-shift">2</span></div>
+            <div class="flex justify-between text-slate-600 dark:text-slate-400"><span>Total Officers (incl. relief):</span><span class="font-bold text-slate-800 dark:text-slate-200" id="est-total">3</span></div>
+            <div class="flex justify-between text-slate-600 dark:text-slate-400"><span>Recommended Service:</span><span class="font-bold text-slate-800 dark:text-slate-200" id="est-service">Concierge Guard</span></div>
+          </div>
+          <a href="hire.html" class="btn-primary w-full justify-center text-sm">Get a Formal Proposal <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg></a>
+          <p class="text-center text-xs text-slate-400">Free estimate. No obligation. Our operations team will contact you within 2 business hours.</p>
+        </div>
+
+        <!-- Explain Why -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-200 dark:border-slate-800 space-y-4">
+          <h4 class="font-display font-bold text-base text-slate-900 dark:text-white">Why More Than 1 Officer?</h4>
+          <p class="text-xs text-slate-500 leading-relaxed">Security posts require shift overlap, mandatory breaks, sick leave cover, and training days. A single 24/7 post typically needs <strong class="text-slate-700 dark:text-slate-300">4â€“5 officers</strong> in your contracted headcount to maintain uninterrupted coverage â€” Bulwark manages this scheduling automatically.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHIFT PLANNING TABLE -->
+<section class="py-24 md:py-32 bg-white dark:bg-obsidian-900 border-t border-slate-200 dark:border-slate-800">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center space-y-5 mb-16">
+      <div class="section-label mx-auto">Shift Planning Reference</div>
+      <h2 class="font-display font-extrabold text-4xl sm:text-5xl text-slate-900 dark:text-white">Standard Guard Shift Structure</h2>
+    </div>
+    <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 shadow-lg">
+      <table class="portal-table w-full">
+        <thead>
+          <tr>
+            <th>Coverage Type</th>
+            <th>Daily Hours</th>
+            <th>Shifts / Day</th>
+            <th>Hrs per Officer</th>
+            <th>Min. Headcount (1 post)</th>
+            <th>Typical Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="font-semibold text-slate-900 dark:text-white">Business Hours</td><td>8</td><td>1</td><td>8-hr shifts</td><td><strong>1â€“2</strong></td><td>Corporate lobbies, daytime retail</td></tr>
+          <tr><td class="font-semibold text-slate-900 dark:text-white">Extended / Split</td><td>12â€“16</td><td>2</td><td>8-hr shifts</td><td><strong>2â€“3</strong></td><td>Hospitals, hotels, schools</td></tr>
+          <tr><td class="font-semibold text-slate-900 dark:text-white">24/7 Continuous</td><td>24</td><td>3</td><td>8-hr shifts</td><td><strong>4â€“5</strong></td><td>Banks, data centers, warehouses</td></tr>
+          <tr><td class="font-semibold text-slate-900 dark:text-white">24/7 + Breaks/Relief</td><td>24</td><td>3 + float</td><td>8-hr shifts</td><td><strong>5â€“6</strong></td><td>Critical infrastructure</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-slate-500 mt-4 text-center">* Headcount includes one relief officer to cover breaks, sick days, and mandatory training. Bulwark manages all scheduling and reliefs â€” your post is never left vacant.</p>
+  </div>
+</section>
+
+<!-- FOOTER (condensed) -->
+<footer class="site-footer"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600 border-t border-slate-800"><p>Â© 2026 Bulwark SEC, Inc. All rights reserved. <a href="index.html" class="hover:text-slate-400 transition-colors ml-2">â† Back to Home</a></p><div class="flex gap-5"><a href="services.html" class="hover:text-slate-400 transition-colors">Guard Services</a><a href="hire.html" class="hover:text-slate-400 transition-colors">Hire Guards</a><a href="portal.html" class="hover:text-slate-400 transition-colors">Client Portal</a></div></div></div></footer>
+
+<div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script src="utils.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const scaleButtons = document.querySelectorAll('.scale-btn');
+  const sectorButtons = document.querySelectorAll('.sector-btn');
+  const checkboxes = document.querySelectorAll('.calc-check');
+  const scoreDisplay = document.getElementById('calc-score-display');
+  const tierDisplay = document.getElementById('calc-tier-display');
+  const estShift = document.getElementById('est-shift');
+  const estPerShift = document.getElementById('est-per-shift');
+  const estTotal = document.getElementById('est-total');
+  const estService = document.getElementById('est-service');
+
+  let baseGuards = 2;
+  let coverageHours = 8;
+
+  function calculate() {
+    let addons = 0;
+    checkboxes.forEach(cb => { if (cb.checked) addons++; });
+
+    let guardsPerShift, totalOfficers, shiftLabel, serviceLabel, resultLabel, colorClass;
+
+    if (coverageHours === 24) {
+      guardsPerShift = Math.max(2, baseGuards + addons);
+      totalOfficers = guardsPerShift * 3 + 1; // 3 shifts + 1 float
+      shiftLabel = '8-hr rotating / 3 shifts (24/7)';
+      serviceLabel = 'Armed 24/7 Continuous Post Detail';
+      resultLabel = `${guardsPerShift} OFFICERS PER SHIFT / ${totalOfficers} TOTAL`;
+      colorClass = 'font-display font-black text-2xl sm:text-3xl text-emerald-600 dark:text-emerald-400 mt-1';
+      tierDisplay.textContent = 'Bulwark 24/7 Dedicated Static & Patrol Detail';
+    } else if (coverageHours === 12) {
+      guardsPerShift = Math.max(2, baseGuards + Math.ceil(addons * 0.5));
+      totalOfficers = guardsPerShift * 2 + 1;
+      shiftLabel = '12-hr rotating / 2 shifts';
+      serviceLabel = 'Overnight & Weekend Coverage Team';
+      resultLabel = `${guardsPerShift} OFFICERS PER SHIFT (12-HR)`;
+      colorClass = 'font-display font-black text-2xl sm:text-3xl text-amber-500 mt-1';
+      tierDisplay.textContent = 'Bulwark Extended Shift Coverage Team';
+    } else {
+      guardsPerShift = Math.max(1, baseGuards);
+      totalOfficers = guardsPerShift + 1;
+      shiftLabel = '8-hr / Business Hours';
+      serviceLabel = 'Corporate Concierge Guard';
+      resultLabel = `${guardsPerShift} CONCIERGE OFFICER(S) (8-HR)`;
+      colorClass = 'font-display font-black text-2xl sm:text-3xl text-brand-600 dark:text-brand-400 mt-1';
+      tierDisplay.textContent = 'Bulwark Business Hours Front-Desk Detail';
+    }
+
+    scoreDisplay.textContent = resultLabel;
+    scoreDisplay.className = colorClass;
+    if (estShift) estShift.textContent = shiftLabel;
+    if (estPerShift) estPerShift.textContent = guardsPerShift;
+    if (estTotal) estTotal.textContent = totalOfficers;
+    if (estService) estService.textContent = serviceLabel;
+
+    // Update wizard progress
+    updateWizardProgress();
+  }
+
+  function updateWizardProgress() {
+    const addonsChecked = Array.from(checkboxes).some(cb => cb.checked);
+    document.getElementById('step-ind-1')?.classList.add('completed');
+    document.getElementById('conn-1')?.classList.add('completed');
+    document.getElementById('step-ind-2')?.classList.add('completed');
+    document.getElementById('conn-2')?.classList.add('completed');
+    if (addonsChecked) {
+      document.getElementById('step-ind-3')?.classList.add('completed');
+      document.getElementById('conn-3')?.classList.add('completed');
+      document.getElementById('step-ind-4')?.classList.add('completed');
+    }
+  }
+
+  scaleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      scaleButtons.forEach(b => b.classList.remove('active-calc-btn'));
+      btn.classList.add('active-calc-btn');
+      baseGuards = parseInt(btn.dataset.points, 10);
+      calculate();
+    });
+  });
+
+  sectorButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sectorButtons.forEach(b => b.classList.remove('active-calc-btn'));
+      btn.classList.add('active-calc-btn');
+      coverageHours = parseInt(btn.dataset.points, 10);
+      calculate();
+    });
+  });
+
+  checkboxes.forEach(cb => cb.addEventListener('change', calculate));
+  calculate();
+});
+</script>
+</body>
+</html>
+
