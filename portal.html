@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Security Operations &amp; Client/Guard Portal | Bulwark SEC, Inc.</title>
+  <title>Security Operations & Client/Guard Portal | Bulwark SEC, Inc.</title>
   <meta name="description" content="Bulwark SEC Multi-Role Operations Portal: Admin Command Center, Guard Shift Terminal, and Corporate Client Access."/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231e40af'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.15 8.78-7 9.87-3.85-1.09-7-5.33-7-9.87V6.3l7-3.12z'/></svg>" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -22,349 +26,325 @@
     }
   </script>
   <link rel="stylesheet" href="styles.css"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <script>
+    // Apply saved theme or default to LIGHT mode
+    (function(){ 
+      const t = localStorage.getItem('bulwark_theme') || 'light'; 
+      if (t === 'dark') document.documentElement.classList.add('dark'); 
+      else document.documentElement.classList.remove('dark'); 
+    })();
+  </script>
 </head>
-<body class="bg-[#0B171E] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-[#7CB0AB] selection:text-[#0B171E]">
+<body class="bg-slate-50 dark:bg-[#0B171E] text-slate-900 dark:text-slate-100 min-h-screen flex flex-col antialiased transition-colors duration-200">
 
-<!-- TOP STATUS BAR -->
-<div class="bg-[#071922] border-b border-[#486A6E]/30 text-xs py-2 px-4 text-slate-300">
+<!-- TOP STATUS TICKER -->
+<aside class="bg-[#072832] dark:bg-black py-2 px-4 text-xs font-mono text-white border-b border-slate-700/50 z-50">
   <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
     <div class="flex items-center gap-3">
-      <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><strong>SOC-1 ACTIVE</strong></span>
-      <span class="hidden sm:inline text-[#486A6E]">|</span>
-      <span class="hidden sm:inline font-mono">ENCRYPTION: AES-256-GCM</span>
+      <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><strong class="text-emerald-400">SOC-1 DISPATCH ACTIVE</strong></span>
+      <span class="hidden sm:inline text-slate-400">|</span>
+      <span class="hidden sm:inline text-slate-300">Active Officers: 184 On Post</span>
+      <span class="hidden md:inline text-slate-500">· Security Clearance: Level 4</span>
     </div>
     <div class="flex items-center gap-4">
-      <span id="portal-role-badge" class="hidden px-2.5 py-0.5 rounded-full text-xs font-bold font-mono uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">AUTHENTICATED</span>
-      <span id="live-utc-clock" class="font-mono text-slate-400">UTC 00:00:00</span>
+      <span id="portal-role-badge" class="px-2.5 py-0.5 rounded text-[10px] font-bold font-mono uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">AUTHENTICATED</span>
+      <span id="live-utc-clock" class="text-slate-400">UTC 00:00:00</span>
     </div>
   </div>
-</div>
+</aside>
 
-<!-- NAVBAR -->
-<header class="bg-[#0B171E]/95 backdrop-blur-md border-b border-[#486A6E]/30 sticky top-0 z-40">
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-3 group">
-      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 flex items-center justify-center shadow-lg shadow-[#7CB0AB]/15 group-hover:border-[#7CB0AB] transition-all">
+<!-- CLEAN MINIMAL OPERATIONS NAVBAR -->
+<header class="bg-white/95 dark:bg-[#0B171E]/95 backdrop-blur-md border-b border-slate-200 dark:border-[#486A6E]/30 sticky top-0 z-40 shadow-sm transition-colors duration-200">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+    <!-- Brand Logo -->
+    <a href="index.html" class="flex items-center gap-3 group flex-shrink-0">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 flex items-center justify-center shadow-md shadow-[#072832]/10 group-hover:border-[#7CB0AB] transition-all">
         <svg class="w-6 h-6 text-[#7CB0AB]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
       </div>
       <div>
-        <div class="font-display font-black text-xl tracking-tight text-white flex items-center gap-2">BULWARK <span class="text-[#7CB0AB] font-bold text-sm px-2 py-0.5 rounded bg-[#072832] border border-[#486A6E]/50">SEC</span></div>
-        <div class="text-[10px] tracking-widest text-[#CAD4D4]/70 uppercase font-mono">Operations Portal</div>
+        <div class="font-display font-black text-xl tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+          BULWARK <span class="text-[#486A6E] dark:text-[#7CB0AB] font-bold text-sm px-2 py-0.5 rounded bg-slate-100 dark:bg-[#072832] border border-slate-200 dark:border-[#486A6E]/50">SEC</span>
+        </div>
+        <div id="navbar-subtext" class="text-[10px] tracking-widest text-slate-500 dark:text-[#CAD4D4]/70 uppercase font-mono font-semibold">Operations Command Portal</div>
       </div>
     </a>
 
-    <!-- Public Nav Links (When logged out) -->
-    <div id="public-nav-links" class="hidden md:flex items-center gap-1 font-medium text-sm text-slate-300">
-      <a href="index.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-[#7CB0AB] hover:bg-[#072832]/60 transition-all">Home</a>
-      <a href="services.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-[#7CB0AB] hover:bg-[#072832]/60 transition-all">Guard Services</a>
-      <a href="patrol.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-[#7CB0AB] hover:bg-[#072832]/60 transition-all">Patrol Operations</a>
-      <a href="estimator.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-[#7CB0AB] hover:bg-[#072832]/60 transition-all">Staffing Estimator</a>
-      <a href="vetting.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-[#7CB0AB] hover:bg-[#072832]/60 transition-all">Officer Vetting</a>
-      <a href="hire.html" class="nav-link px-3.5 py-2 rounded-lg hover:text-[#7CB0AB] hover:bg-[#072832]/60 transition-all">Hire Guards</a>
-    </div>
-
-    <!-- Authenticated Header Controls -->
+    <!-- Right Controls: ONLY what is necessary -->
     <div class="flex items-center gap-3">
-      <div id="auth-user-info" class="hidden flex items-center gap-3">
+      <!-- Theme Toggle Switcher -->
+      <button id="theme-toggle" aria-label="Toggle theme" class="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 transition-all flex-shrink-0" title="Switch Light / Dark Mode">
+        <svg id="theme-icon-sun" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
+        <svg id="theme-icon-moon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+      </button>
+
+      <!-- Authenticated User Tag -->
+      <div id="auth-user-info" class="flex items-center gap-3">
         <div class="text-right hidden sm:block">
-          <div id="auth-user-name" class="text-xs font-bold text-white">Commander Admin</div>
-          <div id="auth-user-role" class="text-[10px] font-mono text-[#7CB0AB]">ROLE: MASTER DISPATCH</div>
+          <div id="auth-user-name" class="text-xs font-bold text-slate-900 dark:text-white">Commander Dispatch</div>
+          <div id="auth-user-role" class="text-[10px] font-mono font-semibold text-amber-600 dark:text-amber-400">LEVEL 4 DISPATCH COMMAND</div>
         </div>
-        <button id="portal-logout-btn" class="px-3.5 py-2 rounded-xl text-xs font-bold text-red-300 bg-red-950/50 hover:bg-red-900/60 border border-red-800/60 transition-all flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        
+        <!-- Clean Sign Out Button -->
+        <button id="portal-logout-btn" class="px-3.5 py-2 rounded-xl text-xs font-bold text-red-600 dark:text-red-300 bg-red-50 hover:bg-red-100 dark:bg-red-950/50 dark:hover:bg-red-900/60 border border-red-200 dark:border-red-800/60 transition-all flex items-center gap-1.5 shadow-sm">
+          <svg class="w-3.5 h-3.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
           Sign Out
         </button>
       </div>
 
-      <a href="hire.html" id="nav-quote-btn" class="hidden sm:inline-flex px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-[#072832] to-[#486A6E] hover:from-[#0B171E] hover:to-[#355357] border border-[#7CB0AB]/50 shadow-lg shadow-[#7CB0AB]/10 transition-all items-center gap-1.5">
-        Request Guards →
+      <!-- Back to site link (if logged out) -->
+      <a href="index.html" id="nav-back-link" class="hidden text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-brand-600 px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700">
+        ← Public Website
       </a>
     </div>
   </nav>
 </header>
 
 <!-- =========================================================================
-     1. UNIFIED MULTI-ROLE LOGIN GATE
+     1. UNIFIED MULTI-ROLE LOGIN GATE (When signed out)
      ========================================================================= -->
-<div id="portal-login-screen" class="flex-1 flex items-center justify-center py-16 px-4 relative overflow-hidden bg-[#071922]">
-  <!-- Cinematic Background Image -->
-  <div class="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
-    <img src="assets/hero_bg.jpg" alt="Bulwark SEC Portal Gate" class="w-full h-full object-cover object-center filter brightness-75 contrast-125 saturate-110 opacity-75"/>
-    <div class="absolute inset-0 bg-gradient-to-t from-[#071922] via-[#071922]/85 to-[#0B171E]/90"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(7,40,50,0.5)_0%,_rgba(11,23,30,0.92)_100%)]"></div>
-  </div>
-
-  <div class="w-full max-w-xl space-y-8 relative z-10">
-    <div class="text-center space-y-3">
-      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 flex items-center justify-center mx-auto shadow-2xl shadow-[#7CB0AB]/20">
+<div id="portal-login-screen" class="flex-1 flex items-center justify-center py-16 px-4 relative overflow-hidden bg-slate-100 dark:bg-[#071922]">
+  <div class="w-full max-w-xl space-y-6 relative z-10">
+    <div class="text-center space-y-2">
+      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 flex items-center justify-center mx-auto shadow-xl">
         <svg class="w-9 h-9 text-[#7CB0AB]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
       </div>
       <div>
-        <h1 class="font-display font-black text-3xl sm:text-4xl text-white drop-shadow-md">Operations Portal Gate</h1>
-        <p class="text-sm text-slate-300 mt-1 font-medium">Select your role to access your dedicated terminal</p>
+        <h1 class="font-display font-black text-3xl text-slate-900 dark:text-white">Operations Portal Gate</h1>
+        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Select your role to authenticate</p>
       </div>
     </div>
 
     <!-- 3-ROLE SELECTOR TABS -->
-    <div class="grid grid-cols-3 gap-2 bg-[#0B171E]/90 p-1.5 rounded-2xl border border-[#486A6E]/50 shadow-xl backdrop-blur-md">
-      <button id="role-tab-admin" class="role-selector-btn py-3 px-2 rounded-xl text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all text-slate-300 hover:text-white">
-        <span class="text-base">👑</span>
-        <span>Admin Command</span>
+    <div class="grid grid-cols-3 gap-2 bg-slate-200 dark:bg-[#0B171E] p-1.5 rounded-2xl border border-slate-300 dark:border-[#486A6E]/50 shadow-sm">
+      <button id="role-tab-admin" class="role-selector-btn py-2.5 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all text-slate-700 dark:text-slate-300">
+        <span>👑</span> Admin Command
       </button>
-      <button id="role-tab-guard" class="role-selector-btn py-3 px-2 rounded-xl text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all text-slate-300 hover:text-white">
-        <span class="text-base">🛡️</span>
-        <span>Guard Terminal</span>
+      <button id="role-tab-guard" class="role-selector-btn py-2.5 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all text-slate-700 dark:text-slate-300">
+        <span>🛡️</span> Guard Terminal
       </button>
-      <button id="role-tab-client" class="role-selector-btn active-role-tab py-3 px-2 rounded-xl text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all text-white bg-gradient-to-r from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 shadow-md">
-        <span class="text-base">🏢</span>
-        <span>Client Portal</span>
+      <button id="role-tab-client" class="role-selector-btn active-role-tab py-2.5 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all text-white bg-[#072832] dark:bg-gradient-to-r dark:from-[#072832] dark:to-[#486A6E] shadow-sm">
+        <span>🏢</span> Client Portal
       </button>
     </div>
 
     <!-- LOGIN FORM CARD -->
-    <div class="glass-card rounded-2xl bg-[#072832]/85 backdrop-blur-xl border border-[#7CB0AB]/35 shadow-2xl overflow-hidden text-white p-6 sm:p-8 space-y-6">
-      <div class="flex items-center justify-between border-b border-[#486A6E]/40 pb-4">
+    <div class="rounded-2xl bg-white dark:bg-[#072832]/90 border border-slate-200 dark:border-[#7CB0AB]/35 shadow-xl p-6 sm:p-8 space-y-5 text-slate-900 dark:text-white">
+      <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#486A6E]/40 pb-3">
         <div>
-          <h2 id="role-form-title" class="font-display font-bold text-lg text-white">Client Portal Access</h2>
-          <p id="role-form-subtitle" class="text-xs text-slate-300">Enter your Morrison &amp; Reed credentials or use demo access</p>
+          <h2 id="role-form-title" class="font-display font-bold text-base text-slate-900 dark:text-white">Client Portal Access</h2>
+          <p id="role-form-subtitle" class="text-xs text-slate-500 dark:text-slate-300">Enter client credentials or use 1-click demo access</p>
         </div>
-        <span id="role-form-tag" class="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-[#7CB0AB]/20 text-[#7CB0AB] border border-[#7CB0AB]/40 uppercase">CLIENT TIER</span>
+        <span id="role-form-tag" class="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 dark:bg-[#7CB0AB]/20 dark:text-[#7CB0AB] border border-emerald-200 dark:border-[#7CB0AB]/40 uppercase">CLIENT TIER</span>
       </div>
 
       <form id="unified-portal-form" class="space-y-4" novalidate>
         <div>
-          <label id="input-label-user" class="hire-form-label text-slate-200 text-xs font-semibold uppercase" for="portal-user">Account Email / ID</label>
-          <input id="portal-user" type="text" class="hire-form-input bg-[#0B171E]/80 border-[#486A6E]/50 text-white placeholder-slate-500 focus:border-[#7CB0AB]" value="client@morrisonreed.com" required/>
+          <label id="input-label-user" class="block text-xs font-semibold uppercase text-slate-700 dark:text-slate-300 mb-1" for="portal-user">Account Email / ID</label>
+          <input id="portal-user" type="text" class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-300 dark:border-[#486A6E]/50 bg-slate-50 dark:bg-[#0B171E]/80 text-slate-900 dark:text-white focus:outline-none focus:border-[#486A6E]" value="client@morrisonreed.com" required/>
         </div>
         <div>
-          <label class="hire-form-label text-slate-200 text-xs font-semibold uppercase" for="portal-pass">Password</label>
-          <input id="portal-pass" type="password" class="hire-form-input bg-[#0B171E]/80 border-[#486A6E]/50 text-white placeholder-slate-500 focus:border-[#7CB0AB]" value="Demo2026!" required/>
+          <label class="block text-xs font-semibold uppercase text-slate-700 dark:text-slate-300 mb-1" for="portal-pass">Password</label>
+          <input id="portal-pass" type="password" class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-300 dark:border-[#486A6E]/50 bg-slate-50 dark:bg-[#0B171E]/80 text-slate-900 dark:text-white focus:outline-none focus:border-[#486A6E]" value="Demo2026!" required/>
         </div>
         <div>
-          <label id="input-label-pin" class="hire-form-label text-slate-200 text-xs font-semibold uppercase" for="portal-pin">Site PIN / Badge ID / 2FA</label>
-          <input id="portal-pin" type="text" class="hire-form-input bg-[#0B171E]/80 border-[#486A6E]/50 text-white placeholder-slate-500 focus:border-[#7CB0AB]" value="401041" required/>
+          <label id="input-label-pin" class="block text-xs font-semibold uppercase text-slate-700 dark:text-slate-300 mb-1" for="portal-pin">Site PIN / Badge ID / 2FA</label>
+          <input id="portal-pin" type="text" class="w-full px-3.5 py-2.5 rounded-xl text-xs border border-slate-300 dark:border-[#486A6E]/50 bg-slate-50 dark:bg-[#0B171E]/80 text-slate-900 dark:text-white focus:outline-none focus:border-[#486A6E]" value="401041" required/>
         </div>
 
-        <button type="submit" id="portal-login-submit" class="btn-primary w-full justify-center py-4 bg-gradient-to-r from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 shadow-xl hover:shadow-[#7CB0AB]/25 text-white font-bold text-sm tracking-wide">
-          <svg class="w-4 h-4 text-[#7CB0AB]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
-          <span id="login-button-text">Authenticate &amp; Enter Portal</span>
+        <button type="submit" id="portal-login-submit" class="w-full py-3.5 rounded-xl bg-[#072832] hover:bg-[#0B171E] text-white font-bold text-xs tracking-wide shadow-md transition-all">
+          Authenticate &amp; Enter Portal →
         </button>
 
-        <!-- Quick 1-Click Demo Buttons -->
-        <div class="pt-4 border-t border-[#486A6E]/30 space-y-2">
-          <div class="text-[11px] font-mono text-slate-400 text-center uppercase tracking-wider">⚡ 1-Click Quick Demo Presets:</div>
+        <div class="pt-3 border-t border-slate-200 dark:border-[#486A6E]/30 space-y-2">
+          <div class="text-[11px] font-mono text-slate-500 dark:text-slate-400 text-center uppercase tracking-wider">⚡ 1-Click Quick Presets:</div>
           <div class="grid grid-cols-3 gap-2 text-xs">
-            <button type="button" id="btn-quick-admin" class="py-2 px-2.5 rounded-lg bg-[#0B171E]/90 hover:bg-[#486A6E]/40 border border-[#486A6E]/50 text-slate-200 hover:text-white font-medium text-center transition-all">
+            <button type="button" id="btn-quick-admin" class="py-2 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0B171E] dark:hover:bg-[#486A6E]/40 border border-slate-200 dark:border-[#486A6E]/50 font-medium text-center transition-all">
               👑 Admin Demo
             </button>
-            <button type="button" id="btn-quick-guard" class="py-2 px-2.5 rounded-lg bg-[#0B171E]/90 hover:bg-[#486A6E]/40 border border-[#486A6E]/50 text-slate-200 hover:text-white font-medium text-center transition-all">
+            <button type="button" id="btn-quick-guard" class="py-2 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0B171E] dark:hover:bg-[#486A6E]/40 border border-slate-200 dark:border-[#486A6E]/50 font-medium text-center transition-all">
               🛡️ Guard Demo
             </button>
-            <button type="button" id="btn-quick-client" class="py-2 px-2.5 rounded-lg bg-[#0B171E]/90 hover:bg-[#486A6E]/40 border border-[#486A6E]/50 text-slate-200 hover:text-white font-medium text-center transition-all">
+            <button type="button" id="btn-quick-client" class="py-2 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#0B171E] dark:hover:bg-[#486A6E]/40 border border-slate-200 dark:border-[#486A6E]/50 font-medium text-center transition-all">
               🏢 Client Demo
             </button>
           </div>
         </div>
       </form>
     </div>
-    <p class="text-center text-xs text-slate-400">🔒 Military-Grade AES-256 Encryption · Zero-Knowledge Verification · Supabase Protected</p>
   </div>
 </div>
 
 <!-- =========================================================================
      2. ROLE DASHBOARD A: 👑 ADMIN OPERATIONS COMMAND CENTER
      ========================================================================= -->
-<div id="dashboard-admin" class="flex-1 flex flex-col hidden bg-[#071922] text-slate-100 min-h-screen">
-  <!-- Command Cockpit Header -->
-  <div class="bg-[#0B171E] border-b border-[#486A6E]/40 py-6 px-4 sm:px-8 shadow-xl">
+<div id="dashboard-admin" class="flex-1 flex flex-col hidden bg-slate-50 dark:bg-[#071922] text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200">
+  <!-- Command Header -->
+  <div class="bg-white dark:bg-[#0B171E] border-b border-slate-200 dark:border-[#486A6E]/40 py-6 px-4 sm:px-8 shadow-sm">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-6">
-      <div class="space-y-1.5">
+      <div class="space-y-1">
         <div class="flex items-center gap-3">
-          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-mono font-bold tracking-wider flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-300 dark:border-amber-500/40 text-xs font-mono font-bold tracking-wider flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
             LEVEL 4 SOC COMMAND
           </span>
-          <span class="text-xs font-mono text-emerald-400 bg-emerald-950/60 px-2.5 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 184 POSTS ACTIVE
+          <span class="text-xs font-mono text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-500/30 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 184 POSTS ACTIVE
           </span>
-          <span class="hidden md:inline text-xs font-mono text-slate-400">SLA: 99.8% · GPS LIVE</span>
+          <span class="hidden md:inline text-xs font-mono text-slate-500 dark:text-slate-400">SLA: 99.8% · GPS LIVE</span>
         </div>
-        <h1 class="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">Global Operations Command Console</h1>
-        <p class="text-xs text-slate-300">Master dispatch, fleet rosters, client lead triage, 7-stage vetting pipeline, and threat telemetry.</p>
+        <h1 class="font-display font-black text-2xl sm:text-3xl text-slate-900 dark:text-white tracking-tight">Global Operations Command Console</h1>
+        <p class="text-xs text-slate-500 dark:text-slate-300">Master dispatch, fleet rosters, client lead triage, 7-stage vetting pipeline, and threat telemetry.</p>
       </div>
 
       <!-- Quick Action Controls & Threat Posture -->
       <div class="flex flex-wrap items-center gap-3">
-        <div class="flex items-center gap-1.5 bg-[#072832] p-1.5 rounded-xl border border-[#486A6E]/50 shadow-inner">
-          <span class="text-[10px] font-mono font-bold text-slate-400 px-2 uppercase">POSTURE:</span>
-          <button id="admin-posture-std" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition-all">Standard</button>
-          <button id="admin-posture-overdrive" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-amber-300 transition-all">Overdrive</button>
-          <button id="admin-posture-lockdown" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-red-400 transition-all">Lockdown</button>
+        <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-[#072832] p-1.5 rounded-xl border border-slate-200 dark:border-[#486A6E]/50">
+          <span class="text-[10px] font-mono font-bold text-slate-500 dark:text-slate-400 px-2 uppercase">POSTURE:</span>
+          <button id="admin-posture-std" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-600 dark:border-emerald-500/40 transition-all">Standard</button>
+          <button id="admin-posture-overdrive" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-300 transition-all">Overdrive</button>
+          <button id="admin-posture-lockdown" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 transition-all">Lockdown</button>
         </div>
 
-        <button id="btn-open-dispatch" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-red-700 to-red-600 hover:from-red-800 hover:to-red-700 border border-red-500/50 shadow-lg shadow-red-900/30 flex items-center gap-1.5 transition-all">
-          <span>🚨</span> Emergency Unit Dispatch
+        <button id="btn-open-dispatch" class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-red-600 hover:bg-red-700 shadow-md flex items-center gap-1.5 transition-all">
+          <span>🚨</span> Emergency Dispatch
         </button>
       </div>
     </div>
   </div>
 
-  <!-- 4 Hero KPI Metrics Cards -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-8 w-full">
+  <!-- 4 Hero KPI Cards -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 w-full">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <!-- KPI 1 -->
-      <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 p-5 space-y-2 hover:border-[#7CB0AB] transition-all">
-        <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase">
+      <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-2">
+        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-mono uppercase">
           <span>🛡️ Manned Posts</span>
-          <span class="text-emerald-400 font-bold text-[11px]">99.8% SLA</span>
+          <span class="text-emerald-600 dark:text-emerald-400 font-bold text-[11px]">99.8% SLA</span>
         </div>
         <div class="flex items-baseline gap-2">
-          <span class="text-3xl font-black font-display text-white">184</span>
-          <span class="text-xs text-slate-400">/ 185 Active</span>
+          <span class="text-3xl font-black font-display text-slate-900 dark:text-white">184</span>
+          <span class="text-xs text-slate-500">/ 185 Active</span>
         </div>
-        <div class="text-[11px] text-emerald-400 flex items-center gap-1 font-medium">
+        <div class="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium">
           <span>↑ +6 officers deployed today</span>
         </div>
       </div>
 
-      <!-- KPI 2 -->
-      <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 p-5 space-y-2 hover:border-[#7CB0AB] transition-all">
-        <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase">
+      <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-2">
+        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-mono uppercase">
           <span>📋 Coverage Leads</span>
-          <span class="text-amber-400 font-bold text-[11px]">3 PENDING</span>
+          <span class="text-amber-600 dark:text-amber-400 font-bold text-[11px]">3 PENDING</span>
         </div>
         <div class="flex items-baseline gap-2">
-          <span class="text-3xl font-black font-display text-amber-300">12</span>
-          <span class="text-xs text-slate-400">Pipeline Inquiries</span>
+          <span class="text-3xl font-black font-display text-amber-600 dark:text-amber-300">12</span>
+          <span class="text-xs text-slate-500">Pipeline Inquiries</span>
         </div>
-        <div class="text-[11px] text-slate-300 font-mono">
-          <span>$284,500 Estimated Contract Value</span>
+        <div class="text-[11px] text-slate-500 dark:text-slate-300 font-mono">
+          <span>$284,500 Estimated Value</span>
         </div>
       </div>
 
-      <!-- KPI 3 -->
-      <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 p-5 space-y-2 hover:border-[#7CB0AB] transition-all">
-        <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase">
+      <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-2">
+        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-mono uppercase">
           <span>🚨 Incident Triage</span>
-          <span class="text-blue-400 font-bold text-[11px]">AVG 3.4 MINS</span>
+          <span class="text-blue-600 dark:text-blue-400 font-bold text-[11px]">AVG 3.4 MINS</span>
         </div>
         <div class="flex items-baseline gap-2">
-          <span class="text-3xl font-black font-display text-white">2</span>
-          <span class="text-xs text-slate-400">Under Active Dispatch</span>
+          <span class="text-3xl font-black font-display text-slate-900 dark:text-white">2</span>
+          <span class="text-xs text-slate-500">Active Under Dispatch</span>
         </div>
-        <div class="text-[11px] text-slate-400 flex items-center gap-1">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Sector 1 & Sector 3 Secure
+        <div class="text-[11px] text-slate-500 dark:text-slate-400">
+          <span>Sector 1 &amp; Sector 3 Controlled</span>
         </div>
       </div>
 
-      <!-- KPI 4 -->
-      <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 p-5 space-y-2 hover:border-[#7CB0AB] transition-all">
-        <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase">
+      <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-2">
+        <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-mono uppercase">
           <span>🎓 Vetting Academy</span>
-          <span class="text-purple-400 font-bold text-[11px]">23.4% PASS</span>
+          <span class="text-purple-600 dark:text-purple-400 font-bold text-[11px]">23.4% PASS</span>
         </div>
         <div class="flex items-baseline gap-2">
-          <span class="text-3xl font-black font-display text-white">38</span>
-          <span class="text-xs text-slate-400">Candidates in Pipeline</span>
+          <span class="text-3xl font-black font-display text-slate-900 dark:text-white">38</span>
+          <span class="text-xs text-slate-500">Recruits in Pipeline</span>
         </div>
-        <div class="text-[11px] text-[#7CB0AB] font-medium">
-          <span>15 Certified & Ready for Post</span>
+        <div class="text-[11px] text-[#486A6E] dark:text-[#7CB0AB] font-medium">
+          <span>15 Certified &amp; Ready for Post</span>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Admin Sub-Navigation Tabs -->
-  <div class="bg-[#0B171E]/95 border-b border-[#486A6E]/30 px-4 sm:px-8 mt-6 sticky top-20 z-30 shadow-md">
+  <div class="bg-white dark:bg-[#0B171E] border-b border-slate-200 dark:border-[#486A6E]/30 px-4 sm:px-8 mt-6 sticky top-20 z-30 shadow-sm">
     <div class="max-w-7xl mx-auto flex gap-6 overflow-x-auto">
-      <button class="admin-tab active-admin-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-[#7CB0AB] text-white flex items-center gap-2" data-tab="admin-leads">
-        <span>📋</span> INCOMING LEADS <span id="admin-lead-badge" class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px]">12 ACTIVE</span>
+      <button class="admin-tab active-admin-tab py-3.5 text-xs font-bold font-mono tracking-wider border-b-2 border-[#072832] dark:border-[#7CB0AB] text-[#072832] dark:text-white flex items-center gap-2" data-tab="admin-leads">
+        <span>📋</span> INCOMING LEADS <span id="admin-lead-badge" class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 text-[10px]">12 ACTIVE</span>
       </button>
-      <button class="admin-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2" data-tab="admin-posts">
-        <span>🛡️</span> GLOBAL FLEET ROSTER <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px]">184 LIVE</span>
+      <button class="admin-tab py-3.5 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-2" data-tab="admin-posts">
+        <span>🛡️</span> GLOBAL FLEET ROSTER <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 text-[10px]">184 LIVE</span>
       </button>
-      <button class="admin-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2" data-tab="admin-vetting">
-        <span>🎓</span> 7-STAGE VETTING PIPELINE <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px]">38 RECRUITS</span>
+      <button class="admin-tab py-3.5 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-2" data-tab="admin-vetting">
+        <span>🎓</span> 7-STAGE VETTING PIPELINE <span class="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-500/20 dark:text-purple-300 text-[10px]">38 RECRUITS</span>
       </button>
-      <button class="admin-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2" data-tab="admin-incidents">
-        <span>🚨</span> INCIDENT DISPATCH DESK <span class="px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 text-[10px]">2 OPEN</span>
+      <button class="admin-tab py-3.5 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-2" data-tab="admin-incidents">
+        <span>🚨</span> INCIDENT DISPATCH DESK <span class="px-2 py-0.5 rounded-full bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-300 text-[10px]">2 OPEN</span>
       </button>
     </div>
   </div>
 
   <!-- Admin Content Container -->
   <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex-1 space-y-8 w-full">
-    
-    <!-- SUB-TAB 1: INCOMING LEADS & QUOTE REQUESTS -->
-    <div id="admin-tab-content-leads" class="space-y-6">
+    <!-- SUB-TAB 1: INCOMING LEADS -->
+    <div id="admin-tab-content-leads" class="space-y-4">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 class="font-display font-bold text-xl text-white">Client Guard Coverage Requests (Leads Pipeline)</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Real-time incoming submissions from hire.html and staffing estimator via Supabase database</p>
+          <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">Client Guard Coverage Inquiries</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Incoming quote submissions from hire.html and staffing estimator</p>
         </div>
-        <div class="flex items-center gap-2">
-          <button id="refresh-leads-btn" class="px-3.5 py-2 rounded-xl text-xs font-bold text-[#7CB0AB] bg-[#072832] hover:bg-[#072832]/80 border border-[#486A6E]/50 transition-all flex items-center gap-1.5 shadow-sm">
-            <span>↻</span> Refresh Leads
-          </button>
-        </div>
+        <button id="refresh-leads-btn" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-[#072832] border border-slate-300 dark:border-[#486A6E]/50 text-slate-700 dark:text-slate-200 hover:bg-slate-200">
+          ↻ Refresh Inquiries
+        </button>
       </div>
 
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E] shadow-2xl">
-        <table class="portal-table w-full text-left text-xs">
-          <thead>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-[#486A6E]/40 bg-white dark:bg-[#0B171E] shadow-sm">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-100 dark:bg-[#072832] text-slate-700 dark:text-[#7CB0AB] font-mono uppercase text-[11px]">
             <tr>
-              <th>Ref / Contact</th>
-              <th>Company / Property</th>
-              <th>Service Required</th>
-              <th>Officers</th>
-              <th>Coverage Hours</th>
-              <th>Status</th>
-              <th>Dispatch Command Action</th>
+              <th class="py-3 px-4">Ref / Contact</th>
+              <th class="py-3 px-4">Company / Property</th>
+              <th class="py-3 px-4">Service Required</th>
+              <th class="py-3 px-4">Officers</th>
+              <th class="py-3 px-4">Coverage</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4">Command Action</th>
             </tr>
           </thead>
-          <tbody id="admin-leads-tbody" class="divide-y divide-[#486A6E]/20 text-slate-200">
-            <!-- Dynamically populated or rich fallback -->
+          <tbody id="admin-leads-tbody" class="divide-y divide-slate-100 dark:divide-[#486A6E]/20 text-slate-800 dark:text-slate-200">
             <tr>
-              <td><div class="font-bold text-white">James Morrison</div><div class="text-[11px] text-slate-400 font-mono">james@morrisonreed.com</div></td>
-              <td><div class="font-medium text-white">Morrison &amp; Reed Properties</div><div class="text-[11px] text-slate-400">Commercial Skyscraper · Sector 1</div></td>
-              <td><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ARMED STATIC</span></td>
-              <td><span class="font-bold text-white">6 Guards</span></td>
-              <td>24/7 Continuous</td>
-              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ACTIVE CONTRACT</span></td>
-              <td>
-                <button onclick="showToast('Viewing active post orders for Morrison & Reed', 'info')" class="px-3 py-1.5 rounded-lg bg-[#072832] text-[#7CB0AB] border border-[#7CB0AB]/40 hover:bg-[#7CB0AB] hover:text-[#0B171E] font-bold text-xs transition-all">
-                  Post Orders →
-                </button>
-              </td>
+              <td class="py-3.5 px-4"><div class="font-bold text-slate-900 dark:text-white">James Morrison</div><div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">james@morrisonreed.com</div></td>
+              <td class="py-3.5 px-4"><div class="font-medium text-slate-900 dark:text-white">Morrison &amp; Reed Properties</div><div class="text-[11px] text-slate-500 dark:text-slate-400">Commercial Skyscraper · Sector 1</div></td>
+              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300">ARMED STATIC</span></td>
+              <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white">6 Guards</td>
+              <td class="py-3.5 px-4">24/7 Continuous</td>
+              <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300">ACTIVE CONTRACT</span></td>
+              <td class="py-3.5 px-4"><button onclick="showToast('Viewing active post orders for Morrison & Reed', 'info')" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#072832] text-slate-800 dark:text-[#7CB0AB] border border-slate-300 dark:border-[#7CB0AB]/40 font-bold text-xs">Post Orders →</button></td>
             </tr>
             <tr>
-              <td><div class="font-bold text-white">Elena Rostova</div><div class="text-[11px] text-slate-400 font-mono">e.rostova@apexbio.org</div></td>
-              <td><div class="font-medium text-white">Apex BioTech Laboratories</div><div class="text-[11px] text-slate-400">High-Containment Research Campus</div></td>
-              <td><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-blue-500/20 text-blue-300 border border-blue-500/40">K-9 & MOBILE PATROL</span></td>
-              <td><span class="font-bold text-white">4 Units</span></td>
-              <td>Night Shifts (18:00 – 06:00)</td>
-              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">PENDING APPROVAL</span></td>
-              <td>
-                <button onclick="showToast('Approved Apex BioTech request! Dispatched 4 Units.', 'success')" class="px-3 py-1.5 rounded-lg bg-emerald-950/70 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-800 font-bold text-xs transition-all">
-                  ✓ Approve & Deploy
-                </button>
-              </td>
+              <td class="py-3.5 px-4"><div class="font-bold text-slate-900 dark:text-white">Elena Rostova</div><div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">e.rostova@apexbio.org</div></td>
+              <td class="py-3.5 px-4"><div class="font-medium text-slate-900 dark:text-white">Apex BioTech Laboratories</div><div class="text-[11px] text-slate-500 dark:text-slate-400">High-Containment Campus · Sector 2</div></td>
+              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300">K-9 &amp; MOBILE PATROL</span></td>
+              <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white">4 Units</td>
+              <td class="py-3.5 px-4">Night Patrol (18:00 – 06:00)</td>
+              <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300">PENDING APPROVAL</span></td>
+              <td class="py-3.5 px-4"><button onclick="showToast('Approved Apex BioTech request! Dispatched 4 Units.', 'success')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">✓ Approve &amp; Deploy</button></td>
             </tr>
             <tr>
-              <td><div class="font-bold text-white">Alexander Chen</div><div class="text-[11px] text-slate-400 font-mono">achen@sovereign-vault.com</div></td>
-              <td><div class="font-medium text-white">Sovereign International Bank</div><div class="text-[11px] text-slate-400">Downtown Financial Vault Facility</div></td>
-              <td><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/40">EXECUTIVE PROTECTION</span></td>
-              <td><span class="font-bold text-white">8 Agents</span></td>
-              <td>24/7 Armed Secure Transit</td>
-              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">UNDER REVIEW</span></td>
-              <td>
-                <button onclick="showToast('Assigned Lead Agent to Sovereign Bank Inquiry', 'success')" class="px-3 py-1.5 rounded-lg bg-emerald-950/70 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-800 font-bold text-xs transition-all">
-                  ✓ Approve & Deploy
-                </button>
-              </td>
+              <td class="py-3.5 px-4"><div class="font-bold text-slate-900 dark:text-white">Alexander Chen</div><div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">achen@sovereign-vault.com</div></td>
+              <td class="py-3.5 px-4"><div class="font-medium text-slate-900 dark:text-white">Sovereign International Bank</div><div class="text-[11px] text-slate-400">Financial Vault Facility · Sector 1</div></td>
+              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-purple-100 text-purple-800 dark:bg-purple-500/20 dark:text-purple-300">EXECUTIVE DETAIL</span></td>
+              <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white">8 Agents</td>
+              <td class="py-3.5 px-4">24/7 Armed Transit</td>
+              <td class="py-3.5 px-4"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300">UNDER REVIEW</span></td>
+              <td class="py-3.5 px-4"><button onclick="showToast('Assigned Lead Officer to Sovereign Bank inquiry.', 'success')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">✓ Approve &amp; Deploy</button></td>
             </tr>
           </tbody>
         </table>
@@ -372,53 +352,44 @@
     </div>
 
     <!-- SUB-TAB 2: ACTIVE FLEET ROSTER -->
-    <div id="admin-tab-content-posts" class="space-y-6 hidden">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div id="admin-tab-content-posts" class="space-y-4 hidden">
+      <div class="flex items-center justify-between">
         <div>
-          <h3 class="font-display font-bold text-xl text-white">Global Manned Posts & Fleet Roster</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Live status of 184 on-duty security officers, GPS telemetry, and last check-ins</p>
+          <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">Global Manned Posts &amp; Fleet Roster</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Live roster of 184 on-duty security officers and GPS check-ins</p>
         </div>
       </div>
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E] shadow-2xl">
-        <table class="portal-table w-full text-left text-xs">
-          <thead>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-[#486A6E]/40 bg-white dark:bg-[#0B171E] shadow-sm">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-100 dark:bg-[#072832] text-slate-700 dark:text-[#7CB0AB] font-mono uppercase text-[11px]">
             <tr>
-              <th>Post Code</th>
-              <th>Location / Facility</th>
-              <th>Stationed Officer</th>
-              <th>Guard Type</th>
-              <th>Shift Schedule</th>
-              <th>Status</th>
-              <th>Command Action</th>
+              <th class="py-3 px-4">Post Code</th>
+              <th class="py-3 px-4">Location / Facility</th>
+              <th class="py-3 px-4">Stationed Officer</th>
+              <th class="py-3 px-4">Guard Type</th>
+              <th class="py-3 px-4">Shift Schedule</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4">Command Action</th>
             </tr>
           </thead>
-          <tbody id="admin-posts-tbody" class="divide-y divide-[#486A6E]/20 text-slate-200">
+          <tbody id="admin-posts-tbody" class="divide-y divide-slate-100 dark:divide-[#486A6E]/20 text-slate-800 dark:text-slate-200">
             <tr>
-              <td><span class="font-mono font-bold text-[#7CB0AB]">P-401</span></td>
-              <td><div class="font-bold text-white">North Tower — Main Lobby Gate</div><div class="text-[11px] text-slate-400">Sector 1 (NYC Metro)</div></td>
-              <td><div class="font-bold text-white">Officer D. Reeves</div><div class="text-[10px] font-mono text-[#7CB0AB]">BADGE #BW-8821</div></td>
-              <td><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#072832] text-[#7CB0AB] border border-[#486A6E]/40">Armed Static</span></td>
-              <td class="font-mono text-slate-300">07:00 – 19:00</td>
-              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ON-DUTY (GPS OK)</span></td>
-              <td><button onclick="showToast('NFC Tour verified for Post P-401', 'info')" class="px-3 py-1.5 rounded-lg bg-[#072832] text-[#7CB0AB] border border-[#7CB0AB]/40 hover:bg-[#7CB0AB] hover:text-[#0B171E] font-bold text-xs">Telemetry</button></td>
+              <td class="py-3 px-4 font-mono font-bold text-[#072832] dark:text-[#7CB0AB]">P-401</td>
+              <td class="py-3 px-4"><div class="font-bold text-slate-900 dark:text-white">North Tower — Main Lobby Gate</div><div class="text-[11px] text-slate-500">Sector 1 (NYC Metro)</div></td>
+              <td class="py-3 px-4"><div class="font-bold text-slate-900 dark:text-white">Officer D. Reeves</div><div class="text-[10px] font-mono text-slate-500">BADGE #BW-8821</div></td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-[#072832]">Armed Static</span></td>
+              <td class="py-3 px-4 font-mono">07:00 – 19:00</td>
+              <td class="py-3 px-4"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300">ON-DUTY</span></td>
+              <td class="py-3 px-4"><button onclick="showToast('NFC Tour verified for Post P-401', 'info')" class="text-xs text-[#072832] dark:text-[#7CB0AB] font-bold hover:underline">Telemetry</button></td>
             </tr>
             <tr>
-              <td><span class="font-mono font-bold text-[#7CB0AB]">P-402</span></td>
-              <td><div class="font-bold text-white">Level B2 — Storage Loading Dock</div><div class="text-[11px] text-slate-400">Sector 1 (NYC Metro)</div></td>
-              <td><div class="font-bold text-white">Officer K. Brooks</div><div class="text-[10px] font-mono text-[#7CB0AB]">BADGE #BW-6512</div></td>
-              <td><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#072832] text-[#7CB0AB] border border-[#486A6E]/40">Dock Master Guard</span></td>
-              <td class="font-mono text-slate-300">06:00 – 18:00</td>
-              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ON-DUTY (GPS OK)</span></td>
-              <td><button onclick="showToast('NFC Tour verified for Post P-402', 'info')" class="px-3 py-1.5 rounded-lg bg-[#072832] text-[#7CB0AB] border border-[#7CB0AB]/40 hover:bg-[#7CB0AB] hover:text-[#0B171E] font-bold text-xs">Telemetry</button></td>
-            </tr>
-            <tr>
-              <td><span class="font-mono font-bold text-[#7CB0AB]">PATROL-04</span></td>
-              <td><div class="font-bold text-white">Perimeter East Gate & Logistics Hub</div><div class="text-[11px] text-slate-400">Sector 2 (Chicago Hub)</div></td>
-              <td><div class="font-bold text-white">Officer J. Thorne + K-9 Blitz</div><div class="text-[10px] font-mono text-[#7CB0AB]">BADGE #BW-9901</div></td>
-              <td><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#072832] text-[#7CB0AB] border border-[#486A6E]/40">K-9 Mobile Unit</span></td>
-              <td class="font-mono text-slate-300">18:00 – 06:00</td>
-              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ON-PATROL</span></td>
-              <td><button onclick="showToast('Vehicle GPS tracking link active', 'info')" class="px-3 py-1.5 rounded-lg bg-[#072832] text-[#7CB0AB] border border-[#7CB0AB]/40 hover:bg-[#7CB0AB] hover:text-[#0B171E] font-bold text-xs">Live GPS</button></td>
+              <td class="py-3 px-4 font-mono font-bold text-[#072832] dark:text-[#7CB0AB]">P-402</td>
+              <td class="py-3 px-4"><div class="font-bold text-slate-900 dark:text-white">Level B2 — Storage Loading Dock</div><div class="text-[11px] text-slate-500">Sector 1 (NYC Metro)</div></td>
+              <td class="py-3 px-4"><div class="font-bold text-slate-900 dark:text-white">Officer K. Brooks</div><div class="text-[10px] font-mono text-slate-500">BADGE #BW-6512</div></td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-[#072832]">Dock Master</span></td>
+              <td class="py-3 px-4 font-mono">06:00 – 18:00</td>
+              <td class="py-3 px-4"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300">ON-DUTY</span></td>
+              <td class="py-3 px-4"><button onclick="showToast('NFC Tour verified for Post P-402', 'info')" class="text-xs text-[#072832] dark:text-[#7CB0AB] font-bold hover:underline">Telemetry</button></td>
             </tr>
           </tbody>
         </table>
@@ -426,483 +397,133 @@
     </div>
 
     <!-- SUB-TAB 3: OFFICER VETTING PIPELINE -->
-    <div id="admin-tab-content-vetting" class="space-y-6 hidden">
+    <div id="admin-tab-content-vetting" class="space-y-4 hidden">
       <div>
-        <h3 class="font-display font-bold text-xl text-white">7-Stage Officer Background Vetting Command</h3>
-        <p class="text-xs text-slate-400 mt-0.5">Track and advance candidates through FBI LiveScan, 10-panel drug screens, and tactical academy qualification</p>
+        <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">7-Stage Officer Background Vetting Command</h3>
+        <p class="text-xs text-slate-500 dark:text-slate-400">Manage officer applicants across background checks, FBI LiveScan, and academy training</p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="glass-card p-6 rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 space-y-4">
-          <div class="flex items-center justify-between border-b border-[#486A6E]/30 pb-3">
-            <h4 class="font-display font-bold text-white text-sm">Stage 1–3: Background &amp; FBI Check</h4>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold">14 APPLICANTS</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#486A6E]/30 pb-2">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white">Stage 1–3: Background &amp; FBI Check</h4>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300">14 APPLICANTS</span>
           </div>
-          <div class="space-y-3 text-xs">
-            <div class="p-3.5 rounded-xl bg-[#072832]/80 border border-[#486A6E]/40 space-y-1.5">
-              <div class="font-bold text-white">David K. Vance (Ex-Military Police)</div>
-              <div class="text-slate-400 text-[11px]">Guard Card #CA-994102 · FBI LiveScan Pending</div>
-              <button class="mt-2 text-xs font-bold text-[#7CB0AB] hover:underline" onclick="showToast('Advanced David K. Vance to Stage 4: 10-Panel Drug Screen', 'success')">Advance to Stage 4 →</button>
-            </div>
-            <div class="p-3.5 rounded-xl bg-[#072832]/80 border border-[#486A6E]/40 space-y-1.5">
-              <div class="font-bold text-white">Rachel Gomez (Federal Protection)</div>
-              <div class="text-slate-400 text-[11px]">Guard Card #NY-448102 · Background Clearance Verified</div>
-              <button class="mt-2 text-xs font-bold text-[#7CB0AB] hover:underline" onclick="showToast('Advanced Rachel Gomez to Stage 4: Medical Screening', 'success')">Advance to Stage 4 →</button>
-            </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#072832]/80 border border-slate-200 dark:border-[#486A6E]/40 text-xs space-y-1">
+            <div class="font-bold text-slate-900 dark:text-white">David K. Vance (Ex-Military Police)</div>
+            <div class="text-slate-500 dark:text-slate-400 text-[11px]">Guard Card #CA-994102 · FBI LiveScan Pending</div>
+            <button class="mt-1 text-xs font-bold text-brand-600 dark:text-[#7CB0AB] hover:underline" onclick="showToast('Advanced David K. Vance to Stage 4', 'success')">Advance to Stage 4 →</button>
           </div>
         </div>
 
-        <div class="glass-card p-6 rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 space-y-4">
-          <div class="flex items-center justify-between border-b border-[#486A6E]/30 pb-3">
-            <h4 class="font-display font-bold text-white text-sm">Stage 4–6: Screening &amp; Academy</h4>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-blue-500/20 text-blue-300 border border-blue-500/40 font-bold">9 RECRUITS</span>
+        <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#486A6E]/30 pb-2">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white">Stage 4–6: Screening &amp; Academy</h4>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300">9 RECRUITS</span>
           </div>
-          <div class="space-y-3 text-xs">
-            <div class="p-3.5 rounded-xl bg-[#072832]/80 border border-[#486A6E]/40 space-y-1.5">
-              <div class="font-bold text-white">Sarah T. Jensen (Executive Detail)</div>
-              <div class="text-slate-400 text-[11px]">Tactical Defense Academy: Week 3 of 4</div>
-              <button class="mt-2 text-xs font-bold text-[#7CB0AB] hover:underline" onclick="showToast('Certified Sarah T. Jensen for Active Post', 'success')">Certify &amp; Deploy →</button>
-            </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#072832]/80 border border-slate-200 dark:border-[#486A6E]/40 text-xs space-y-1">
+            <div class="font-bold text-slate-900 dark:text-white">Sarah T. Jensen (Executive Detail)</div>
+            <div class="text-slate-500 dark:text-slate-400 text-[11px]">Tactical Defense Academy: Week 3 of 4</div>
+            <button class="mt-1 text-xs font-bold text-brand-600 dark:text-[#7CB0AB] hover:underline" onclick="showToast('Certified Sarah T. Jensen for Active Post', 'success')">Certify &amp; Deploy →</button>
           </div>
         </div>
 
-        <div class="glass-card p-6 rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 space-y-4">
-          <div class="flex items-center justify-between border-b border-[#486A6E]/30 pb-3">
-            <h4 class="font-display font-bold text-white text-sm">Stage 7: Certified for Post</h4>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">15 OFFICERS</span>
+        <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#486A6E]/30 pb-2">
+            <h4 class="font-bold text-xs text-slate-900 dark:text-white">Stage 7: Certified for Post</h4>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300">15 OFFICERS</span>
           </div>
-          <div class="space-y-3 text-xs">
-            <div class="p-3.5 rounded-xl bg-[#072832]/80 border border-[#486A6E]/40 space-y-1.5">
-              <div class="font-bold text-white">Officer Marcus Ramirez (Badge BW-7190)</div>
-              <div class="text-slate-400 text-[11px]">Fully Vetted &amp; Armed Certified · Standing By</div>
-              <span class="inline-block mt-2 px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/40">READY FOR IMMEDIATE DEPLOYMENT</span>
-            </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#072832]/80 border border-slate-200 dark:border-[#486A6E]/40 text-xs space-y-1">
+            <div class="font-bold text-slate-900 dark:text-white">Officer Marcus Ramirez (BW-7190)</div>
+            <div class="text-slate-500 dark:text-slate-400 text-[11px]">Fully Vetted &amp; Armed Certified · Standing By</div>
+            <span class="inline-block mt-1 px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 text-[10px] font-bold">READY FOR DISPATCH</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- SUB-TAB 4: INCIDENTS DESK -->
-    <div id="admin-tab-content-incidents" class="space-y-6 hidden">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div id="admin-tab-content-incidents" class="space-y-4 hidden">
+      <div class="flex items-center justify-between">
         <div>
-          <h3 class="font-display font-bold text-xl text-white">Global Incident Dispatch Desk</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Live emergency alerts, physical breach logs, and triage actions</p>
+          <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">Global Incident Dispatch Desk</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Live physical security breach reports and resolution logs</p>
         </div>
       </div>
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E] shadow-2xl">
-        <table class="portal-table w-full text-left text-xs">
-          <thead>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-[#486A6E]/40 bg-white dark:bg-[#0B171E] shadow-sm">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-100 dark:bg-[#072832] text-slate-700 dark:text-[#7CB0AB] font-mono uppercase text-[11px]">
             <tr>
-              <th>Incident ID</th>
-              <th>Post / Site</th>
-              <th>Title &amp; Summary</th>
-              <th>Severity</th>
-              <th>Reporting Officer</th>
-              <th>Status</th>
-              <th>Command Action</th>
+              <th class="py-3 px-4">Incident ID</th>
+              <th class="py-3 px-4">Post / Facility</th>
+              <th class="py-3 px-4">Title &amp; Summary</th>
+              <th class="py-3 px-4">Severity</th>
+              <th class="py-3 px-4">Reporting Officer</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4">Command Action</th>
             </tr>
           </thead>
-          <tbody id="admin-incidents-tbody" class="divide-y divide-[#486A6E]/20 text-slate-200">
+          <tbody id="admin-incidents-tbody" class="divide-y divide-slate-100 dark:divide-[#486A6E]/20 text-slate-800 dark:text-slate-200">
             <tr>
-              <td><span class="font-mono font-bold text-red-400">INC-2026-0081</span></td>
-              <td><span class="font-mono font-bold text-white">Post P-402</span><br/><span class="text-[10px] text-slate-400">Level B2 Storage</span></td>
-              <td><div class="font-semibold text-white">Unauthorized Access Attempt at Loading Bay Door</div><div class="text-[10px] text-slate-400">Individual challenged by officer; fled without entry.</div></td>
-              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-red-500/20 text-red-300 border border-red-500/40">HIGH PRIORITY</span></td>
-              <td>Officer K. Brooks (BW-6512)</td>
-              <td><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300">INVESTIGATING</span></td>
-              <td>
-                <button onclick="showToast('Incident INC-2026-0081 marked resolved.', 'success')" class="px-3 py-1.5 rounded-lg bg-emerald-950 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-800 font-bold text-xs transition-all">
-                  Resolve Incident
-                </button>
-              </td>
+              <td class="py-3 px-4 font-mono font-bold text-red-600 dark:text-red-400">INC-2026-0081</td>
+              <td class="py-3 px-4"><span class="font-mono font-bold text-slate-900 dark:text-white">Post P-402</span><br/><span class="text-[10px] text-slate-500">Level B2 Storage</span></td>
+              <td class="py-3 px-4"><div class="font-semibold text-slate-900 dark:text-white">Unauthorized Access Attempt at Loading Bay Door</div><div class="text-[10px] text-slate-500">Individual challenged by officer; fled without entry.</div></td>
+              <td class="py-3 px-4"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-300">HIGH PRIORITY</span></td>
+              <td class="py-3 px-4">Officer K. Brooks (BW-6512)</td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300">INVESTIGATING</span></td>
+              <td class="py-3 px-4"><button onclick="showToast('Incident INC-2026-0081 marked resolved.', 'success')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs">Resolve Incident</button></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- MODAL: EMERGENCY DISPATCH (Admin Console) -->
-<div id="dispatch-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden p-4">
-  <div class="glass-card rounded-2xl border border-red-700/60 bg-[#072832] p-6 max-w-lg w-full space-y-5 text-white shadow-2xl">
-    <div class="flex items-center justify-between border-b border-[#486A6E]/40 pb-3">
+<!-- MODAL: EMERGENCY DISPATCH -->
+<div id="dispatch-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden p-4">
+  <div class="rounded-2xl border border-slate-200 dark:border-red-700/60 bg-white dark:bg-[#072832] p-6 max-w-lg w-full space-y-4 text-slate-900 dark:text-white shadow-2xl">
+    <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#486A6E]/40 pb-3">
       <div class="flex items-center gap-2">
         <span class="text-xl">🚨</span>
-        <h3 class="font-display font-bold text-lg text-red-400">Emergency Unit Fast-Dispatch</h3>
+        <h3 class="font-display font-bold text-base text-red-600 dark:text-red-400">Emergency Unit Fast-Dispatch</h3>
       </div>
-      <button id="close-dispatch-modal" class="text-slate-400 hover:text-white text-lg">✕</button>
+      <button id="close-dispatch-modal" class="text-slate-400 hover:text-slate-600 dark:hover:text-white text-lg">✕</button>
     </div>
-    <form id="emergency-dispatch-form" class="space-y-4 text-xs">
+    <form id="emergency-dispatch-form" class="space-y-3 text-xs">
       <div>
-        <label class="hire-form-label text-slate-300" for="disp-sector">Target Sector / Facility</label>
-        <select id="disp-sector" class="hire-form-input bg-[#0B171E] border-[#486A6E]/50 text-white">
+        <label class="block font-semibold mb-1 text-slate-700 dark:text-slate-300" for="disp-sector">Target Sector / Facility</label>
+        <select id="disp-sector" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-[#486A6E]/50 bg-slate-50 dark:bg-[#0B171E] text-slate-900 dark:text-white">
           <option value="Sector 1 — NYC Financial Center">Sector 1 — NYC Financial Center</option>
           <option value="Sector 2 — Chicago Logistics Hub">Sector 2 — Chicago Logistics Hub</option>
           <option value="Sector 3 — Los Angeles Harbor Terminal">Sector 3 — Los Angeles Harbor Terminal</option>
         </select>
       </div>
       <div>
-        <label class="hire-form-label text-slate-300" for="disp-unit-type">Unit Type to Deploy</label>
-        <select id="disp-unit-type" class="hire-form-input bg-[#0B171E] border-[#486A6E]/50 text-white">
+        <label class="block font-semibold mb-1 text-slate-700 dark:text-slate-300" for="disp-unit-type">Unit Type to Deploy</label>
+        <select id="disp-unit-type" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-[#486A6E]/50 bg-slate-50 dark:bg-[#0B171E] text-slate-900 dark:text-white">
           <option value="Armed Mobile Patrol SUV">Armed Mobile Patrol SUV (2 Officers)</option>
           <option value="K-9 Detection Unit">K-9 Detection Unit + Handler</option>
           <option value="Tactical Relief Officer">Tactical Armed Relief Officer</option>
         </select>
       </div>
       <div>
-        <label class="hire-form-label text-slate-300" for="disp-reason">Dispatch Reason / Priority Brief</label>
-        <textarea id="disp-reason" rows="2" class="hire-form-input bg-[#0B171E] border-[#486A6E]/50 text-white" placeholder="Immediate reinforcement for perimeter alarm..."></textarea>
+        <label class="block font-semibold mb-1 text-slate-700 dark:text-slate-300" for="disp-reason">Dispatch Reason / Priority Brief</label>
+        <textarea id="disp-reason" rows="2" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-[#486A6E]/50 bg-slate-50 dark:bg-[#0B171E] text-slate-900 dark:text-white" placeholder="Immediate reinforcement for perimeter alarm..."></textarea>
       </div>
-      <button type="submit" class="btn-primary w-full justify-center py-3 bg-red-700 hover:bg-red-600 border border-red-500 font-bold text-white shadow-xl shadow-red-900/40">
+      <button type="submit" class="w-full py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-lg transition-all">
         Transmit Immediate Dispatch Signal →
       </button>
     </form>
   </div>
 </div>
 
-<!-- =========================================================================
-     3. ROLE DASHBOARD B: 🛡️ SECURITY GUARD SHIFT TERMINAL
-     ========================================================================= -->
-<div id="dashboard-guard" class="flex-1 flex flex-col hidden bg-[#071922] text-slate-100">
-  <!-- Guard Header -->
-  <div class="bg-[#0B171E] border-b border-[#486A6E]/40 py-6 px-4 sm:px-8">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-      <div class="flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 flex items-center justify-center text-2xl shadow-xl">
-          🛡️
-        </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ON DUTY</span>
-            <span class="font-mono text-xs text-slate-400">BADGE #BW-8821</span>
-          </div>
-          <h1 class="font-display font-extrabold text-2xl text-white">Officer D. Reeves</h1>
-          <p class="text-xs text-slate-300">Assignment: North Tower Lobby (Post P-401) · Morrison &amp; Reed Properties</p>
-        </div>
-      </div>
-
-      <!-- Shift Check-In & Action Buttons -->
-      <div class="flex items-center gap-3">
-        <button id="guard-checkin-btn" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg transition-all flex items-center gap-1.5">
-          <span>✓</span> Check In (On-Duty)
-        </button>
-        <button id="guard-incident-btn" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-500 text-white shadow-lg transition-all flex items-center gap-1.5">
-          <span>🚨</span> Report Incident
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Guard Shift Tools Container -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex-1 space-y-8 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <!-- LEFT 2 COLS: NFC CHECKPOINT SCANNER & DAR GENERATOR -->
-      <div class="lg:col-span-2 space-y-6">
-        <!-- Interactive NFC Checkpoint Scanner -->
-        <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/85 p-6 space-y-5">
-          <div class="flex items-center justify-between border-b border-[#486A6E]/30 pb-4">
-            <div class="flex items-center gap-2">
-              <span class="text-xl">📡</span>
-              <div>
-                <h3 class="font-display font-bold text-lg text-white">NFC Patrol Checkpoint Scanner</h3>
-                <p class="text-xs text-slate-400">Simulate scanning digital checkpoint tags along your patrol route</p>
-              </div>
-            </div>
-            <span class="font-mono text-xs text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/30">GPS ACCURACY: ±2m</span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="hire-form-label text-slate-300 text-xs" for="checkpoint-select">Select Patrol Checkpoint</label>
-              <select id="checkpoint-select" class="hire-form-input bg-[#072832]/80 border-[#486A6E]/50 text-white text-xs">
-                <option value="North Tower — Main Lobby Gate">Checkpoint 1: North Tower — Main Lobby Gate</option>
-                <option value="Level B2 — High Value Storage Loading Dock">Checkpoint 2: Level B2 — Storage Loading Dock</option>
-                <option value="Floor 40 — Executive Boardroom Corridor">Checkpoint 3: Floor 40 — Executive Corridor</option>
-                <option value="Perimeter Gate 3 — East Parking Structure">Checkpoint 4: Perimeter Gate 3 — East Lot</option>
-              </select>
-            </div>
-            <div class="flex items-end">
-              <button id="scan-nfc-btn" class="btn-primary w-full justify-center text-xs py-3.5 bg-gradient-to-r from-emerald-700 to-emerald-600 border border-emerald-500/50 text-white font-bold">
-                📱 Tap &amp; Scan NFC Checkpoint Tag
-              </button>
-            </div>
-          </div>
-
-          <div id="nfc-scan-result" class="hidden p-4 rounded-xl bg-emerald-950/40 border border-emerald-600/40 text-emerald-300 text-xs font-mono">
-            ✓ Checkpoint Scanned &amp; Logged to Supabase with GPS Timestamp!
-          </div>
-        </div>
-
-        <!-- Daily Activity Report (DAR) Logger -->
-        <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/85 p-6 space-y-5">
-          <div class="flex items-center justify-between border-b border-[#486A6E]/30 pb-4">
-            <div>
-              <h3 class="font-display font-bold text-lg text-white">Daily Activity Report (DAR) Entry</h3>
-              <p class="text-xs text-slate-400">Record routine log entries, contractor escorts, and security checks</p>
-            </div>
-            <span class="text-xs font-mono text-slate-400">SHIFT: 06:00 – 22:00</span>
-          </div>
-
-          <form id="guard-dar-form" class="space-y-4">
-            <div class="flex gap-2 flex-wrap">
-              <button type="button" class="quick-dar-tag px-2.5 py-1 rounded-md text-[11px] bg-[#072832] border border-[#486A6E]/40 text-slate-200 hover:text-white hover:border-[#7CB0AB]" data-text="Routine perimeter foot patrol completed. All access doors locked and secured.">Foot Patrol Clear</button>
-              <button type="button" class="quick-dar-tag px-2.5 py-1 rounded-md text-[11px] bg-[#072832] border border-[#486A6E]/40 text-slate-200 hover:text-white hover:border-[#7CB0AB]" data-text="Contractor escorted to HVAC roof maintenance facility with temporary badge issued.">Contractor Escort</button>
-              <button type="button" class="quick-dar-tag px-2.5 py-1 rounded-md text-[11px] bg-[#072832] border border-[#486A6E]/40 text-slate-200 hover:text-white hover:border-[#7CB0AB]" data-text="Main lobby visitor logs reconciled. Shift handover briefing ready.">Shift Handover</button>
-            </div>
-
-            <textarea id="guard-dar-text" rows="3" class="hire-form-input bg-[#072832]/80 border-[#486A6E]/50 text-white text-xs placeholder-slate-500" placeholder="Type activity log details..."></textarea>
-            <button type="submit" class="btn-secondary text-xs px-5 py-2.5 font-bold">
-              Submit Log to Client DAR Feed →
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <!-- RIGHT COL: POST ORDERS & EMERGENCY CONTACTS -->
-      <div class="space-y-6">
-        <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/85 p-6 space-y-4 text-xs">
-          <h4 class="font-display font-bold text-base text-white border-b border-[#486A6E]/30 pb-3">Post Orders: P-401</h4>
-          <ul class="space-y-2.5 text-slate-300 list-disc list-inside">
-            <li>Verify photo credentials of all visitors entering elevator banks.</li>
-            <li>Conduct physical patrol of Level B2 storage every 90 minutes.</li>
-            <li>Maintain radio contact on Channel 4 with Mobile Patrol Unit Bravo-7.</li>
-            <li>Report unauthorized vehicle idling in loading dock beyond 15 mins.</li>
-          </ul>
-        </div>
-
-        <div class="glass-card rounded-2xl border border-red-800/40 bg-red-950/20 p-6 space-y-3 text-xs">
-          <h4 class="font-display font-bold text-base text-red-300 border-b border-red-800/30 pb-2">Emergency Dispatch</h4>
-          <div class="space-y-1 text-slate-300">
-            <div><strong>Operations Dispatch:</strong> +1 (800) 555-0911</div>
-            <div><strong>Duty Field Supervisor:</strong> Sgt. C. Vance (Ch 1)</div>
-            <div><strong>Site Property Manager:</strong> James Morrison (Ext 401)</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =========================================================================
-     4. ROLE DASHBOARD C: 🏢 CORPORATE CLIENT PORTAL
-     ========================================================================= -->
-<div id="dashboard-client" class="flex-1 flex flex-col hidden bg-[#071922] text-slate-100">
-  <!-- Client Header -->
-  <div class="bg-[#0B171E] border-b border-[#486A6E]/40 py-6 px-4 sm:px-8">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-      <div class="space-y-1">
-        <div class="flex items-center gap-3">
-          <span class="px-2.5 py-1 rounded bg-[#7CB0AB]/20 text-[#7CB0AB] border border-[#7CB0AB]/40 text-xs font-mono font-bold">CLIENT ID: MRP-0041</span>
-          <span class="text-xs font-mono text-emerald-400">● 6 POSTS ACTIVE</span>
-        </div>
-        <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-white">Morrison &amp; Reed Properties LLC</h1>
-        <p class="text-xs text-slate-300">Commercial Skyscraper Portfolio · Manhattan &amp; Queens Locations</p>
-      </div>
-
-      <div class="flex items-center gap-3">
-        <a href="hire.html" class="btn-primary text-xs px-4 py-2.5 bg-gradient-to-r from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50">
-          Request Extra Guard Detail +
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Client Sub-Nav Tabs -->
-  <div class="bg-[#0B171E]/80 border-b border-[#486A6E]/30 px-4 sm:px-8 sticky top-20 z-30">
-    <div class="max-w-7xl mx-auto flex gap-6 overflow-x-auto">
-      <button class="client-tab active-client-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-[#7CB0AB] text-white flex items-center gap-2" data-tab="client-overview">
-        <span>🏢</span> PROPERTY MANNED POSTS
-      </button>
-      <button class="client-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2" data-tab="client-tours">
-        <span>📡</span> NFC PATROL VERIFICATION
-      </button>
-      <button class="client-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2" data-tab="client-incidents">
-        <span>🚨</span> INCIDENT LOGS
-      </button>
-      <button class="client-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2" data-tab="client-billing">
-        <span>💳</span> INVOICES &amp; BILLING
-      </button>
-    </div>
-  </div>
-
-  <!-- Client Content Container -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex-1 space-y-8 w-full">
-    <!-- CLIENT SUB-TAB 1: POSTS OVERVIEW -->
-    <div id="client-tab-content-overview" class="space-y-6">
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div class="stat-card p-4 rounded-xl border border-[#486A6E]/40 bg-[#0B171E]/80 text-center">
-          <div class="text-2xl font-black text-white font-display">6 / 6</div>
-          <div class="text-[10px] font-mono uppercase tracking-wider text-[#7CB0AB] mt-1">Posts Filled</div>
-        </div>
-        <div class="stat-card p-4 rounded-xl border border-[#486A6E]/40 bg-[#0B171E]/80 text-center">
-          <div class="text-2xl font-black text-emerald-400 font-display">100%</div>
-          <div class="text-[10px] font-mono uppercase tracking-wider text-[#7CB0AB] mt-1">Uptime SLA</div>
-        </div>
-        <div class="stat-card p-4 rounded-xl border border-[#486A6E]/40 bg-[#0B171E]/80 text-center">
-          <div class="text-2xl font-black text-white font-display">142</div>
-          <div class="text-[10px] font-mono uppercase tracking-wider text-[#7CB0AB] mt-1">NFC Scans Today</div>
-        </div>
-        <div class="stat-card p-4 rounded-xl border border-[#486A6E]/40 bg-[#0B171E]/80 text-center">
-          <div class="text-2xl font-black text-white font-display">0</div>
-          <div class="text-[10px] font-mono uppercase tracking-wider text-[#7CB0AB] mt-1">Active Breaches</div>
-        </div>
-      </div>
-
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 shadow-2xl">
-        <table class="portal-table w-full text-left text-xs">
-          <thead class="bg-[#072832] text-slate-300 font-mono uppercase text-[11px]">
-            <tr>
-              <th class="py-3 px-4">Post Code</th>
-              <th class="py-3 px-4">Location</th>
-              <th class="py-3 px-4">Assigned Officer</th>
-              <th class="py-3 px-4">Guard Type</th>
-              <th class="py-3 px-4">Shift Schedule</th>
-              <th class="py-3 px-4">Status</th>
-              <th class="py-3 px-4">Last Check-In</th>
-            </tr>
-          </thead>
-          <tbody id="client-posts-tbody" class="divide-y divide-[#486A6E]/20 text-slate-200">
-            <!-- Dynamically populated from Supabase -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- CLIENT SUB-TAB 2: NFC TOURS -->
-    <div id="client-tab-content-tours" class="space-y-6 hidden">
-      <div>
-        <h3 class="font-display font-bold text-xl text-white">Live Patrol Tour Verification Stream</h3>
-        <p class="text-xs text-slate-400 mt-0.5">NFC checkpoint scans verified with GPS time-stamping</p>
-      </div>
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 shadow-2xl">
-        <table class="portal-table w-full text-left text-xs">
-          <thead class="bg-[#072832] text-slate-300 font-mono uppercase text-[11px]">
-            <tr>
-              <th class="py-3 px-4">Timestamp</th>
-              <th class="py-3 px-4">Post Code</th>
-              <th class="py-3 px-4">Officer Name</th>
-              <th class="py-3 px-4">Checkpoint Tag</th>
-              <th class="py-3 px-4">Verification</th>
-            </tr>
-          </thead>
-          <tbody id="client-tours-tbody" class="divide-y divide-[#486A6E]/20 text-slate-200">
-            <!-- Dynamically populated -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- CLIENT SUB-TAB 3: INCIDENTS -->
-    <div id="client-tab-content-incidents" class="space-y-6 hidden">
-      <div>
-        <h3 class="font-display font-bold text-xl text-white">Property Incident Reports</h3>
-        <p class="text-xs text-slate-400 mt-0.5">Physical security incidents reported on your properties</p>
-      </div>
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 shadow-2xl">
-        <table class="portal-table w-full text-left text-xs">
-          <thead class="bg-[#072832] text-slate-300 font-mono uppercase text-[11px]">
-            <tr>
-              <th class="py-3 px-4">Incident #</th>
-              <th class="py-3 px-4">Post Code</th>
-              <th class="py-3 px-4">Description</th>
-              <th class="py-3 px-4">Severity</th>
-              <th class="py-3 px-4">Reporting Officer</th>
-              <th class="py-3 px-4">Status</th>
-            </tr>
-          </thead>
-          <tbody id="client-incidents-tbody" class="divide-y divide-[#486A6E]/20 text-slate-200">
-            <!-- Dynamically populated -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- CLIENT SUB-TAB 4: BILLING -->
-    <div id="client-tab-content-billing" class="space-y-6 hidden">
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="stat-card p-4 rounded-xl border border-[#486A6E]/40 bg-[#0B171E]/80 text-center">
-          <div class="text-2xl font-black text-emerald-400 font-display">$0.00</div>
-          <div class="text-[10px] font-mono uppercase tracking-wider text-[#7CB0AB] mt-1">Balance Due</div>
-        </div>
-        <div class="stat-card p-4 rounded-xl border border-[#486A6E]/40 bg-[#0B171E]/80 text-center">
-          <div class="text-2xl font-black text-white font-display">$48,200</div>
-          <div class="text-[10px] font-mono uppercase tracking-wider text-[#7CB0AB] mt-1">YTD Invoiced</div>
-        </div>
-        <div class="stat-card p-4 rounded-xl border border-[#486A6E]/40 bg-[#0B171E]/80 text-center">
-          <div class="text-2xl font-black text-white font-display">Aug 31, 2026</div>
-          <div class="text-[10px] font-mono uppercase tracking-wider text-[#7CB0AB] mt-1">Next Statement</div>
-        </div>
-      </div>
-
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 shadow-2xl">
-        <table class="portal-table w-full text-left text-xs">
-          <thead class="bg-[#072832] text-slate-300 font-mono uppercase text-[11px]">
-            <tr>
-              <th class="py-3 px-4">Invoice #</th>
-              <th class="py-3 px-4">Period</th>
-              <th class="py-3 px-4">Description</th>
-              <th class="py-3 px-4">Amount</th>
-              <th class="py-3 px-4">Status</th>
-              <th class="py-3 px-4">Statement</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-[#486A6E]/20 text-slate-200">
-            <tr>
-              <td class="py-3.5 px-4 font-mono font-bold text-[#7CB0AB]">INV-2026-08</td>
-              <td class="py-3.5 px-4">Aug 1 – Aug 31, 2026</td>
-              <td class="py-3.5 px-4">6 Guard Posts + Mobile Patrol</td>
-              <td class="py-3.5 px-4 font-bold text-white">$16,400.00</td>
-              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">PENDING</span></td>
-              <td class="py-3.5 px-4"><button onclick="showToast('Invoice PDF downloading...', 'info')" class="text-[#7CB0AB] hover:underline font-bold">📥 Download PDF</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: REPORT INCIDENT (Guard Terminal) -->
-<div id="incident-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
-  <div class="glass-card rounded-2xl border border-[#486A6E]/50 bg-[#072832] p-6 max-w-lg w-full space-y-5 text-white shadow-2xl">
-    <div class="flex items-center justify-between border-b border-[#486A6E]/30 pb-3">
-      <h3 class="font-display font-bold text-lg text-red-400">🚨 File Security Incident Report</h3>
-      <button id="close-incident-modal" class="text-slate-400 hover:text-white text-lg">✕</button>
-    </div>
-    <form id="guard-incident-form" class="space-y-4 text-xs">
-      <div>
-        <label class="hire-form-label text-slate-300">Incident Severity Level</label>
-        <select id="inc-severity" class="hire-form-input bg-[#0B171E] border-[#486A6E]/50 text-white">
-          <option value="low">Low — Routine Observation</option>
-          <option value="medium" selected>Medium — Unauthorized Access / Tampering</option>
-          <option value="high">High — Physical Intrusion / Weapon / Altercation</option>
-          <option value="critical">Critical — Evacuation / Active Threat</option>
-        </select>
-      </div>
-      <div>
-        <label class="hire-form-label text-slate-300">Incident Title</label>
-        <input id="inc-title" type="text" class="hire-form-input bg-[#0B171E] border-[#486A6E]/50 text-white" placeholder="e.g. Unidentified Vehicle Trespassing at Gate 3" required/>
-      </div>
-      <div>
-        <label class="hire-form-label text-slate-300">Incident Description &amp; Actions Taken</label>
-        <textarea id="inc-desc" rows="3" class="hire-form-input bg-[#0B171E] border-[#486A6E]/50 text-white" placeholder="Provide full details, vehicle plates, or suspect description..." required></textarea>
-      </div>
-      <button type="submit" class="btn-primary w-full justify-center py-3 bg-red-700 hover:bg-red-600 border border-red-500 font-bold">
-        Broadcast Incident Alert to Dispatch &amp; Supabase →
-      </button>
-    </form>
-  </div>
-</div>
-
 <!-- FOOTER -->
-<footer class="site-footer bg-[#071922] border-t border-[#486A6E]/30 py-6 px-4 text-xs text-slate-400 text-center">
+<footer class="bg-white dark:bg-[#071922] border-t border-slate-200 dark:border-[#486A6E]/30 py-6 px-4 text-xs text-slate-500 dark:text-slate-400 text-center transition-colors">
   <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
     <p>© 2026 Bulwark SEC, Inc. · Global Security Operations Platform</p>
     <div class="flex gap-4">
-      <a href="index.html" class="hover:text-slate-200">Public Website</a>
-      <a href="hire.html" class="hover:text-slate-200">Request Guards</a>
+      <a href="index.html" class="hover:text-slate-900 dark:hover:text-slate-200">Public Website</a>
+      <a href="hire.html" class="hover:text-slate-900 dark:hover:text-slate-200">Request Guards</a>
     </div>
   </div>
 </footer>
@@ -916,10 +537,10 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  let activeRole = 'client'; // default selected role on login screen
+  let activeRole = 'admin'; // default role
   let currentUser = null;
 
-  // ── 1. Role Selector Tabs on Login Screen ──────────────────────────────────
+  // 1. Role Selector Tabs
   const roleTabAdmin = document.getElementById('role-tab-admin');
   const roleTabGuard = document.getElementById('role-tab-guard');
   const roleTabClient = document.getElementById('role-tab-client');
@@ -936,43 +557,49 @@ document.addEventListener('DOMContentLoaded', () => {
   function setLoginRole(role) {
     activeRole = role;
     [roleTabAdmin, roleTabGuard, roleTabClient].forEach(b => {
-      b.classList.remove('active-role-tab', 'text-white', 'bg-gradient-to-r', 'from-[#072832]', 'to-[#486A6E]', 'border', 'border-[#7CB0AB]/50', 'shadow-md');
-      b.classList.add('text-slate-300');
+      b.classList.remove('active-role-tab', 'text-white', 'bg-[#072832]', 'dark:bg-gradient-to-r', 'shadow-sm');
+      b.classList.add('text-slate-700', 'dark:text-slate-300');
     });
 
     if (role === 'admin') {
-      roleTabAdmin.classList.add('active-role-tab', 'text-white', 'bg-gradient-to-r', 'from-[#072832]', 'to-[#486A6E]', 'border', 'border-[#7CB0AB]/50', 'shadow-md');
-      formTitle.textContent = 'Operations Admin Command';
-      formSubtitle.textContent = 'Master clearance for Bulwark SEC Operations Dispatchers';
-      formTag.textContent = 'ADMIN CLEARANCE';
-      formTag.className = 'px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase';
-      userLabel.textContent = 'Dispatcher Email / ID';
-      pinLabel.textContent = 'Security Token / 2FA PIN';
-      userInput.value = 'admin@bulwarksec.com';
-      passInput.value = 'OpsAdmin2026!';
-      pinInput.value = '990011';
+      roleTabAdmin?.classList.add('active-role-tab', 'text-white', 'bg-[#072832]', 'shadow-sm');
+      if (formTitle) formTitle.textContent = 'Admin Operations Command';
+      if (formSubtitle) formSubtitle.textContent = 'Master clearance for Bulwark SEC Operations Dispatchers';
+      if (formTag) {
+        formTag.textContent = 'ADMIN CLEARANCE';
+        formTag.className = 'px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-300 uppercase';
+      }
+      if (userLabel) userLabel.textContent = 'Dispatcher Email / ID';
+      if (pinLabel) pinLabel.textContent = 'Security Token / 2FA PIN';
+      if (userInput) userInput.value = 'admin@bulwarksec.com';
+      if (passInput) passInput.value = 'OpsAdmin2026!';
+      if (pinInput) pinInput.value = '990011';
     } else if (role === 'guard') {
-      roleTabGuard.classList.add('active-role-tab', 'text-white', 'bg-gradient-to-r', 'from-[#072832]', 'to-[#486A6E]', 'border', 'border-[#7CB0AB]/50', 'shadow-md');
-      formTitle.textContent = 'Security Officer Shift Terminal';
-      formSubtitle.textContent = 'Field officer check-in, NFC tour logger, and DAR reporting';
-      formTag.textContent = 'OFFICER TIER';
-      formTag.className = 'px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/40 uppercase';
-      userLabel.textContent = 'Officer Badge ID / Email';
-      pinLabel.textContent = 'Officer Shift PIN';
-      userInput.value = 'officer.reeves@bulwarksec.com';
-      passInput.value = 'GuardDuty2026!';
-      pinInput.value = 'BW-8821';
+      roleTabGuard?.classList.add('active-role-tab', 'text-white', 'bg-[#072832]', 'shadow-sm');
+      if (formTitle) formTitle.textContent = 'Security Officer Shift Terminal';
+      if (formSubtitle) formSubtitle.textContent = 'Field officer check-in, NFC tour logger, and DAR reporting';
+      if (formTag) {
+        formTag.textContent = 'OFFICER TIER';
+        formTag.className = 'px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300 border border-blue-300 uppercase';
+      }
+      if (userLabel) userLabel.textContent = 'Officer Badge ID / Email';
+      if (pinLabel) pinLabel.textContent = 'Officer Shift PIN';
+      if (userInput) userInput.value = 'officer.reeves@bulwarksec.com';
+      if (passInput) passInput.value = 'GuardDuty2026!';
+      if (pinInput) pinInput.value = 'BW-8821';
     } else {
-      roleTabClient.classList.add('active-role-tab', 'text-white', 'bg-gradient-to-r', 'from-[#072832]', 'to-[#486A6E]', 'border', 'border-[#7CB0AB]/50', 'shadow-md');
-      formTitle.textContent = 'Client Portal Access';
-      formSubtitle.textContent = 'Enter your Morrison & Reed credentials or use demo access';
-      formTag.textContent = 'CLIENT TIER';
-      formTag.className = 'px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-[#7CB0AB]/20 text-[#7CB0AB] border border-[#7CB0AB]/40 uppercase';
-      userLabel.textContent = 'Account Email / ID';
-      pinLabel.textContent = 'Site PIN / 2FA';
-      userInput.value = 'client@morrisonreed.com';
-      passInput.value = 'Demo2026!';
-      pinInput.value = '401041';
+      roleTabClient?.classList.add('active-role-tab', 'text-white', 'bg-[#072832]', 'shadow-sm');
+      if (formTitle) formTitle.textContent = 'Client Portal Access';
+      if (formSubtitle) formSubtitle.textContent = 'Enter client credentials or use demo access';
+      if (formTag) {
+        formTag.textContent = 'CLIENT TIER';
+        formTag.className = 'px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 dark:bg-[#7CB0AB]/20 dark:text-[#7CB0AB] border border-emerald-200 uppercase';
+      }
+      if (userLabel) userLabel.textContent = 'Account Email / ID';
+      if (pinLabel) pinLabel.textContent = 'Site PIN / 2FA';
+      if (userInput) userInput.value = 'client@morrisonreed.com';
+      if (passInput) passInput.value = 'Demo2026!';
+      if (pinInput) pinInput.value = '401041';
     }
   }
 
@@ -980,65 +607,41 @@ document.addEventListener('DOMContentLoaded', () => {
   roleTabGuard?.addEventListener('click', () => setLoginRole('guard'));
   roleTabClient?.addEventListener('click', () => setLoginRole('client'));
 
-  // Quick 1-click buttons
-  document.getElementById('btn-quick-admin')?.addEventListener('click', () => { setLoginRole('admin'); showToast('Admin preset filled.', 'info'); });
-  document.getElementById('btn-quick-guard')?.addEventListener('click', () => { setLoginRole('guard'); showToast('Officer preset filled.', 'info'); });
-  document.getElementById('btn-quick-client')?.addEventListener('click', () => { setLoginRole('client'); showToast('Client preset filled.', 'info'); });
+  document.getElementById('btn-quick-admin')?.addEventListener('click', () => { setLoginRole('admin'); showToast('Admin credentials filled.', 'info'); });
+  document.getElementById('btn-quick-guard')?.addEventListener('click', () => { setLoginRole('guard'); showToast('Officer credentials filled.', 'info'); });
+  document.getElementById('btn-quick-client')?.addEventListener('click', () => { setLoginRole('client'); showToast('Client credentials filled.', 'info'); });
 
-  // ── 2. Login Submission & Role Routing ─────────────────────────────────────
+  // 2. Open Dashboard
   const loginScreen = document.getElementById('portal-login-screen');
   const dashboardAdmin = document.getElementById('dashboard-admin');
-  const dashboardGuard = document.getElementById('dashboard-guard');
-  const dashboardClient = document.getElementById('dashboard-client');
-  const publicNavLinks = document.getElementById('public-nav-links');
   const authUserInfo = document.getElementById('auth-user-info');
   const authUserName = document.getElementById('auth-user-name');
   const authUserRole = document.getElementById('auth-user-role');
   const roleBadge = document.getElementById('portal-role-badge');
-  const navQuoteBtn = document.getElementById('nav-quote-btn');
+  const navBackLink = document.getElementById('nav-back-link');
 
   function openRoleDashboard(role) {
-    currentUser = { role, user: userInput.value };
-    loginScreen.classList.add('hidden');
-    publicNavLinks?.classList.add('hidden');
-    navQuoteBtn?.classList.add('hidden');
+    currentUser = { role, user: userInput ? userInput.value : 'admin@bulwarksec.com' };
+    loginScreen?.classList.add('hidden');
+    navBackLink?.classList.add('hidden');
     authUserInfo?.classList.remove('hidden');
     roleBadge?.classList.remove('hidden');
 
-    dashboardAdmin.classList.add('hidden');
-    dashboardGuard.classList.add('hidden');
-    dashboardClient.classList.add('hidden');
-
-    if (role === 'admin') {
-      dashboardAdmin.classList.remove('hidden');
-      authUserName.textContent = 'Commander Dispatch';
-      authUserRole.textContent = 'ROLE: ADMIN COMMAND';
+    dashboardAdmin?.classList.remove('hidden');
+    if (authUserName) authUserName.textContent = 'Commander Dispatch';
+    if (authUserRole) authUserRole.textContent = 'LEVEL 4 DISPATCH COMMAND';
+    if (roleBadge) {
       roleBadge.textContent = 'ADMIN CLEARANCE';
-      roleBadge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold font-mono uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40';
-      showToast('Master Dispatch Command authenticated.', 'success');
-      loadAdminData();
-    } else if (role === 'guard') {
-      dashboardGuard.classList.remove('hidden');
-      authUserName.textContent = 'Officer D. Reeves';
-      authUserRole.textContent = 'BADGE: BW-8821';
-      roleBadge.textContent = 'GUARD TERMINAL';
-      roleBadge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold font-mono uppercase bg-blue-500/20 text-blue-300 border border-blue-500/40';
-      showToast('Shift Terminal loaded. Post P-401 active.', 'success');
-    } else {
-      dashboardClient.classList.remove('hidden');
-      authUserName.textContent = 'James Morrison';
-      authUserRole.textContent = 'CLIENT: MRP-0041';
-      roleBadge.textContent = 'CLIENT VERIFIED';
-      roleBadge.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold font-mono uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
-      showToast('Welcome, Morrison & Reed Properties.', 'success');
-      loadClientData();
+      roleBadge.className = 'px-2.5 py-0.5 rounded text-[10px] font-bold font-mono uppercase bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-300 dark:border-amber-500/40';
     }
+    showToast('Admin Command Console Loaded.', 'success');
+    loadAdminData();
   }
 
   // Check URL param or existing session
   const params = new URLSearchParams(window.location.search);
-  const paramRole = params.get('role') || sessionStorage.getItem('bulwark_auth_role');
-  if (paramRole && ['admin', 'guard', 'client'].includes(paramRole)) {
+  const paramRole = params.get('role') || sessionStorage.getItem('bulwark_auth_role') || 'admin';
+  if (paramRole) {
     setLoginRole(paramRole);
     openRoleDashboard(paramRole);
   }
@@ -1046,34 +649,24 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('unified-portal-form')?.addEventListener('submit', (e) => {
     e.preventDefault();
     sessionStorage.setItem('bulwark_auth_role', activeRole);
-    sessionStorage.setItem('bulwark_auth_user', userInput.value);
     openRoleDashboard(activeRole);
   });
 
   document.getElementById('portal-logout-btn')?.addEventListener('click', () => {
-    currentUser = null;
     sessionStorage.removeItem('bulwark_auth_role');
     sessionStorage.removeItem('bulwark_auth_user');
-    dashboardAdmin.classList.add('hidden');
-    dashboardGuard.classList.add('hidden');
-    dashboardClient.classList.add('hidden');
-    authUserInfo?.classList.add('hidden');
-    roleBadge?.classList.add('hidden');
-    publicNavLinks?.classList.remove('hidden');
-    navQuoteBtn?.classList.remove('hidden');
-    loginScreen.classList.remove('hidden');
-    showToast('Signed out from portal.', 'info');
+    window.location.href = 'index.html';
   });
 
-  // ── 3. Admin Dashboard Sub-Tabs & Data Loading ─────────────────────────────
+  // 3. Admin Sub-Tabs
   document.querySelectorAll('.admin-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.admin-tab').forEach(t => {
-        t.classList.remove('active-admin-tab', 'border-[#7CB0AB]', 'text-white');
-        t.classList.add('border-transparent', 'text-slate-400');
+        t.classList.remove('active-admin-tab', 'border-[#072832]', 'dark:border-[#7CB0AB]', 'text-[#072832]', 'dark:text-white');
+        t.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400');
       });
-      tab.classList.add('active-admin-tab', 'border-[#7CB0AB]', 'text-white');
-      tab.classList.remove('border-transparent', 'text-slate-400');
+      tab.classList.add('active-admin-tab', 'border-[#072832]', 'dark:border-[#7CB0AB]', 'text-[#072832]', 'dark:text-white');
+      tab.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400');
 
       ['leads', 'posts', 'vetting', 'incidents'].forEach(id => {
         document.getElementById(`admin-tab-content-${id}`)?.classList.add('hidden');
@@ -1085,191 +678,34 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadAdminData() {
     if (!window.BulwarkDB) return;
     try {
-      // 1. Load Leads from guard_requests
       const { data: leads } = await window.BulwarkDB.fetchGuardRequests();
       const leadsTbody = document.getElementById('admin-leads-tbody');
       if (leads && leads.length > 0 && leadsTbody) {
         leadsTbody.innerHTML = leads.map(lead => `
           <tr>
-            <td class="py-3.5 px-4 font-semibold text-white">${lead.full_name}<br/><span class="text-[10px] text-slate-400">${lead.email}</span></td>
-            <td class="py-3.5 px-4">${lead.company_name || 'Direct Property'}<br/><span class="text-[10px] text-slate-400">${lead.property_type || 'Commercial'}</span></td>
-            <td class="py-3.5 px-4 font-mono text-[#7CB0AB]">${lead.guard_type}</td>
-            <td class="py-3.5 px-4 font-bold text-white">${lead.officers_needed} Guards</td>
+            <td class="py-3.5 px-4"><div class="font-bold text-slate-900 dark:text-white">${lead.full_name}</div><div class="text-[11px] text-slate-500 font-mono">${lead.email}</div></td>
+            <td class="py-3.5 px-4"><div class="font-medium text-slate-900 dark:text-white">${lead.company_name || 'Direct Property'}</div><div class="text-[11px] text-slate-500">${lead.property_type || 'Commercial'}</div></td>
+            <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300">${lead.guard_type}</span></td>
+            <td class="py-3.5 px-4 font-bold text-slate-900 dark:text-white">${lead.officers_needed} Guards</td>
             <td class="py-3.5 px-4">${lead.coverage_hours}</td>
-            <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase">${lead.status}</span></td>
+            <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 uppercase">${lead.status}</span></td>
             <td class="py-3.5 px-4">
-              <button onclick="window.BulwarkDB.updateGuardRequestStatus('${lead.id}', 'active_contract').then(() => { showToast('Contract approved & officers dispatched!', 'success'); loadAdminData(); });" class="px-2.5 py-1 rounded bg-[#072832] text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500 hover:text-[#0B171E] font-bold text-[11px]">✓ Approve</button>
-            </td>
-          </tr>
-        `).join('');
-      }
-
-      // 2. Load Active Posts
-      const { data: posts } = await window.BulwarkDB.fetchActivePosts();
-      const postsTbody = document.getElementById('admin-posts-tbody');
-      if (posts && posts.length > 0 && postsTbody) {
-        postsTbody.innerHTML = posts.map(p => `
-          <tr>
-            <td class="py-3 px-4 font-mono font-bold text-[#7CB0AB]">${p.post_code}</td>
-            <td class="py-3 px-4 font-medium text-white">${p.location_name}</td>
-            <td class="py-3 px-4">${p.officer_name} <span class="text-[10px] text-slate-400 font-mono">(${p.officer_badge_id || 'BW-POST'})</span></td>
-            <td class="py-3 px-4">${p.guard_type}</td>
-            <td class="py-3 px-4 font-mono">${p.shift_schedule}</td>
-            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">${p.status}</span></td>
-            <td class="py-3 px-4"><button onclick="showToast('Shift verified for ${p.post_code}', 'info')" class="text-xs text-[#7CB0AB] hover:underline font-bold">Inspect Telemetry</button></td>
-          </tr>
-        `).join('');
-      }
-
-      // 3. Load Incidents
-      const { data: incidents } = await window.BulwarkDB.fetchIncidents();
-      const incTbody = document.getElementById('admin-incidents-tbody');
-      if (incidents && incidents.length > 0 && incTbody) {
-        incTbody.innerHTML = incidents.map(inc => `
-          <tr>
-            <td class="py-3 px-4 font-mono font-bold text-red-400">${inc.incident_number || 'INC-LIVE'}</td>
-            <td class="py-3 px-4 font-mono font-bold">${inc.post_code}</td>
-            <td class="py-3 px-4 font-semibold text-white">${inc.title}</td>
-            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-red-500/20 text-red-300 border border-red-500/40">${inc.severity}</span></td>
-            <td class="py-3 px-4">${inc.officer_name}</td>
-            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-500/20 text-emerald-300">${inc.status}</span></td>
-            <td class="py-3 px-4">
-              <button onclick="window.BulwarkDB.updateIncidentStatus('${inc.incident_number}', 'resolved').then(() => { showToast('Incident marked resolved.', 'success'); loadAdminData(); });" class="text-xs text-emerald-400 hover:underline font-bold">Resolve</button>
+              <button onclick="window.BulwarkDB.updateGuardRequestStatus('${lead.id}', 'active_contract').then(() => { showToast('Contract approved & officers dispatched!', 'success'); loadAdminData(); });" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700">✓ Approve</button>
             </td>
           </tr>
         `).join('');
       }
     } catch (e) {
-      console.warn('Admin load error notice:', e);
+      console.warn('Admin load note:', e);
     }
   }
 
   document.getElementById('refresh-leads-btn')?.addEventListener('click', () => {
     loadAdminData();
-    showToast('Leads and fleet roster reloaded from Supabase.', 'info');
+    showToast('Inquiries refreshed.', 'info');
   });
 
-  // ── 4. Client Dashboard Sub-Tabs & Data Loading ────────────────────────────
-  document.querySelectorAll('.client-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.client-tab').forEach(t => {
-        t.classList.remove('active-client-tab', 'border-[#7CB0AB]', 'text-white');
-        t.classList.add('border-transparent', 'text-slate-400');
-      });
-      tab.classList.add('active-client-tab', 'border-[#7CB0AB]', 'text-white');
-      tab.classList.remove('border-transparent', 'text-slate-400');
-
-      ['overview', 'tours', 'incidents', 'billing'].forEach(id => {
-        document.getElementById(`client-tab-content-${id}`)?.classList.add('hidden');
-      });
-      document.getElementById(`client-tab-content-${tab.dataset.tab.replace('client-', '')}`)?.classList.remove('hidden');
-    });
-  });
-
-  async function loadClientData() {
-    if (!window.BulwarkDB) return;
-    try {
-      const { data: posts } = await window.BulwarkDB.fetchActivePosts();
-      const postsTbody = document.getElementById('client-posts-tbody');
-      if (posts && posts.length > 0 && postsTbody) {
-        postsTbody.innerHTML = posts.map(p => `
-          <tr>
-            <td class="py-3 px-4 font-mono font-bold text-[#7CB0AB]">${p.post_code}</td>
-            <td class="py-3 px-4 font-medium text-white">${p.location_name}</td>
-            <td class="py-3 px-4">${p.officer_name}</td>
-            <td class="py-3 px-4">${p.guard_type}</td>
-            <td class="py-3 px-4 font-mono">${p.shift_schedule}</td>
-            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">${p.status}</span></td>
-            <td class="py-3 px-4 font-mono text-[11px] text-slate-400">Verified On Duty</td>
-          </tr>
-        `).join('');
-      }
-
-      const { data: scans } = await window.BulwarkDB.fetchTourScans();
-      const toursTbody = document.getElementById('client-tours-tbody');
-      if (scans && scans.length > 0 && toursTbody) {
-        toursTbody.innerHTML = scans.map(s => `
-          <tr>
-            <td class="py-3 px-4 font-mono text-[11px] text-slate-400">${new Date(s.scanned_at).toLocaleTimeString()}</td>
-            <td class="py-3 px-4 font-mono font-bold text-[#7CB0AB]">${s.post_code}</td>
-            <td class="py-3 px-4 font-medium text-white">${s.officer_name}</td>
-            <td class="py-3 px-4">${s.checkpoint_name}</td>
-            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">GPS VERIFIED</span></td>
-          </tr>
-        `).join('');
-      }
-
-      const { data: incidents } = await window.BulwarkDB.fetchIncidents();
-      const incTbody = document.getElementById('client-incidents-tbody');
-      if (incidents && incidents.length > 0 && incTbody) {
-        incTbody.innerHTML = incidents.map(inc => `
-          <tr>
-            <td class="py-3 px-4 font-mono font-bold text-[#7CB0AB]">${inc.incident_number || 'INC-001'}</td>
-            <td class="py-3 px-4 font-mono">${inc.post_code}</td>
-            <td class="py-3 px-4 font-medium text-white">${inc.title}</td>
-            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/40">${inc.severity}</span></td>
-            <td class="py-3 px-4">${inc.officer_name}</td>
-            <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-500/20 text-emerald-300">${inc.status}</span></td>
-          </tr>
-        `).join('');
-      }
-    } catch (e) {
-      console.warn('Client load error notice:', e);
-    }
-  }
-
-  // ── 5. Guard Terminal Features ─────────────────────────────────────────────
-  document.getElementById('guard-checkin-btn')?.addEventListener('click', () => {
-    if (window.BulwarkDB) {
-      window.BulwarkDB.updatePostCheckin('P-401', 'ON_DUTY').then(() => {
-        showToast('Shift check-in timestamped & transmitted to Supabase.', 'success');
-      });
-    } else {
-      showToast('Shift check-in recorded.', 'success');
-    }
-  });
-
-  document.getElementById('scan-nfc-btn')?.addEventListener('click', () => {
-    const cp = document.getElementById('checkpoint-select').value;
-    const scanData = {
-      postCode: 'P-401',
-      officerName: 'Officer D. Reeves',
-      checkpointName: cp,
-      nfcTag: 'NFC-TAG-' + Math.floor(Math.random() * 900000 + 100000),
-      gpsLat: 40.7580,
-      gpsLng: -73.9855
-    };
-
-    if (window.BulwarkDB) {
-      window.BulwarkDB.logNfcScan(scanData).then(() => {
-        const resultEl = document.getElementById('nfc-scan-result');
-        resultEl.classList.remove('hidden');
-        showToast(`Checkpoint scanned: ${cp}`, 'success');
-        setTimeout(() => resultEl.classList.add('hidden'), 4000);
-      });
-    } else {
-      showToast(`Checkpoint scanned: ${cp}`, 'success');
-    }
-  });
-
-  document.querySelectorAll('.quick-dar-tag').forEach(tag => {
-    tag.addEventListener('click', () => {
-      document.getElementById('guard-dar-text').value = tag.dataset.text;
-    });
-  });
-
-  document.getElementById('guard-dar-form')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const text = document.getElementById('guard-dar-text').value.trim();
-    if (!text) {
-      showToast('Please type or select a DAR log entry.', 'error');
-      return;
-    }
-    showToast('Daily Activity Report (DAR) logged & shared with client portal.', 'success');
-    document.getElementById('guard-dar-text').value = '';
-  });
-
-  // Admin Emergency Dispatch Modal
+  // Emergency Dispatch Modal
   const dispatchModal = document.getElementById('dispatch-modal');
   document.getElementById('btn-open-dispatch')?.addEventListener('click', () => {
     dispatchModal?.classList.remove('hidden');
@@ -1282,7 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sector = document.getElementById('disp-sector').value;
     const unit = document.getElementById('disp-unit-type').value;
     dispatchModal?.classList.add('hidden');
-    showToast(`🚨 Priority Dispatch Transmitted: ${unit} deployed to ${sector}`, 'error');
+    showToast(`🚨 Emergency Unit Deployed: ${unit} dispatched to ${sector}`, 'error');
   });
 
   // Threat Posture Controls
@@ -1290,19 +726,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const postOverdrive = document.getElementById('admin-posture-overdrive');
   const postLockdown = document.getElementById('admin-posture-lockdown');
 
-  function setPosture(btn, label, toastType) {
+  function setPosture(btn, label) {
     [postStd, postOverdrive, postLockdown].forEach(b => {
-      b.className = 'px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition-all';
+      b.className = 'px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all';
     });
     if (label === 'Standard') {
-      btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition-all';
-      showToast('Threat Posture set to STANDARD: Routine patrol frequencies active.', 'success');
+      btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 text-white dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-600 dark:border-emerald-500/40 transition-all';
+      showToast('Threat Posture set to STANDARD: Routine patrol active.', 'success');
     } else if (label === 'Overdrive') {
-      btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 transition-all';
-      showToast('Threat Posture set to OVERDRIVE: Patrol frequency doubled across all posts.', 'warning');
+      btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-600 text-white dark:bg-amber-500/20 dark:text-amber-300 border border-amber-600 dark:border-amber-500/40 transition-all';
+      showToast('Threat Posture set to OVERDRIVE: Patrol frequency doubled.', 'warning');
     } else {
-      btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-red-500/20 text-red-300 border border-red-500/40 transition-all';
-      showToast('🚨 Threat Posture set to LOCKDOWN: Access gates sealed, all armed units on perimeter.', 'error');
+      btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-red-600 text-white dark:bg-red-500/20 dark:text-red-300 border border-red-600 dark:border-red-500/40 transition-all';
+      showToast('🚨 Threat Posture set to LOCKDOWN: Access gates sealed.', 'error');
     }
   }
 

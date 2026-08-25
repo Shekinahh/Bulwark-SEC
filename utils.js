@@ -91,6 +91,11 @@ function initGlobalAuthUI() {
     return;
   }
 
+  // If on portal.html, let portal.html manage its own dedicated cockpit navbar
+  if (isPortalPage) {
+    return;
+  }
+
   // Target the existing portal link in desktop navbar
   const portalLink = document.querySelector('header nav a[href="portal.html"]') || document.querySelector('header nav a[href="portal"]');
   const mobileDrawerLinks = document.querySelector('#mobile-drawer .flex-col');
