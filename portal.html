@@ -46,7 +46,7 @@
 
 <!-- INTERACTIVE TACTICAL TELEMETRY BACKGROUND CANVAS -->
 <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-  <canvas id="tactical-bg-canvas" class="w-full h-full opacity-60 dark:opacity-40 transition-opacity duration-300"></canvas>
+  <canvas id="tactical-bg-canvas" class="w-full h-full opacity-90 dark:opacity-75 transition-opacity duration-300"></canvas>
   <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/40 to-white/80 dark:via-[#0B171E]/40 dark:to-[#0B171E]/90 pointer-events-none"></div>
 </div>
 
@@ -875,15 +875,19 @@
 
 <script>
 
-  // ==========================================
-  // INTERACTIVE TACTICAL CANVAS TELEMETRY
-  // ==========================================
-  (function initTacticalBackground() {
+  
+  // =========================================================================
+  // ADVANCED INTERACTIVE TACTICAL CANVAS TELEMETRY SYSTEM
+  // =========================================================================
+  (function initAdvancedTacticalBackground() {
     const canvas = document.getElementById('tactical-bg-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let width, height;
-    let mouse = { x: null, y: null, radius: 180 };
+    let mouse = { x: null, y: null, targetX: null, targetY: null, radius: 220, isDown: false };
+    let clickRipples = [];
+    let scanLineY = 0;
+    let scanSpeed = 1.2;
 
     function resize() {
       width = canvas.width = window.innerWidth;
@@ -893,53 +897,96 @@
     resize();
 
     window.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+      if (mouse.x === null) {
+        mouse.x = mouse.targetX;
+        mouse.y = mouse.targetY;
+      }
     });
 
     window.addEventListener('mouseleave', () => {
-      mouse.x = null;
-      mouse.y = null;
+      mouse.targetX = null;
+      mouse.targetY = null;
     });
 
-    // Telemetry Nodes (Tactical Grid)
-    const nodes = [];
-    const nodeCount = Math.min(Math.floor((width * height) / 22000), 45);
+    // Click interactive radar wave burst
+    window.addEventListener('click', (e) => {
+      // Don't trigger on interactive form controls
+      if (['BUTTON', 'INPUT', 'SELECT', 'A', 'TEXTAREA'].includes(e.target.tagName)) return;
+      
+      clickRipples.push({
+        x: e.clientX,
+        y: e.clientY,
+        radius: 5,
+        maxRadius: 280,
+        opacity: 0.8,
+        speed: 4.5
+      });
 
-    for (let i = 0; i < nodeCount; i++) {
+      // Spawn click spark particles
+      for (let k = 0; k < 12; k++) {
+        const angle = (Math.PI * 2 * k) / 12;
+        const speed = Math.random() * 3 + 2;
+        nodes.push({
+          x: e.clientX,
+          y: e.clientY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          radius: Math.random() * 2 + 1.5,
+          life: 1.0,
+          decay: Math.random() * 0.02 + 0.015,
+          isSpark: true
+        });
+      }
+    });
+
+    // Rich Telemetry Nodes
+    const nodes = [];
+    const baseNodeCount = Math.min(Math.floor((width * height) / 14000), 70);
+
+    for (let i = 0; i < baseNodeCount; i++) {
       nodes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 2 + 1.2
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        radius: Math.random() * 2.2 + 1.5,
+        pulse: Math.random() * Math.PI,
+        pulseSpeed: 0.03 + Math.random() * 0.02
       });
     }
 
-    let pulseAngle = 0;
+    // Dynamic Waypoints on Grid
+    const waypoints = [
+      { label: 'SECTOR-1 NORTH TOWER (P-401)', xRel: 0.18, yRel: 0.3 },
+      { label: 'SECTOR-2 LOGISTICS GATE (P-402)', xRel: 0.82, yRel: 0.45 },
+      { label: 'SOC PRIMARY DISPATCH BEACON', xRel: 0.5, yRel: 0.85 }
+    ];
 
     function render() {
       ctx.clearRect(0, 0, width, height);
       const isDark = document.documentElement.classList.contains('dark');
 
-      const dotColor = isDark ? 'rgba(124, 176, 171, 0.35)' : 'rgba(72, 106, 110, 0.25)';
-      const lineColor = isDark ? 'rgba(124, 176, 171, 0.08)' : 'rgba(72, 106, 110, 0.07)';
-      const mouseGlow = isDark ? 'rgba(124, 176, 171, 0.12)' : 'rgba(72, 106, 110, 0.06)';
-
-      // 1. Subtle Interactive Mouse Spotlight
-      if (mouse.x !== null && mouse.y !== null) {
-        const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, mouse.radius);
-        grad.addColorStop(0, mouseGlow);
-        grad.addColorStop(1, 'transparent');
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
-        ctx.fill();
+      // Smooth mouse easing
+      if (mouse.targetX !== null && mouse.targetY !== null) {
+        mouse.x += (mouse.targetX - mouse.x) * 0.15;
+        mouse.y += (mouse.targetY - mouse.y) * 0.15;
+      } else {
+        mouse.x = null;
+        mouse.y = null;
       }
 
-      // 2. Subtle Coordinate Grid Lines
-      const gridSize = 80;
-      ctx.strokeStyle = isDark ? 'rgba(72, 106, 110, 0.05)' : 'rgba(202, 212, 212, 0.35)';
+      // Color Tokens from Palette
+      const dotColor = isDark ? '#7CB0AB' : '#486A6E';
+      const laserColor = isDark ? 'rgba(124, 176, 171, 0.4)' : 'rgba(72, 106, 110, 0.35)';
+      const nodeLineColor = isDark ? 'rgba(124, 176, 171, 0.14)' : 'rgba(72, 106, 110, 0.12)';
+      const mouseGlowColor = isDark ? 'rgba(124, 176, 171, 0.18)' : 'rgba(72, 106, 110, 0.10)';
+      const gridColor = isDark ? 'rgba(72, 106, 110, 0.1)' : 'rgba(202, 212, 212, 0.55)';
+
+      // 1. Interactive Tactical Coordinate Grid
+      const gridSize = 70;
+      ctx.strokeStyle = gridColor;
       ctx.lineWidth = 1;
       ctx.beginPath();
       for (let x = 0; x < width; x += gridSize) {
@@ -952,39 +999,151 @@
       }
       ctx.stroke();
 
-      // 3. Ambient Telemetry Nodes & Connectors
-      for (let i = 0; i < nodes.length; i++) {
+      // 2. Tactical Scanning Horizontal Laser Line
+      scanLineY += scanSpeed;
+      if (scanLineY > height) scanLineY = 0;
+
+      const scanGrad = ctx.createLinearGradient(0, scanLineY - 30, 0, scanLineY + 30);
+      scanGrad.addColorStop(0, 'transparent');
+      scanGrad.addColorStop(0.5, isDark ? 'rgba(124, 176, 171, 0.15)' : 'rgba(72, 106, 110, 0.12)');
+      scanGrad.addColorStop(1, 'transparent');
+      ctx.fillStyle = scanGrad;
+      ctx.fillRect(0, scanLineY - 30, width, 60);
+
+      ctx.strokeStyle = isDark ? 'rgba(124, 176, 171, 0.3)' : 'rgba(72, 106, 110, 0.25)';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      ctx.moveTo(0, scanLineY);
+      ctx.lineTo(width, scanLineY);
+      ctx.stroke();
+
+      // 3. Render Waypoint Markers
+      waypoints.forEach(wp => {
+        const wx = wp.xRel * width;
+        const wy = wp.yRel * height;
+
+        ctx.strokeStyle = isDark ? 'rgba(124, 176, 171, 0.35)' : 'rgba(72, 106, 110, 0.35)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(wx - 6, wy - 6, 12, 12);
+        
+        ctx.fillStyle = dotColor;
+        ctx.fillRect(wx - 2, wy - 2, 4, 4);
+
+        ctx.font = '9px "JetBrains Mono", monospace';
+        ctx.fillStyle = isDark ? 'rgba(202, 212, 212, 0.45)' : 'rgba(72, 106, 110, 0.55)';
+        ctx.fillText(`[ ${wp.label} ]`, wx + 12, wy + 3);
+      });
+
+      // 4. Interactive Mouse Spotlight Glow & Crosshair Telemetry
+      if (mouse.x !== null && mouse.y !== null) {
+        const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, mouse.radius);
+        grad.addColorStop(0, mouseGlowColor);
+        grad.addColorStop(1, 'transparent');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Subtle Tactical Crosshair around Cursor
+        ctx.strokeStyle = isDark ? 'rgba(124, 176, 171, 0.25)' : 'rgba(72, 106, 110, 0.25)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 24, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Live Coordinate HUD following cursor
+        const lat = (40.7584 + (mouse.y / height) * 0.05).toFixed(4);
+        const lon = (73.9848 + (mouse.x / width) * 0.05).toFixed(4);
+        ctx.font = '10px "JetBrains Mono", monospace';
+        ctx.fillStyle = isDark ? 'rgba(124, 176, 171, 0.7)' : 'rgba(72, 106, 110, 0.7)';
+        ctx.fillText(`GPS: ${lat}°N, ${lon}°W · BEARING: ${Math.floor((mouse.x / width) * 360)}°`, mouse.x + 32, mouse.y - 12);
+      }
+
+      // 5. Render & Expand Click Ripples
+      for (let r = clickRipples.length - 1; r >= 0; r--) {
+        const rip = clickRipples[r];
+        rip.radius += rip.speed;
+        rip.opacity -= 0.015;
+
+        if (rip.opacity <= 0 || rip.radius >= rip.maxRadius) {
+          clickRipples.splice(r, 1);
+          continue;
+        }
+
+        ctx.strokeStyle = isDark ? `rgba(124, 176, 171, ${rip.opacity})` : `rgba(72, 106, 110, ${rip.opacity})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(rip.x, rip.y, rip.radius, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.strokeStyle = isDark ? `rgba(124, 176, 171, ${rip.opacity * 0.4})` : `rgba(72, 106, 110, ${rip.opacity * 0.4})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(rip.x, rip.y, rip.radius * 0.65, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      // 6. Interactive Physics Nodes & Magnetic Cursor Lines
+      for (let i = nodes.length - 1; i >= 0; i--) {
         const n = nodes[i];
+
+        // Spark decay
+        if (n.isSpark) {
+          n.life -= n.decay;
+          n.vx *= 0.95;
+          n.vy *= 0.95;
+          if (n.life <= 0) {
+            nodes.splice(i, 1);
+            continue;
+          }
+        }
+
         n.x += n.vx;
         n.y += n.vy;
 
         if (n.x < 0 || n.x > width) n.vx *= -1;
         if (n.y < 0 || n.y > height) n.vy *= -1;
 
-        // Interaction with mouse
+        // Interactive mouse connection and magnetic repulsion
         if (mouse.x !== null && mouse.y !== null) {
           const dx = mouse.x - n.x;
           const dy = mouse.y - n.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const dist = Math.hypot(dx, dy);
+
           if (dist < mouse.radius) {
+            // Direct interactive laser connection to cursor!
+            const alpha = (1 - dist / mouse.radius);
+            ctx.strokeStyle = isDark ? `rgba(124, 176, 171, ${alpha * 0.5})` : `rgba(72, 106, 110, ${alpha * 0.45})`;
+            ctx.lineWidth = 1.2;
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+
+            // Push nodes away smoothly
             const force = (mouse.radius - dist) / mouse.radius;
-            n.x -= (dx / dist) * force * 1.5;
-            n.y -= (dy / dist) * force * 1.5;
+            n.x -= (dx / dist) * force * 1.8;
+            n.y -= (dy / dist) * force * 1.8;
           }
         }
 
+        // Pulse node radius
+        n.pulse += n.pulseSpeed;
+        const currentRadius = n.radius + Math.sin(n.pulse) * 0.6;
+
         // Draw node
-        ctx.fillStyle = dotColor;
+        ctx.fillStyle = n.isSpark ? (isDark ? '#7CB0AB' : '#072832') : dotColor;
         ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+        ctx.arc(n.x, n.y, Math.max(currentRadius, 1), 0, Math.PI * 2);
         ctx.fill();
 
         // Connect nearby nodes
         for (let j = i + 1; j < nodes.length; j++) {
           const n2 = nodes[j];
           const dist = Math.hypot(n.x - n2.x, n.y - n2.y);
-          if (dist < 140) {
-            ctx.strokeStyle = lineColor;
+          if (dist < 150) {
+            const alpha = (1 - dist / 150);
+            ctx.strokeStyle = isDark ? `rgba(124, 176, 171, ${alpha * 0.18})` : `rgba(72, 106, 110, ${alpha * 0.14})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(n.x, n.y);
@@ -994,21 +1153,11 @@
         }
       }
 
-      // 4. Subtle Ambient Radar Ping Pulse
-      pulseAngle += 0.008;
-      const radarX = width * 0.85;
-      const radarY = 120;
-      const radarRadius = (Math.sin(pulseAngle) * 0.5 + 0.5) * 120 + 20;
-      ctx.strokeStyle = isDark ? 'rgba(124, 176, 171, 0.05)' : 'rgba(72, 106, 110, 0.04)';
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.arc(radarX, radarY, radarRadius, 0, Math.PI * 2);
-      ctx.stroke();
-
       requestAnimationFrame(render);
     }
     requestAnimationFrame(render);
   })();
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
