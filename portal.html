@@ -44,6 +44,13 @@
 </head>
 <body class="bg-white dark:bg-[#0B171E] text-slate-800 dark:text-slate-200 min-h-screen flex flex-col antialiased transition-colors duration-200">
 
+<!-- INTERACTIVE TACTICAL TELEMETRY BACKGROUND CANVAS -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+  <canvas id="tactical-bg-canvas" class="w-full h-full opacity-60 dark:opacity-40 transition-opacity duration-300"></canvas>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/40 to-white/80 dark:via-[#0B171E]/40 dark:to-[#0B171E]/90 pointer-events-none"></div>
+</div>
+
+
 <!-- TOP STATUS TICKER -->
 <aside class="bg-slate-100/90 dark:bg-[#071922] py-2 px-4 text-xs font-mono text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800 z-50 transition-colors">
   <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
@@ -221,7 +228,7 @@
   <!-- 4 Balanced KPI Cards -->
   <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 w-full">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1.5">
+      <div class="p-5 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-1.5">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-mono uppercase">
           <span>🛡️ Manned Fleet</span>
           <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">99.8% SLA</span>
@@ -233,7 +240,7 @@
         <div class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">↑ +6 officers deployed today</div>
       </div>
 
-      <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1.5">
+      <div class="p-5 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-1.5">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-mono uppercase">
           <span>📋 Leads &amp; Pipeline</span>
           <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800">3 PENDING</span>
@@ -245,7 +252,7 @@
         <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">$284,500 Estimated Value</div>
       </div>
 
-      <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1.5">
+      <div class="p-5 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-1.5">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-mono uppercase">
           <span>📡 NFC Tour Scans</span>
           <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 dark:bg-[#486A6E] dark:text-[#7CB0AB] border border-slate-200 dark:border-[#486A6E]">LIVE SYNC</span>
@@ -257,7 +264,7 @@
         <div class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">98.6% Tour Compliance Rate</div>
       </div>
 
-      <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1.5">
+      <div class="p-5 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-1.5">
         <div class="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-mono uppercase">
           <span>🎓 Vetting Academy</span>
           <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 dark:bg-[#486A6E] dark:text-[#7CB0AB] border border-slate-200 dark:border-[#486A6E]">23.4% PASS</span>
@@ -397,7 +404,7 @@
     <!-- VETTING -->
     <div id="admin-tab-content-vetting" class="space-y-4 hidden">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-3">
+        <div class="p-5 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-3">
           <h4 class="font-bold text-xs text-slate-900 dark:text-white">Stage 1–3: Background &amp; FBI Check</h4>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#486A6E]/80 border border-slate-200 dark:border-[#486A6E]/40 text-xs space-y-1">
             <div class="font-bold text-slate-900 dark:text-white">David K. Vance (Ex-Military Police)</div>
@@ -464,7 +471,7 @@
 
     <!-- SETTINGS -->
     <div id="admin-tab-content-settings" class="space-y-4 hidden">
-      <div class="p-5 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-3 text-xs">
+      <div class="p-5 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-3 text-xs">
         <h4 class="font-bold text-sm text-slate-900 dark:text-white">Database &amp; API Integration</h4>
         <div class="space-y-2 font-mono text-slate-600 dark:text-slate-300">
           <div class="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800">
@@ -522,25 +529,25 @@
   <!-- 4 Officer KPI Shift Status Cards (Harmonious & Tasteful) -->
   <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 w-full">
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1">
+      <div class="p-4 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-1">
         <div class="text-slate-500 dark:text-slate-400 text-[11px] font-mono uppercase">Shift Time Clock</div>
         <div id="guard-shift-timer" class="text-xl sm:text-2xl font-black font-mono text-slate-900 dark:text-white">06:42:18</div>
         <div class="text-[11px] text-slate-500">Shift ends at 19:00</div>
       </div>
 
-      <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1">
+      <div class="p-4 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-1">
         <div class="text-slate-500 dark:text-slate-400 text-[11px] font-mono uppercase">NFC Tour Progress</div>
         <div class="text-xl sm:text-2xl font-black font-display text-slate-900 dark:text-white">3 / 5 Checkpoints</div>
         <div class="text-[11px] text-slate-500 font-medium">60% Complete · Next in 12m</div>
       </div>
 
-      <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1">
+      <div class="p-4 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-1">
         <div class="text-slate-500 dark:text-slate-400 text-[11px] font-mono uppercase">Visitors On-Site</div>
         <div class="text-xl sm:text-2xl font-black font-display text-slate-900 dark:text-white">4 Active</div>
         <div class="text-[11px] text-slate-500">18 Badges Issued Today</div>
       </div>
 
-      <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1">
+      <div class="p-4 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-1">
         <div class="text-slate-500 dark:text-slate-400 text-[11px] font-mono uppercase">DAR Logs Logged</div>
         <div class="text-xl sm:text-2xl font-black font-display text-slate-900 dark:text-white">7 Entries</div>
         <div class="text-[11px] text-slate-500 font-medium">Shared with Client Portal</div>
@@ -576,7 +583,7 @@
     <div id="guard-tab-content-tour" class="space-y-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Interactive Scanner Box -->
-        <div class="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-5">
+        <div class="lg:col-span-2 p-6 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-5">
           <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#486A6E]/30 pb-3">
             <div class="flex items-center gap-2">
               <span class="text-xl">📡</span>
@@ -651,7 +658,7 @@
         </div>
 
         <!-- Patrol Route Protocols -->
-        <div class="p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-4">
+        <div class="p-6 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-4">
           <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">Route Safety Protocols</h4>
           <ul class="space-y-2.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
             <li class="flex items-start gap-2">
@@ -676,7 +683,7 @@
     <div id="guard-tab-content-dar" class="space-y-6 hidden">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- DAR Entry Form -->
-        <div class="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-5">
+        <div class="lg:col-span-2 p-6 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-5">
           <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#486A6E]/30 pb-3">
             <div>
               <h3 class="font-display font-bold text-base text-slate-900 dark:text-white">New Activity Report (DAR) Entry</h3>
@@ -710,7 +717,7 @@
         </div>
 
         <!-- Shift Log Audit Trail -->
-        <div class="p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-4">
+        <div class="p-6 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-4">
           <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">Today's Shift Log History (7)</h4>
           <div id="guard-dar-history" class="space-y-3 text-xs overflow-y-auto max-h-[340px] pr-1">
             <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#486A6E]/60 border border-slate-200 dark:border-[#486A6E]/30 space-y-1">
@@ -755,7 +762,7 @@
     <!-- DESK 4: KEY & ASSET CHECKOUT -->
     <div id="guard-tab-content-keys" class="space-y-4 hidden">
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-2">
+        <div class="p-4 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-2">
           <div class="flex justify-between items-center text-xs font-mono">
             <span class="font-bold text-slate-900 dark:text-white">KEY RING #4 (HVAC)</span>
             <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">IN KEY BOX</span>
@@ -768,7 +775,7 @@
     <!-- DESK 5: POST ORDERS & EMERGENCY -->
     <div id="guard-tab-content-orders" class="space-y-6 hidden">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-4">
+        <div class="lg:col-span-2 p-6 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-4">
           <div class="border-b border-slate-200 dark:border-[#486A6E]/30 pb-3">
             <h3 class="font-display font-bold text-base text-slate-900 dark:text-white">Active Post Orders (SOP)</h3>
             <p class="text-xs text-slate-500">Post P-401 · North Tower Lobby</p>
@@ -784,7 +791,7 @@
           </ul>
         </div>
 
-        <div class="p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-4">
+        <div class="p-6 rounded-2xl bg-white/90 dark:bg-[#0B171E]/90 backdrop-blur-sm border border-slate-200/90 dark:border-[#486A6E]/40 dark:border-[#486A6E]/40 shadow-sm space-y-4">
           <div class="border-b border-slate-200 dark:border-[#486A6E]/30 pb-3">
             <h3 class="font-display font-bold text-base text-slate-900 dark:text-white">Emergency Speed Dial</h3>
             <p class="text-[11px] text-slate-500">Direct 1-click communications</p>
@@ -867,6 +874,143 @@
 <script src="utils.js"></script>
 
 <script>
+
+  // ==========================================
+  // INTERACTIVE TACTICAL CANVAS TELEMETRY
+  // ==========================================
+  (function initTacticalBackground() {
+    const canvas = document.getElementById('tactical-bg-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let mouse = { x: null, y: null, radius: 180 };
+
+    function resize() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    // Telemetry Nodes (Tactical Grid)
+    const nodes = [];
+    const nodeCount = Math.min(Math.floor((width * height) / 22000), 45);
+
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        radius: Math.random() * 2 + 1.2
+      });
+    }
+
+    let pulseAngle = 0;
+
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+      const isDark = document.documentElement.classList.contains('dark');
+
+      const dotColor = isDark ? 'rgba(124, 176, 171, 0.35)' : 'rgba(72, 106, 110, 0.25)';
+      const lineColor = isDark ? 'rgba(124, 176, 171, 0.08)' : 'rgba(72, 106, 110, 0.07)';
+      const mouseGlow = isDark ? 'rgba(124, 176, 171, 0.12)' : 'rgba(72, 106, 110, 0.06)';
+
+      // 1. Subtle Interactive Mouse Spotlight
+      if (mouse.x !== null && mouse.y !== null) {
+        const grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, mouse.radius);
+        grad.addColorStop(0, mouseGlow);
+        grad.addColorStop(1, 'transparent');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, mouse.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // 2. Subtle Coordinate Grid Lines
+      const gridSize = 80;
+      ctx.strokeStyle = isDark ? 'rgba(72, 106, 110, 0.05)' : 'rgba(202, 212, 212, 0.35)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let x = 0; x < width; x += gridSize) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+      }
+      for (let y = 0; y < height; y += gridSize) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+      }
+      ctx.stroke();
+
+      // 3. Ambient Telemetry Nodes & Connectors
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        n.x += n.vx;
+        n.y += n.vy;
+
+        if (n.x < 0 || n.x > width) n.vx *= -1;
+        if (n.y < 0 || n.y > height) n.vy *= -1;
+
+        // Interaction with mouse
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - n.x;
+          const dy = mouse.y - n.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouse.radius) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            n.x -= (dx / dist) * force * 1.5;
+            n.y -= (dy / dist) * force * 1.5;
+          }
+        }
+
+        // Draw node
+        ctx.fillStyle = dotColor;
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Connect nearby nodes
+        for (let j = i + 1; j < nodes.length; j++) {
+          const n2 = nodes[j];
+          const dist = Math.hypot(n.x - n2.x, n.y - n2.y);
+          if (dist < 140) {
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(n2.x, n2.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 4. Subtle Ambient Radar Ping Pulse
+      pulseAngle += 0.008;
+      const radarX = width * 0.85;
+      const radarY = 120;
+      const radarRadius = (Math.sin(pulseAngle) * 0.5 + 0.5) * 120 + 20;
+      ctx.strokeStyle = isDark ? 'rgba(124, 176, 171, 0.05)' : 'rgba(72, 106, 110, 0.04)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(radarX, radarY, radarRadius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  })();
+
+
 document.addEventListener('DOMContentLoaded', () => {
   let activeRole = 'admin';
   let currentUser = null;
