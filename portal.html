@@ -841,13 +841,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Check URL param or existing session
+  const params = new URLSearchParams(window.location.search);
+  const paramRole = params.get('role') || sessionStorage.getItem('bulwark_auth_role');
+  if (paramRole && ['admin', 'guard', 'client'].includes(paramRole)) {
+    setLoginRole(paramRole);
+    openRoleDashboard(paramRole);
+  }
+
   document.getElementById('unified-portal-form')?.addEventListener('submit', (e) => {
     e.preventDefault();
+    sessionStorage.setItem('bulwark_auth_role', activeRole);
+    sessionStorage.setItem('bulwark_auth_user', userInput.value);
     openRoleDashboard(activeRole);
   });
 
   document.getElementById('portal-logout-btn')?.addEventListener('click', () => {
     currentUser = null;
+    sessionStorage.removeItem('bulwark_auth_role');
+    sessionStorage.removeItem('bulwark_auth_user');
     dashboardAdmin.classList.add('hidden');
     dashboardGuard.classList.add('hidden');
     dashboardClient.classList.add('hidden');

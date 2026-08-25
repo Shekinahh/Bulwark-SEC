@@ -29,9 +29,97 @@
     (function(){ const t=localStorage.getItem('bulwark_theme')||'light'; if(t==='dark') document.documentElement.classList.add('dark'); })();
   </script>
 </head>
-<body class="text-slate-900 dark:text-slate-100 dark:text-slate-100 transition-colors duration-300 font-sans antialiased overflow-x-hidden flex flex-col min-h-screen">
+<body class="text-slate-900 dark:text-slate-100 transition-colors duration-300 font-sans antialiased overflow-x-hidden flex flex-col min-h-screen">
 
-<!-- â•â•â• TOP TICKER â•â•â• -->
+<!-- =========================================================================
+     MANDATORY GLOBAL SECURITY CLEARANCE & LOGIN GATE
+     ========================================================================= -->
+<div id="global-login-gate" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#071922] overflow-y-auto">
+  <!-- Cinematic Background Image -->
+  <div class="absolute inset-0 z-0 overflow-hidden select-none pointer-events-none">
+    <img src="assets/hero_bg.jpg" alt="Bulwark SEC Security Access" class="w-full h-full object-cover object-center filter brightness-75 contrast-125 saturate-110 opacity-80"/>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#071922] via-[#071922]/85 to-[#0B171E]/90"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(7,40,50,0.5)_0%,_rgba(11,23,30,0.92)_100%)]"></div>
+  </div>
+
+  <div class="w-full max-w-xl space-y-6 relative z-10 my-auto">
+    <div class="text-center space-y-3">
+      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 flex items-center justify-center mx-auto shadow-2xl shadow-[#7CB0AB]/20">
+        <svg class="w-9 h-9 text-[#7CB0AB]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+      </div>
+      <div>
+        <h1 class="font-display font-black text-3xl sm:text-4xl text-white drop-shadow-md">Bulwark SEC · Identity Gate</h1>
+        <p class="text-xs sm:text-sm text-slate-300 mt-1 font-medium">Please authenticate with your credentials to access the platform</p>
+      </div>
+    </div>
+
+    <!-- 3-ROLE SELECTOR TABS -->
+    <div class="grid grid-cols-3 gap-2 bg-[#0B171E]/90 p-1.5 rounded-2xl border border-[#486A6E]/50 shadow-xl backdrop-blur-md">
+      <button id="gate-tab-admin" class="gate-role-btn py-3 px-2 rounded-xl text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all text-slate-300 hover:text-white">
+        <span>👑</span>
+        <span>Admin</span>
+      </button>
+      <button id="gate-tab-guard" class="gate-role-btn py-3 px-2 rounded-xl text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all text-slate-300 hover:text-white">
+        <span>🛡️</span>
+        <span>Guard</span>
+      </button>
+      <button id="gate-tab-client" class="gate-role-btn active-gate-role py-3 px-2 rounded-xl text-xs sm:text-sm font-bold flex flex-col sm:flex-row items-center justify-center gap-1.5 transition-all text-white bg-gradient-to-r from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 shadow-md">
+        <span>🏢</span>
+        <span>Client</span>
+      </button>
+    </div>
+
+    <!-- GATE LOGIN CARD -->
+    <div class="glass-card rounded-2xl bg-[#072832]/85 backdrop-blur-xl border border-[#7CB0AB]/35 shadow-2xl overflow-hidden text-white p-6 sm:p-8 space-y-5">
+      <div class="flex items-center justify-between border-b border-[#486A6E]/40 pb-3">
+        <div>
+          <h2 id="gate-form-title" class="font-display font-bold text-base sm:text-lg text-white">Client &amp; Public Access</h2>
+          <p id="gate-form-subtitle" class="text-xs text-slate-300">Enter client credentials or use 1-click demo access</p>
+        </div>
+        <span id="gate-form-tag" class="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-[#7CB0AB]/20 text-[#7CB0AB] border border-[#7CB0AB]/40 uppercase">CLIENT TIER</span>
+      </div>
+
+      <form id="global-gate-form" class="space-y-4" novalidate>
+        <div>
+          <label id="gate-user-label" class="hire-form-label text-slate-200 text-xs font-semibold uppercase" for="gate-user">Account Email / ID</label>
+          <input id="gate-user" type="text" class="hire-form-input bg-[#0B171E]/80 border-[#486A6E]/50 text-white placeholder-slate-500 focus:border-[#7CB0AB]" value="client@morrisonreed.com" required/>
+        </div>
+        <div>
+          <label class="hire-form-label text-slate-200 text-xs font-semibold uppercase" for="gate-pass">Password</label>
+          <input id="gate-pass" type="password" class="hire-form-input bg-[#0B171E]/80 border-[#486A6E]/50 text-white placeholder-slate-500 focus:border-[#7CB0AB]" value="Demo2026!" required/>
+        </div>
+        <div>
+          <label id="gate-pin-label" class="hire-form-label text-slate-200 text-xs font-semibold uppercase" for="gate-pin">Site PIN / Badge ID / 2FA</label>
+          <input id="gate-pin" type="text" class="hire-form-input bg-[#0B171E]/80 border-[#486A6E]/50 text-white placeholder-slate-500 focus:border-[#7CB0AB]" value="401041" required/>
+        </div>
+
+        <button type="submit" id="gate-submit-btn" class="btn-primary w-full justify-center py-3.5 bg-gradient-to-r from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 shadow-xl hover:shadow-[#7CB0AB]/25 text-white font-bold text-sm tracking-wide">
+          <svg class="w-4 h-4 text-[#7CB0AB]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+          <span id="gate-button-text">Authenticate &amp; Enter Platform</span>
+        </button>
+
+        <!-- 1-Click Quick Demo Presets -->
+        <div class="pt-3 border-t border-[#486A6E]/30 space-y-2">
+          <div class="text-[11px] font-mono text-slate-400 text-center uppercase tracking-wider">⚡ 1-Click Quick Presets:</div>
+          <div class="grid grid-cols-3 gap-2 text-xs">
+            <button type="button" id="gate-demo-admin" class="py-2 px-2 rounded-lg bg-[#0B171E]/90 hover:bg-[#486A6E]/40 border border-[#486A6E]/50 text-slate-200 hover:text-white font-medium text-center transition-all">
+              👑 Admin Demo
+            </button>
+            <button type="button" id="gate-demo-guard" class="py-2 px-2 rounded-lg bg-[#0B171E]/90 hover:bg-[#486A6E]/40 border border-[#486A6E]/50 text-slate-200 hover:text-white font-medium text-center transition-all">
+              🛡️ Guard Demo
+            </button>
+            <button type="button" id="gate-demo-client" class="py-2 px-2 rounded-lg bg-[#0B171E]/90 hover:bg-[#486A6E]/40 border border-[#486A6E]/50 text-slate-200 hover:text-white font-medium text-center transition-all">
+              🏢 Client Demo
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <p class="text-center text-[11px] text-slate-400">🔒 Military-Grade AES-256 Encryption · Zero-Knowledge Verification · Supabase Protected</p>
+  </div>
+</div>
+
+<!-- TOP TICKER -->
 <aside class="bg-slate-900 dark:bg-black py-2 px-4 text-xs font-mono text-white border-b border-slate-800 z-50">
   <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
     <div class="flex items-center gap-3">
@@ -479,6 +567,97 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabaseClient.js"></script>
   <script src="utils.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const gate = document.getElementById('global-login-gate');
+      let activeGateRole = 'client';
+
+      // Check existing session
+      const savedRole = sessionStorage.getItem('bulwark_auth_role');
+      if (savedRole) {
+        gate?.classList.add('hidden');
+      }
+
+      const tabAdmin = document.getElementById('gate-tab-admin');
+      const tabGuard = document.getElementById('gate-tab-guard');
+      const tabClient = document.getElementById('gate-tab-client');
+
+      const titleEl = document.getElementById('gate-form-title');
+      const subtitleEl = document.getElementById('gate-form-subtitle');
+      const tagEl = document.getElementById('gate-form-tag');
+      const userLabel = document.getElementById('gate-user-label');
+      const pinLabel = document.getElementById('gate-pin-label');
+      const userInput = document.getElementById('gate-user');
+      const passInput = document.getElementById('gate-pass');
+      const pinInput = document.getElementById('gate-pin');
+
+      function setGateRole(role) {
+        activeGateRole = role;
+        [tabAdmin, tabGuard, tabClient].forEach(b => {
+          b.classList.remove('active-gate-role', 'text-white', 'bg-gradient-to-r', 'from-[#072832]', 'to-[#486A6E]', 'border', 'border-[#7CB0AB]/50', 'shadow-md');
+          b.classList.add('text-slate-300');
+        });
+
+        if (role === 'admin') {
+          tabAdmin.classList.add('active-gate-role', 'text-white', 'bg-gradient-to-r', 'from-[#072832]', 'to-[#486A6E]', 'border', 'border-[#7CB0AB]/50', 'shadow-md');
+          titleEl.textContent = 'Admin Operations Command';
+          subtitleEl.textContent = 'Full access to master dispatch, fleet rosters, and incoming leads';
+          tagEl.textContent = 'ADMIN CLEARANCE';
+          tagEl.className = 'px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 uppercase';
+          userLabel.textContent = 'Dispatcher Email / ID';
+          pinLabel.textContent = 'Security Token / 2FA';
+          userInput.value = 'admin@bulwarksec.com';
+          passInput.value = 'OpsAdmin2026!';
+          pinInput.value = '990011';
+        } else if (role === 'guard') {
+          tabGuard.classList.add('active-gate-role', 'text-white', 'bg-gradient-to-r', 'from-[#072832]', 'to-[#486A6E]', 'border', 'border-[#7CB0AB]/50', 'shadow-md');
+          titleEl.textContent = 'Security Guard Terminal';
+          subtitleEl.textContent = 'On-duty shift terminal, NFC checkpoints, and DAR logging';
+          tagEl.textContent = 'OFFICER TIER';
+          tagEl.className = 'px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-blue-500/20 text-blue-300 border border-blue-500/40 uppercase';
+          userLabel.textContent = 'Officer Badge ID / Email';
+          pinLabel.textContent = 'Officer Shift PIN';
+          userInput.value = 'officer.reeves@bulwarksec.com';
+          passInput.value = 'GuardDuty2026!';
+          pinInput.value = 'BW-8821';
+        } else {
+          tabClient.classList.add('active-gate-role', 'text-white', 'bg-gradient-to-r', 'from-[#072832]', 'to-[#486A6E]', 'border', 'border-[#7CB0AB]/50', 'shadow-md');
+          titleEl.textContent = 'Client & Public Access';
+          subtitleEl.textContent = 'Enter client credentials or use 1-click demo access';
+          tagEl.textContent = 'CLIENT TIER';
+          tagEl.className = 'px-2.5 py-1 rounded-md text-[10px] font-mono font-bold bg-[#7CB0AB]/20 text-[#7CB0AB] border border-[#7CB0AB]/40 uppercase';
+          userLabel.textContent = 'Account Email / ID';
+          pinLabel.textContent = 'Site PIN / 2FA';
+          userInput.value = 'client@morrisonreed.com';
+          passInput.value = 'Demo2026!';
+          pinInput.value = '401041';
+        }
+      }
+
+      tabAdmin?.addEventListener('click', () => setGateRole('admin'));
+      tabGuard?.addEventListener('click', () => setGateRole('guard'));
+      tabClient?.addEventListener('click', () => setGateRole('client'));
+
+      document.getElementById('gate-demo-admin')?.addEventListener('click', () => { setGateRole('admin'); showToast('Admin credentials filled.', 'info'); });
+      document.getElementById('gate-demo-guard')?.addEventListener('click', () => { setGateRole('guard'); showToast('Officer credentials filled.', 'info'); });
+      document.getElementById('gate-demo-client')?.addEventListener('click', () => { setGateRole('client'); showToast('Client credentials filled.', 'info'); });
+
+      document.getElementById('global-gate-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        sessionStorage.setItem('bulwark_auth_role', activeGateRole);
+        sessionStorage.setItem('bulwark_auth_user', userInput.value);
+
+        if (activeGateRole === 'admin') {
+          window.location.href = 'portal.html?role=admin';
+        } else if (activeGateRole === 'guard') {
+          window.location.href = 'portal.html?role=guard';
+        } else {
+          gate.classList.add('hidden');
+          showToast('Authentication Successful. Welcome to Bulwark SEC Platform.', 'success');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
 
