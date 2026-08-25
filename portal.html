@@ -530,63 +530,117 @@
 </div>
 
 <!-- =========================================================================
-     3. ROLE DASHBOARD B: 🛡️ SECURITY GUARD SHIFT TERMINAL
+     3. ROLE DASHBOARD B: 🛡️ COMPLETE SECURITY GUARD SHIFT TERMINAL
      ========================================================================= -->
 <div id="dashboard-guard" class="flex-1 flex flex-col hidden bg-slate-50 dark:bg-[#071922] text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200">
+  
   <!-- Officer Shift Cockpit Header -->
-  <div class="bg-white dark:bg-[#0B171E] border-b border-slate-200 dark:border-[#486A6E]/40 py-6 px-4 sm:px-8 shadow-sm">
+  <div class="bg-white dark:bg-[#0B171E] border-b border-slate-200 dark:border-[#486A6E]/40 py-5 px-4 sm:px-8 shadow-sm">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
       <div class="flex items-center gap-4">
-        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 flex items-center justify-center text-2xl shadow-md text-white">
+        <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#072832] to-[#486A6E] border border-[#7CB0AB]/50 flex items-center justify-center text-2xl shadow-md text-white flex-shrink-0">
           🛡️
         </div>
-        <div>
-          <div class="flex items-center gap-2">
-            <span id="guard-duty-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40">
-              ON-DUTY
+        <div class="space-y-0.5">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="guard-duty-badge" class="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-500/40">
+              ● ON-DUTY (SHIFT ACTIVE)
             </span>
             <span class="font-mono text-xs text-slate-500 dark:text-slate-400">BADGE #BW-8821</span>
+            <span class="text-xs font-mono text-slate-500 hidden sm:inline">· GPS ACTIVE (±2m)</span>
           </div>
-          <h1 class="font-display font-extrabold text-2xl text-slate-900 dark:text-white">Officer D. Reeves</h1>
+          <h1 class="font-display font-extrabold text-xl sm:text-2xl text-slate-900 dark:text-white">Officer D. Reeves</h1>
           <p class="text-xs text-slate-600 dark:text-slate-300">Assignment: North Tower Lobby (Post P-401) · Morrison &amp; Reed Properties</p>
         </div>
       </div>
 
-      <!-- Quick Shift Action Buttons -->
-      <div class="flex items-center gap-3">
-        <button id="guard-toggle-shift-btn" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-md transition-all flex items-center gap-1.5">
-          <span>✓</span> Check In (On-Duty)
+      <!-- Quick Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <button id="guard-toggle-shift-btn" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition-all flex items-center gap-1.5">
+          <span>✓</span> Check In (Active)
         </button>
-        <button id="guard-incident-btn" class="px-4 py-2.5 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-700 text-white shadow-md transition-all flex items-center gap-1.5">
+        <button id="guard-incident-btn" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-700 text-white shadow-sm transition-all flex items-center gap-1.5">
           <span>🚨</span> Report Incident
+        </button>
+        <button id="guard-panic-btn" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-black dark:bg-red-950 text-red-400 hover:bg-red-900 border border-red-800 transition-all flex items-center gap-1.5 animate-pulse" title="Immediate Dispatch SOS">
+          <span>⚠️</span> SOS Panic
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Shift Grid Tools -->
+  <!-- 4 Officer KPI Shift Status Cards -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-6 w-full">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1">
+        <div class="text-slate-500 dark:text-slate-400 text-[11px] font-mono uppercase">Shift Time Clock</div>
+        <div id="guard-shift-timer" class="text-xl sm:text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400">06:42:18</div>
+        <div class="text-[11px] text-slate-500">Shift ends at 19:00</div>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1">
+        <div class="text-slate-500 dark:text-slate-400 text-[11px] font-mono uppercase">NFC Tour Progress</div>
+        <div class="text-xl sm:text-2xl font-black font-display text-blue-600 dark:text-blue-400">3 / 5 Checkpoints</div>
+        <div class="text-[11px] text-blue-600 dark:text-blue-400 font-medium">60% Complete · Next in 12m</div>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1">
+        <div class="text-slate-500 dark:text-slate-400 text-[11px] font-mono uppercase">Visitors On-Site</div>
+        <div class="text-xl sm:text-2xl font-black font-display text-amber-600 dark:text-amber-400">4 Active</div>
+        <div class="text-[11px] text-slate-500">18 Badges Issued Today</div>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-1">
+        <div class="text-slate-500 dark:text-slate-400 text-[11px] font-mono uppercase">DAR Logs Logged</div>
+        <div class="text-xl sm:text-2xl font-black font-display text-purple-600 dark:text-purple-400">7 Entries</div>
+        <div class="text-[11px] text-purple-600 font-medium">Shared with Client Portal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Guard Sub-Navigation Tool Desks -->
+  <div class="bg-white dark:bg-[#0B171E] border-b border-slate-200 dark:border-[#486A6E]/30 px-4 sm:px-8 mt-6 sticky top-20 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto flex gap-6 overflow-x-auto">
+      <button class="guard-tab active-guard-tab py-3.5 text-xs font-bold font-mono tracking-wider border-b-2 border-[#072832] dark:border-[#7CB0AB] text-[#072832] dark:text-white flex items-center gap-1.5 whitespace-nowrap" data-tab="guard-tour">
+        <span>📡</span> NFC PATROL TOUR <span class="px-2 py-0.2 rounded-full bg-blue-100 text-blue-800 text-[10px]">3/5</span>
+      </button>
+      <button class="guard-tab py-3.5 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 whitespace-nowrap" data-tab="guard-dar">
+        <span>📝</span> DAILY ACTIVITY LOG (DAR) <span class="px-2 py-0.2 rounded-full bg-purple-100 text-purple-800 text-[10px]">7</span>
+      </button>
+      <button class="guard-tab py-3.5 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 whitespace-nowrap" data-tab="guard-visitors">
+        <span>📋</span> VISITOR &amp; ACCESS REGISTER <span class="px-2 py-0.2 rounded-full bg-amber-100 text-amber-800 text-[10px]">4 ON-SITE</span>
+      </button>
+      <button class="guard-tab py-3.5 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 whitespace-nowrap" data-tab="guard-keys">
+        <span>🔑</span> KEY &amp; ASSET CHECKOUT
+      </button>
+      <button class="guard-tab py-3.5 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 whitespace-nowrap" data-tab="guard-orders">
+        <span>📖</span> POST ORDERS &amp; EMERGENCY
+      </button>
+    </div>
+  </div>
+
+  <!-- Guard Content Desks Container -->
   <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex-1 space-y-6 w-full">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      
-      <!-- LEFT 2 COLUMNS: NFC CHECKPOINT SCANNER & DAR GENERATOR -->
-      <div class="lg:col-span-2 space-y-6">
-        
-        <!-- Interactive NFC Checkpoint Scanner -->
-        <div class="p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-5">
+    
+    <!-- DESK 1: NFC PATROL TOUR & CHECKPOINT SCANNER -->
+    <div id="guard-tab-content-tour" class="space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Interactive Scanner Box -->
+        <div class="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-5">
           <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#486A6E]/30 pb-3">
             <div class="flex items-center gap-2">
               <span class="text-xl">📡</span>
               <div>
                 <h3 class="font-display font-bold text-base text-slate-900 dark:text-white">NFC Patrol Checkpoint Scanner</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Scan digital checkpoint tags along your patrol route to verify presence</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Scan digital tags along your designated route to verify presence with GPS stamp</p>
               </div>
             </div>
-            <span class="font-mono text-[11px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-200 dark:border-emerald-500/30">GPS ACCURACY: ±2m</span>
+            <span class="font-mono text-[11px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-200 dark:border-emerald-500/30">GPS ±2m</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold uppercase text-slate-700 dark:text-slate-300 mb-1" for="checkpoint-select">Select Patrol Checkpoint</label>
+              <label class="block text-xs font-semibold uppercase text-slate-700 dark:text-slate-300 mb-1" for="checkpoint-select">Select Active Checkpoint</label>
               <select id="checkpoint-select" class="w-full px-3.5 py-3 rounded-xl border border-slate-300 dark:border-[#486A6E]/50 bg-slate-50 dark:bg-[#072832]/80 text-slate-900 dark:text-white text-xs font-medium focus:outline-none">
                 <option value="Checkpoint 1: North Tower — Main Lobby Gate">Checkpoint 1: North Tower — Main Lobby Gate</option>
                 <option value="Checkpoint 2: Level B2 — Storage Loading Dock">Checkpoint 2: Level B2 — Storage Loading Dock</option>
@@ -597,7 +651,7 @@
             </div>
             <div class="flex items-end">
               <button id="scan-nfc-btn" class="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2">
-                <span>📱</span> Tap &amp; Scan NFC Checkpoint Tag
+                <span>📱</span> Tap &amp; Scan Selected NFC Tag
               </button>
             </div>
           </div>
@@ -605,19 +659,98 @@
           <div id="nfc-scan-result" class="hidden p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-300 dark:border-emerald-600/40 text-emerald-800 dark:text-emerald-300 text-xs font-mono">
             ✓ Checkpoint Scanned &amp; Logged to Supabase with GPS Timestamp!
           </div>
+
+          <!-- Interactive Checkpoint Checklist -->
+          <div class="space-y-2 pt-2">
+            <h4 class="font-bold text-xs text-slate-700 dark:text-slate-300 uppercase tracking-wider">Scheduled Tour Checklist (Tour 3 of 4)</h4>
+            <div class="space-y-2 text-xs">
+              <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-emerald-600 font-bold">✓</span>
+                  <div>
+                    <div class="font-bold text-slate-900 dark:text-white">Checkpoint 1: North Tower Main Lobby</div>
+                    <div class="text-[10px] text-slate-500 font-mono">Scanned at 15:24:19 · GPS Verified</div>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100">CLEARED</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/40 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-emerald-600 font-bold">✓</span>
+                  <div>
+                    <div class="font-bold text-slate-900 dark:text-white">Checkpoint 2: Level B2 Storage Loading Dock</div>
+                    <div class="text-[10px] text-slate-500 font-mono">Scanned at 15:28:42 · GPS Verified</div>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-200 dark:bg-emerald-800 text-emerald-900 dark:text-emerald-100">CLEARED</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#072832]/60 border border-slate-200 dark:border-[#486A6E]/40 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-amber-500 font-bold">⏳</span>
+                  <div>
+                    <div class="font-bold text-slate-900 dark:text-white">Checkpoint 3: Floor 40 Executive Corridor</div>
+                    <div class="text-[10px] text-amber-600 font-mono">Due within next 12 minutes</div>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">PENDING SCAN</span>
+              </div>
+
+              <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#072832]/60 border border-slate-200 dark:border-[#486A6E]/40 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                  <span class="text-slate-400 font-bold">⏳</span>
+                  <div>
+                    <div class="font-bold text-slate-900 dark:text-white">Checkpoint 4: Perimeter Gate 3 East Lot</div>
+                    <div class="text-[10px] text-slate-500 font-mono">Scheduled for 16:15</div>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-700">UPCOMING</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Daily Activity Report (DAR) Quick Logger -->
-        <div class="p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-5">
+        <!-- Patrol Route Diagram & Instructions -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-4">
+          <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">Route Safety Protocols</h4>
+          <ul class="space-y-2.5 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 font-bold">●</span>
+              <span>Always carry standard flashlight and portable radio on Level B2 patrols.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 font-bold">●</span>
+              <span>Test emergency exit door latches on Floor 40 during each tour.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-emerald-600 font-bold">●</span>
+              <span>If any tag fails to scan, log an immediate manual DAR entry with physical inspection notes.</span>
+            </li>
+          </ul>
+
+          <div class="p-3.5 rounded-xl bg-slate-100 dark:bg-[#072832]/80 border border-slate-200 dark:border-[#486A6E]/50 text-xs">
+            <div class="font-bold text-slate-900 dark:text-white">Next Mandatory Dispatch Check-In:</div>
+            <div class="text-emerald-600 font-mono font-bold text-sm mt-0.5">16:00:00 (In 22 mins)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESK 2: DAILY ACTIVITY REPORT (DAR) & LIVE SHIFT LOGS -->
+    <div id="guard-tab-content-dar" class="space-y-6 hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- DAR Entry Form -->
+        <div class="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-5">
           <div class="flex items-center justify-between border-b border-slate-200 dark:border-[#486A6E]/30 pb-3">
             <div>
-              <h3 class="font-display font-bold text-base text-slate-900 dark:text-white">Daily Activity Report (DAR) Entry</h3>
-              <p class="text-xs text-slate-500 dark:text-slate-400">Record routine log entries, contractor escorts, and security checks</p>
+              <h3 class="font-display font-bold text-base text-slate-900 dark:text-white">New Activity Report (DAR) Entry</h3>
+              <p class="text-xs text-slate-500 dark:text-slate-400">Entries sync automatically to client management portal</p>
             </div>
             <span class="font-mono text-[11px] text-slate-500">SHIFT: 07:00 – 19:00</span>
           </div>
 
-          <!-- Quick DAR Tags -->
+          <!-- Quick Preset Buttons -->
           <div class="flex flex-wrap gap-2 text-xs">
             <button type="button" class="quick-dar-tag px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#072832] dark:hover:bg-[#486A6E]/40 border border-slate-200 dark:border-[#486A6E]/40 font-medium" data-text="[Foot Patrol] Routine perimeter & stairwell patrol completed. All access doors locked and secure.">
               Foot Patrol Clear
@@ -628,52 +761,174 @@
             <button type="button" class="quick-dar-tag px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#072832] dark:hover:bg-[#486A6E]/40 border border-slate-200 dark:border-[#486A6E]/40 font-medium" data-text="[Package Delivery] Courier delivery received and logged in North Tower loading dock.">
               Package Delivery
             </button>
+            <button type="button" class="quick-dar-tag px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#072832] dark:hover:bg-[#486A6E]/40 border border-slate-200 dark:border-[#486A6E]/40 font-medium" data-text="[Lighting Check] Perimeter security floodlights tested and functioning normally.">
+              Lighting Check
+            </button>
             <button type="button" class="quick-dar-tag px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-[#072832] dark:hover:bg-[#486A6E]/40 border border-slate-200 dark:border-[#486A6E]/40 font-medium" data-text="[Shift Handover] Transferred radio, keys, and master post log to incoming relief officer.">
               Shift Handover
             </button>
           </div>
 
           <form id="guard-dar-form" class="space-y-3">
-            <textarea id="guard-dar-text" rows="3" class="w-full p-3.5 rounded-xl border border-slate-300 dark:border-[#486A6E]/50 bg-slate-50 dark:bg-[#072832]/60 text-slate-900 dark:text-white text-xs focus:outline-none" placeholder="Type activity log details or click a quick tag above..."></textarea>
+            <textarea id="guard-dar-text" rows="3" class="w-full p-3.5 rounded-xl border border-slate-300 dark:border-[#486A6E]/50 bg-slate-50 dark:bg-[#072832]/60 text-slate-900 dark:text-white text-xs focus:outline-none" placeholder="Type activity log details or click a quick tag above..." required></textarea>
             <button type="submit" class="px-5 py-2.5 rounded-xl bg-[#072832] hover:bg-[#0B171E] text-white font-bold text-xs shadow-md transition-all">
               Submit Log to Client DAR Feed →
             </button>
           </form>
         </div>
+
+        <!-- Shift Log Audit Trail -->
+        <div class="p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-4">
+          <h4 class="font-display font-bold text-sm text-slate-900 dark:text-white">Today's Shift Log History (7)</h4>
+          <div id="guard-dar-history" class="space-y-3 text-xs overflow-y-auto max-h-[340px] pr-1">
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#072832]/60 border border-slate-200 dark:border-[#486A6E]/30 space-y-1">
+              <div class="flex justify-between font-mono text-[10px] text-slate-500">
+                <span>15:28:42</span> <span class="text-emerald-600 font-bold">NFC TOUR</span>
+              </div>
+              <p class="text-slate-800 dark:text-slate-200 text-xs">Level B2 storage dock scanned. Area clear of obstructions.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#072832]/60 border border-slate-200 dark:border-[#486A6E]/30 space-y-1">
+              <div class="flex justify-between font-mono text-[10px] text-slate-500">
+                <span>14:10:00</span> <span class="text-blue-600 font-bold">CONTRACTOR</span>
+              </div>
+              <p class="text-slate-800 dark:text-slate-200 text-xs">Otis Elevator technician arrived for quarterly maintenance.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-[#072832]/60 border border-slate-200 dark:border-[#486A6E]/30 space-y-1">
+              <div class="flex justify-between font-mono text-[10px] text-slate-500">
+                <span>07:00:00</span> <span class="text-purple-600 font-bold">SHIFT START</span>
+              </div>
+              <p class="text-slate-800 dark:text-slate-200 text-xs">Officer D. Reeves on post. Equipment check 100% verified.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESK 3: VISITOR & CONTRACTOR ACCESS REGISTER -->
+    <div id="guard-tab-content-visitors" class="space-y-4 hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">Visitor &amp; Contractor Access Control Register</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Log visitor arrivals, verify photo IDs, and issue temporary visitor badges</p>
+        </div>
+        <button onclick="showToast('New visitor check-in form opened.', 'info')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#072832] text-white hover:bg-black">
+          + Check In New Guest
+        </button>
       </div>
 
-      <!-- RIGHT COLUMN: DIGITAL POST ORDERS & EMERGENCY DISPATCH SPEED DIAL -->
-      <div class="space-y-6">
+      <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-[#486A6E]/40 bg-white dark:bg-[#0B171E] shadow-sm">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-slate-100 dark:bg-[#072832] text-slate-700 dark:text-[#7CB0AB] font-mono uppercase text-[11px]">
+            <tr>
+              <th class="py-3 px-4">Visitor Name</th>
+              <th class="py-3 px-4">Company / Organization</th>
+              <th class="py-3 px-4">Host / Destination</th>
+              <th class="py-3 px-4">Badge # Issued</th>
+              <th class="py-3 px-4">Time In</th>
+              <th class="py-3 px-4">Status</th>
+              <th class="py-3 px-4">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 dark:divide-[#486A6E]/20 text-slate-800 dark:text-slate-200">
+            <tr>
+              <td class="py-3.5 px-4 font-bold">Marcus Thorne</td>
+              <td class="py-3.5 px-4">Cisco Network Systems</td>
+              <td class="py-3.5 px-4">IT Infrastructure (Floor 40)</td>
+              <td class="py-3.5 px-4 font-mono font-bold text-amber-600">GUEST-041</td>
+              <td class="py-3.5 px-4 font-mono">14:30:15</td>
+              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">ON-SITE</span></td>
+              <td class="py-3.5 px-4"><button onclick="showToast('Checked out Marcus Thorne', 'success')" class="text-xs text-red-600 font-bold hover:underline">Check Out</button></td>
+            </tr>
+            <tr>
+              <td class="py-3.5 px-4 font-bold">Sarah Jenkins</td>
+              <td class="py-3.5 px-4">KPMG Financial Advisory</td>
+              <td class="py-3.5 px-4">Morrison &amp; Reed Exec Office</td>
+              <td class="py-3.5 px-4 font-mono font-bold text-amber-600">GUEST-042</td>
+              <td class="py-3.5 px-4 font-mono">15:00:22</td>
+              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800">ON-SITE</span></td>
+              <td class="py-3.5 px-4"><button onclick="showToast('Checked out Sarah Jenkins', 'success')" class="text-xs text-red-600 font-bold hover:underline">Check Out</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DESK 4: KEY & ASSET CHECKOUT REGISTER -->
+    <div id="guard-tab-content-keys" class="space-y-4 hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white">Facility Key Ring &amp; Tactical Asset Register</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Track custody of master keys, access fobs, and two-way radio units</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-2">
+          <div class="flex justify-between items-center text-xs font-mono">
+            <span class="font-bold">KEY RING #4 (HVAC & Vault)</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">IN KEY BOX</span>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300">Master access to sub-basement & electrical vaults.</p>
+          <button onclick="showToast('Signed out Key Ring #4 to Officer Reeves', 'info')" class="w-full py-2 rounded-lg bg-slate-100 dark:bg-[#072832] font-bold text-xs hover:bg-slate-200">Sign Out Key</button>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-2">
+          <div class="flex justify-between items-center text-xs font-mono">
+            <span class="font-bold">RADIO UNIT #12 (Ch. 4)</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800">IN CUSTODY</span>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300">Currently in use by Officer D. Reeves (Post P-401).</p>
+          <button onclick="showToast('Radio Unit #12 returned to charging dock', 'success')" class="w-full py-2 rounded-lg bg-slate-100 dark:bg-[#072832] font-bold text-xs hover:bg-slate-200">Return to Dock</button>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-2">
+          <div class="flex justify-between items-center text-xs font-mono">
+            <span class="font-bold">BODYCAM AXON-08</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">RECORDING</span>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300">Active video recording · Battery 92%.</p>
+          <button onclick="showToast('Bodycam stream synced with Dispatch', 'info')" class="w-full py-2 rounded-lg bg-slate-100 dark:bg-[#072832] font-bold text-xs hover:bg-slate-200">Sync Bodycam</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESK 5: POST ORDERS & EMERGENCY DIRECTORY -->
+    <div id="guard-tab-content-orders" class="space-y-6 hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Post Orders SOP -->
-        <div class="p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-4">
+        <div class="lg:col-span-2 p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-slate-200 dark:border-[#486A6E]/40 shadow-sm space-y-4">
           <div class="border-b border-slate-200 dark:border-[#486A6E]/30 pb-3">
             <h3 class="font-display font-bold text-base text-slate-900 dark:text-white">Active Post Orders (SOP)</h3>
-            <p class="text-[11px] text-slate-500">Post P-401 · North Tower Lobby</p>
+            <p class="text-xs text-slate-500">Post P-401 · North Tower Lobby</p>
           </div>
-          <ul class="space-y-2.5 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
-            <li class="flex items-start gap-2">
-              <span class="text-emerald-600 font-bold">1.</span>
-              <span>Verify photo credentials of all visitors entering elevator banks.</span>
+          <ul class="space-y-3 text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-600 font-bold text-sm">1.</span>
+              <div>
+                <strong>Visitor Identity Verification:</strong>
+                <p class="text-slate-500 dark:text-slate-400 mt-0.5">Verify government-issued photo ID of all non-badged visitors. Match against tenant host directory before issuing visitor pass.</p>
+              </div>
             </li>
-            <li class="flex items-start gap-2">
-              <span class="text-emerald-600 font-bold">2.</span>
-              <span>Conduct physical foot patrol of Level B2 storage every 90 minutes.</span>
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-600 font-bold text-sm">2.</span>
+              <div>
+                <strong>Loading Dock & Delivery Management:</strong>
+                <p class="text-slate-500 dark:text-slate-400 mt-0.5">All courier trucks must be logged in dock manifest. No unattended vehicles permitted beyond 15 minutes.</p>
+              </div>
             </li>
-            <li class="flex items-start gap-2">
-              <span class="text-emerald-600 font-bold">3.</span>
-              <span>Maintain active radio contact on Channel 4 with Mobile Patrol Unit Bravo.</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-emerald-600 font-bold">4.</span>
-              <span>Challenge any unauthorized vehicles idling in the loading dock beyond 15 mins.</span>
+            <li class="flex items-start gap-2.5">
+              <span class="text-emerald-600 font-bold text-sm">3.</span>
+              <div>
+                <strong>Incident Escalation Tree:</strong>
+                <p class="text-slate-500 dark:text-slate-400 mt-0.5">For Level 1 physical threats, activate Radio SOS panic channel immediately, notify Building Engineering, and contact Local Precinct Dispatch.</p>
+              </div>
             </li>
           </ul>
         </div>
 
-        <!-- Emergency Speed Dial -->
+        <!-- Emergency Directory -->
         <div class="p-6 rounded-2xl bg-white dark:bg-[#0B171E] border border-red-200 dark:border-red-900/40 shadow-sm space-y-4">
           <div class="border-b border-red-100 dark:border-red-900/30 pb-3">
-            <h3 class="font-display font-bold text-base text-red-600 dark:text-red-400">Emergency Dispatch Directory</h3>
+            <h3 class="font-display font-bold text-base text-red-600 dark:text-red-400">Emergency Speed Dial</h3>
             <p class="text-[11px] text-slate-500">Direct 1-click communications</p>
           </div>
           <div class="space-y-2 text-xs">
@@ -685,11 +940,15 @@
               <span>👮 Duty Field Supervisor (Sgt. Vance)</span>
               <span class="text-brand-600 text-[11px] font-mono">Radio Ch. 4</span>
             </a>
+            <a href="tel:+18005550913" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-[#072832]/60 dark:hover:bg-[#072832] border border-slate-200 dark:border-[#486A6E]/40 flex items-center justify-between font-bold text-slate-900 dark:text-white transition-all">
+              <span>🏢 Property Manager (James Morrison)</span>
+              <span class="text-brand-600 text-[11px] font-mono">Ext. 401</span>
+            </a>
           </div>
         </div>
-
       </div>
     </div>
+
   </div>
 </div>
 
@@ -1081,6 +1340,30 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('DAR entry logged to client feed.', 'success');
     document.getElementById('guard-dar-text').value = '';
   });
+
+  
+  // Guard Sub-Tabs
+  document.querySelectorAll('.guard-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.guard-tab').forEach(t => {
+        t.classList.remove('active-guard-tab', 'border-[#072832]', 'dark:border-[#7CB0AB]', 'text-[#072832]', 'dark:text-white');
+        t.classList.add('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+      });
+      tab.classList.add('active-guard-tab', 'border-[#072832]', 'dark:border-[#7CB0AB]', 'text-[#072832]', 'dark:text-white');
+      tab.classList.remove('border-transparent', 'text-slate-500', 'dark:text-slate-400');
+
+      ['tour', 'dar', 'visitors', 'keys', 'orders'].forEach(id => {
+        document.getElementById(`guard-tab-content-${id}`)?.classList.add('hidden');
+      });
+      document.getElementById(`guard-tab-content-${tab.dataset.tab.replace('guard-', '')}`)?.classList.remove('hidden');
+    });
+  });
+
+  // Guard Panic SOS
+  document.getElementById('guard-panic-btn')?.addEventListener('click', () => {
+    showToast('🚨 SOS PANIC ALERT TRANSMITTED TO DISPATCH & MOBILE BACKUP!', 'error');
+  });
+
 
   // Guard Shift Check-In Toggle
   let onDuty = true;
