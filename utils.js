@@ -71,9 +71,83 @@ document.addEventListener('DOMContentLoaded', () => {
   tick();
   setInterval(tick, 1000);
 
+  // Global Auth & Sign Out Management
+  initGlobalAuthUI();
+
   // Patrol canvas (hero page only)
   initPatrolCanvas();
 });
+
+// ── Global Auth & Sign Out UI Manager ──────────────────────────────────────
+function initGlobalAuthUI() {
+  const currentPath = window.location.pathname.toLowerCase();
+  const isHomePage = currentPath.endsWith('index.html') || currentPath.endsWith('/') || currentPath === '';
+  const isPortalPage = currentPath.endsWith('portal.html') || currentPath.endsWith('/portal');
+  const role = sessionStorage.getItem('bulwark_auth_role');
+
+  // If visiting an inner page without authentication, redirect to index.html login gate
+  if (!role && !isHomePage && !isPortalPage) {
+    window.location.href = 'index.html';
+    return;
+  }
+
+  // Find desktop navigation container
+  const navContainer = document.querySelector('header nav .hidden.sm\\:flex') || document.querySelector('header nav div:last-child');
+  const mobileDrawerLinks = document.querySelector('#mobile-drawer .flex-col');
+
+  if (role) {
+    // Role styling
+    let roleLabel = 'CLIENT';
+    let roleBg = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+    if (role === 'admin') {
+      roleLabel = '👑 ADMIN';
+      roleBg = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+    } else if (role === 'guard') {
+      roleLabel = '🛡️ GUARD';
+      roleBg = 'bg-blue-500/20 text-blue-300 border-blue-500/40';
+    } else {
+      roleLabel = '🏢 CLIENT';
+      roleBg = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+    }
+
+    // Add Desktop Sign Out button if not already present
+    if (navContainer && !document.getElementById('global-signout-btn')) {
+      const authDiv = document.createElement('div');
+      authDiv.id = 'global-auth-controls';
+      authDiv.className = 'flex items-center gap-2.5';
+      authDiv.innerHTML = `
+        <span class="hidden md:inline-flex px-2.5 py-1 rounded-md text-[11px] font-mono font-bold uppercase border ${roleBg}">
+          ${roleLabel}
+        </span>
+        <button id="global-signout-btn" class="px-3.5 py-2 rounded-xl text-xs font-bold text-red-300 bg-red-950/60 hover:bg-red-900/80 border border-red-800/60 transition-all flex items-center gap-1.5 shadow-sm">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          Sign Out
+        </button>
+      `;
+      navContainer.appendChild(authDiv);
+
+      document.getElementById('global-signout-btn')?.addEventListener('click', () => {
+        sessionStorage.removeItem('bulwark_auth_role');
+        sessionStorage.removeItem('bulwark_auth_user');
+        window.location.href = 'index.html';
+      });
+    }
+
+    // Add Mobile Drawer Sign Out button
+    if (mobileDrawerLinks && !document.getElementById('mobile-signout-link')) {
+      const mobileBtn = document.createElement('button');
+      mobileBtn.id = 'mobile-signout-link';
+      mobileBtn.className = 'drawer-link py-3 px-4 rounded-xl bg-red-950/40 text-red-300 hover:bg-red-900/50 border border-red-800/40 font-bold flex items-center justify-between text-left mt-2';
+      mobileBtn.innerHTML = `<span>🚪 Sign Out (${roleLabel})</span> <span>→</span>`;
+      mobileBtn.addEventListener('click', () => {
+        sessionStorage.removeItem('bulwark_auth_role');
+        sessionStorage.removeItem('bulwark_auth_user');
+        window.location.href = 'index.html';
+      });
+      mobileDrawerLinks.appendChild(mobileBtn);
+    }
+  }
+}
 
 // ── Patrol Network Canvas ─────────────────────────────────────────────────
 function initPatrolCanvas() {
