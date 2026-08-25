@@ -177,82 +177,194 @@
 <!-- =========================================================================
      2. ROLE DASHBOARD A: 👑 ADMIN OPERATIONS COMMAND CENTER
      ========================================================================= -->
-<div id="dashboard-admin" class="flex-1 flex flex-col hidden bg-[#071922] text-slate-100">
-  <!-- Command Header -->
-  <div class="bg-[#0B171E] border-b border-[#486A6E]/40 py-6 px-4 sm:px-8">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-      <div class="space-y-1">
+<div id="dashboard-admin" class="flex-1 flex flex-col hidden bg-[#071922] text-slate-100 min-h-screen">
+  <!-- Command Cockpit Header -->
+  <div class="bg-[#0B171E] border-b border-[#486A6E]/40 py-6 px-4 sm:px-8 shadow-xl">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-6">
+      <div class="space-y-1.5">
         <div class="flex items-center gap-3">
-          <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-mono font-bold">LEVEL 4 DISPATCH COMMAND</span>
-          <span class="text-xs font-mono text-emerald-400">● 184 POSTS ON-DUTY</span>
+          <span class="px-2.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-mono font-bold tracking-wider flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+            LEVEL 4 SOC COMMAND
+          </span>
+          <span class="text-xs font-mono text-emerald-400 bg-emerald-950/60 px-2.5 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 184 POSTS ACTIVE
+          </span>
+          <span class="hidden md:inline text-xs font-mono text-slate-400">SLA: 99.8% · GPS LIVE</span>
         </div>
-        <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-white">Global Operations Command Console</h1>
-        <p class="text-xs text-slate-300">Master management for clients, live post rosters, incoming leads, vetting pipeline, and threat postures.</p>
+        <h1 class="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">Global Operations Command Console</h1>
+        <p class="text-xs text-slate-300">Master dispatch, fleet rosters, client lead triage, 7-stage vetting pipeline, and threat telemetry.</p>
       </div>
 
-      <!-- Threat Posture Controls -->
-      <div class="flex items-center gap-2 bg-[#072832] p-1.5 rounded-xl border border-[#486A6E]/50">
-        <span class="text-[11px] font-mono font-bold text-slate-400 px-2 uppercase">POSTURE:</span>
-        <button id="admin-posture-std" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Standard</button>
-        <button id="admin-posture-overdrive" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-amber-300">Overdrive</button>
-        <button id="admin-posture-lockdown" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-red-400">Lockdown</button>
+      <!-- Quick Action Controls & Threat Posture -->
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="flex items-center gap-1.5 bg-[#072832] p-1.5 rounded-xl border border-[#486A6E]/50 shadow-inner">
+          <span class="text-[10px] font-mono font-bold text-slate-400 px-2 uppercase">POSTURE:</span>
+          <button id="admin-posture-std" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition-all">Standard</button>
+          <button id="admin-posture-overdrive" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-amber-300 transition-all">Overdrive</button>
+          <button id="admin-posture-lockdown" class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-red-400 transition-all">Lockdown</button>
+        </div>
+
+        <button id="btn-open-dispatch" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-red-700 to-red-600 hover:from-red-800 hover:to-red-700 border border-red-500/50 shadow-lg shadow-red-900/30 flex items-center gap-1.5 transition-all">
+          <span>🚨</span> Emergency Unit Dispatch
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 Hero KPI Metrics Cards -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-8 pt-8 w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- KPI 1 -->
+      <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 p-5 space-y-2 hover:border-[#7CB0AB] transition-all">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase">
+          <span>🛡️ Manned Posts</span>
+          <span class="text-emerald-400 font-bold text-[11px]">99.8% SLA</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-black font-display text-white">184</span>
+          <span class="text-xs text-slate-400">/ 185 Active</span>
+        </div>
+        <div class="text-[11px] text-emerald-400 flex items-center gap-1 font-medium">
+          <span>↑ +6 officers deployed today</span>
+        </div>
+      </div>
+
+      <!-- KPI 2 -->
+      <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 p-5 space-y-2 hover:border-[#7CB0AB] transition-all">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase">
+          <span>📋 Coverage Leads</span>
+          <span class="text-amber-400 font-bold text-[11px]">3 PENDING</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-black font-display text-amber-300">12</span>
+          <span class="text-xs text-slate-400">Pipeline Inquiries</span>
+        </div>
+        <div class="text-[11px] text-slate-300 font-mono">
+          <span>$284,500 Estimated Contract Value</span>
+        </div>
+      </div>
+
+      <!-- KPI 3 -->
+      <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 p-5 space-y-2 hover:border-[#7CB0AB] transition-all">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase">
+          <span>🚨 Incident Triage</span>
+          <span class="text-blue-400 font-bold text-[11px]">AVG 3.4 MINS</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-black font-display text-white">2</span>
+          <span class="text-xs text-slate-400">Under Active Dispatch</span>
+        </div>
+        <div class="text-[11px] text-slate-400 flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Sector 1 & Sector 3 Secure
+        </div>
+      </div>
+
+      <!-- KPI 4 -->
+      <div class="glass-card rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 p-5 space-y-2 hover:border-[#7CB0AB] transition-all">
+        <div class="flex items-center justify-between text-slate-400 text-xs font-mono uppercase">
+          <span>🎓 Vetting Academy</span>
+          <span class="text-purple-400 font-bold text-[11px]">23.4% PASS</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="text-3xl font-black font-display text-white">38</span>
+          <span class="text-xs text-slate-400">Candidates in Pipeline</span>
+        </div>
+        <div class="text-[11px] text-[#7CB0AB] font-medium">
+          <span>15 Certified & Ready for Post</span>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Admin Sub-Navigation Tabs -->
-  <div class="bg-[#0B171E]/80 border-b border-[#486A6E]/30 px-4 sm:px-8 sticky top-20 z-30">
+  <div class="bg-[#0B171E]/95 border-b border-[#486A6E]/30 px-4 sm:px-8 mt-6 sticky top-20 z-30 shadow-md">
     <div class="max-w-7xl mx-auto flex gap-6 overflow-x-auto">
       <button class="admin-tab active-admin-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-[#7CB0AB] text-white flex items-center gap-2" data-tab="admin-leads">
-        <span>📋</span> INCOMING LEADS <span id="admin-lead-badge" class="px-2 py-0.5 rounded-full bg-brand-500/30 text-[#7CB0AB] text-[10px]">SYNC</span>
+        <span>📋</span> INCOMING LEADS <span id="admin-lead-badge" class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px]">12 ACTIVE</span>
       </button>
       <button class="admin-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2" data-tab="admin-posts">
-        <span>🛡️</span> ACTIVE FLEET ROSTER
+        <span>🛡️</span> GLOBAL FLEET ROSTER <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px]">184 LIVE</span>
       </button>
       <button class="admin-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2" data-tab="admin-vetting">
-        <span>🎓</span> OFFICER VETTING PIPELINE
+        <span>🎓</span> 7-STAGE VETTING PIPELINE <span class="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/40 text-[10px]">38 RECRUITS</span>
       </button>
       <button class="admin-tab py-4 text-xs font-bold font-mono tracking-wider border-b-2 border-transparent text-slate-400 hover:text-white flex items-center gap-2" data-tab="admin-incidents">
-        <span>🚨</span> INCIDENT DISPATCH DESK
+        <span>🚨</span> INCIDENT DISPATCH DESK <span class="px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 text-[10px]">2 OPEN</span>
       </button>
     </div>
   </div>
 
   <!-- Admin Content Container -->
   <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 flex-1 space-y-8 w-full">
+    
     <!-- SUB-TAB 1: INCOMING LEADS & QUOTE REQUESTS -->
     <div id="admin-tab-content-leads" class="space-y-6">
-      <div class="flex items-center justify-between">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 class="font-display font-bold text-xl text-white">Client Guard Coverage Requests</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Real-time incoming submissions from hire.html and estimator.html via Supabase</p>
+          <h3 class="font-display font-bold text-xl text-white">Client Guard Coverage Requests (Leads Pipeline)</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Real-time incoming submissions from hire.html and staffing estimator via Supabase database</p>
         </div>
-        <button id="refresh-leads-btn" class="btn-secondary text-xs px-3 py-2">↻ Refresh Leads</button>
+        <div class="flex items-center gap-2">
+          <button id="refresh-leads-btn" class="px-3.5 py-2 rounded-xl text-xs font-bold text-[#7CB0AB] bg-[#072832] hover:bg-[#072832]/80 border border-[#486A6E]/50 transition-all flex items-center gap-1.5 shadow-sm">
+            <span>↻</span> Refresh Leads
+          </button>
+        </div>
       </div>
 
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 shadow-2xl">
+      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E] shadow-2xl">
         <table class="portal-table w-full text-left text-xs">
-          <thead class="bg-[#072832] text-slate-300 font-mono uppercase text-[11px]">
+          <thead>
             <tr>
-              <th class="py-3 px-4">Ref / Contact</th>
-              <th class="py-3 px-4">Company / Site</th>
-              <th class="py-3 px-4">Service Required</th>
-              <th class="py-3 px-4">Officers</th>
-              <th class="py-3 px-4">Coverage Hours</th>
-              <th class="py-3 px-4">Status</th>
-              <th class="py-3 px-4">Dispatch Action</th>
+              <th>Ref / Contact</th>
+              <th>Company / Property</th>
+              <th>Service Required</th>
+              <th>Officers</th>
+              <th>Coverage Hours</th>
+              <th>Status</th>
+              <th>Dispatch Command Action</th>
             </tr>
           </thead>
           <tbody id="admin-leads-tbody" class="divide-y divide-[#486A6E]/20 text-slate-200">
-            <!-- Dynamically populated or fallback rows -->
+            <!-- Dynamically populated or rich fallback -->
             <tr>
-              <td class="py-3.5 px-4 font-semibold text-white">James Morrison<br/><span class="text-[10px] text-slate-400">james@morrisonreed.com</span></td>
-              <td class="py-3.5 px-4">Morrison &amp; Reed Properties<br/><span class="text-[10px] text-slate-400">Commercial Skyscraper</span></td>
-              <td class="py-3.5 px-4 font-mono text-[#7CB0AB]">Armed Static Detail</td>
-              <td class="py-3.5 px-4 font-bold text-white">6 Guards</td>
-              <td class="py-3.5 px-4">24/7 Continuous</td>
-              <td class="py-3.5 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ACTIVE CONTRACT</span></td>
-              <td class="py-3.5 px-4"><button class="px-2.5 py-1 rounded bg-[#072832] text-[#7CB0AB] border border-[#7CB0AB]/40 hover:bg-[#7CB0AB] hover:text-[#0B171E] font-bold">View Post Orders</button></td>
+              <td><div class="font-bold text-white">James Morrison</div><div class="text-[11px] text-slate-400 font-mono">james@morrisonreed.com</div></td>
+              <td><div class="font-medium text-white">Morrison &amp; Reed Properties</div><div class="text-[11px] text-slate-400">Commercial Skyscraper · Sector 1</div></td>
+              <td><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ARMED STATIC</span></td>
+              <td><span class="font-bold text-white">6 Guards</span></td>
+              <td>24/7 Continuous</td>
+              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ACTIVE CONTRACT</span></td>
+              <td>
+                <button onclick="showToast('Viewing active post orders for Morrison & Reed', 'info')" class="px-3 py-1.5 rounded-lg bg-[#072832] text-[#7CB0AB] border border-[#7CB0AB]/40 hover:bg-[#7CB0AB] hover:text-[#0B171E] font-bold text-xs transition-all">
+                  Post Orders →
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="font-bold text-white">Elena Rostova</div><div class="text-[11px] text-slate-400 font-mono">e.rostova@apexbio.org</div></td>
+              <td><div class="font-medium text-white">Apex BioTech Laboratories</div><div class="text-[11px] text-slate-400">High-Containment Research Campus</div></td>
+              <td><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-blue-500/20 text-blue-300 border border-blue-500/40">K-9 & MOBILE PATROL</span></td>
+              <td><span class="font-bold text-white">4 Units</span></td>
+              <td>Night Shifts (18:00 – 06:00)</td>
+              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">PENDING APPROVAL</span></td>
+              <td>
+                <button onclick="showToast('Approved Apex BioTech request! Dispatched 4 Units.', 'success')" class="px-3 py-1.5 rounded-lg bg-emerald-950/70 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-800 font-bold text-xs transition-all">
+                  ✓ Approve & Deploy
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td><div class="font-bold text-white">Alexander Chen</div><div class="text-[11px] text-slate-400 font-mono">achen@sovereign-vault.com</div></td>
+              <td><div class="font-medium text-white">Sovereign International Bank</div><div class="text-[11px] text-slate-400">Downtown Financial Vault Facility</div></td>
+              <td><span class="px-2 py-0.5 rounded font-mono font-bold text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/40">EXECUTIVE PROTECTION</span></td>
+              <td><span class="font-bold text-white">8 Agents</span></td>
+              <td>24/7 Armed Secure Transit</td>
+              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">UNDER REVIEW</span></td>
+              <td>
+                <button onclick="showToast('Assigned Lead Agent to Sovereign Bank Inquiry', 'success')" class="px-3 py-1.5 rounded-lg bg-emerald-950/70 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-800 font-bold text-xs transition-all">
+                  ✓ Approve & Deploy
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -261,27 +373,53 @@
 
     <!-- SUB-TAB 2: ACTIVE FLEET ROSTER -->
     <div id="admin-tab-content-posts" class="space-y-6 hidden">
-      <div class="flex items-center justify-between">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h3 class="font-display font-bold text-xl text-white">All Active Guard Posts Worldwide</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Live roster of on-duty security officers, post codes, and check-in times</p>
+          <h3 class="font-display font-bold text-xl text-white">Global Manned Posts & Fleet Roster</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Live status of 184 on-duty security officers, GPS telemetry, and last check-ins</p>
         </div>
       </div>
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 shadow-2xl">
+      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E] shadow-2xl">
         <table class="portal-table w-full text-left text-xs">
-          <thead class="bg-[#072832] text-slate-300 font-mono uppercase text-[11px]">
+          <thead>
             <tr>
-              <th class="py-3 px-4">Post Code</th>
-              <th class="py-3 px-4">Location / Facility</th>
-              <th class="py-3 px-4">Stationed Officer</th>
-              <th class="py-3 px-4">Guard Type</th>
-              <th class="py-3 px-4">Shift Schedule</th>
-              <th class="py-3 px-4">Status</th>
-              <th class="py-3 px-4">Command Action</th>
+              <th>Post Code</th>
+              <th>Location / Facility</th>
+              <th>Stationed Officer</th>
+              <th>Guard Type</th>
+              <th>Shift Schedule</th>
+              <th>Status</th>
+              <th>Command Action</th>
             </tr>
           </thead>
           <tbody id="admin-posts-tbody" class="divide-y divide-[#486A6E]/20 text-slate-200">
-            <!-- Dynamically populated from Supabase -->
+            <tr>
+              <td><span class="font-mono font-bold text-[#7CB0AB]">P-401</span></td>
+              <td><div class="font-bold text-white">North Tower — Main Lobby Gate</div><div class="text-[11px] text-slate-400">Sector 1 (NYC Metro)</div></td>
+              <td><div class="font-bold text-white">Officer D. Reeves</div><div class="text-[10px] font-mono text-[#7CB0AB]">BADGE #BW-8821</div></td>
+              <td><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#072832] text-[#7CB0AB] border border-[#486A6E]/40">Armed Static</span></td>
+              <td class="font-mono text-slate-300">07:00 – 19:00</td>
+              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ON-DUTY (GPS OK)</span></td>
+              <td><button onclick="showToast('NFC Tour verified for Post P-401', 'info')" class="px-3 py-1.5 rounded-lg bg-[#072832] text-[#7CB0AB] border border-[#7CB0AB]/40 hover:bg-[#7CB0AB] hover:text-[#0B171E] font-bold text-xs">Telemetry</button></td>
+            </tr>
+            <tr>
+              <td><span class="font-mono font-bold text-[#7CB0AB]">P-402</span></td>
+              <td><div class="font-bold text-white">Level B2 — Storage Loading Dock</div><div class="text-[11px] text-slate-400">Sector 1 (NYC Metro)</div></td>
+              <td><div class="font-bold text-white">Officer K. Brooks</div><div class="text-[10px] font-mono text-[#7CB0AB]">BADGE #BW-6512</div></td>
+              <td><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#072832] text-[#7CB0AB] border border-[#486A6E]/40">Dock Master Guard</span></td>
+              <td class="font-mono text-slate-300">06:00 – 18:00</td>
+              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ON-DUTY (GPS OK)</span></td>
+              <td><button onclick="showToast('NFC Tour verified for Post P-402', 'info')" class="px-3 py-1.5 rounded-lg bg-[#072832] text-[#7CB0AB] border border-[#7CB0AB]/40 hover:bg-[#7CB0AB] hover:text-[#0B171E] font-bold text-xs">Telemetry</button></td>
+            </tr>
+            <tr>
+              <td><span class="font-mono font-bold text-[#7CB0AB]">PATROL-04</span></td>
+              <td><div class="font-bold text-white">Perimeter East Gate & Logistics Hub</div><div class="text-[11px] text-slate-400">Sector 2 (Chicago Hub)</div></td>
+              <td><div class="font-bold text-white">Officer J. Thorne + K-9 Blitz</div><div class="text-[10px] font-mono text-[#7CB0AB]">BADGE #BW-9901</div></td>
+              <td><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#072832] text-[#7CB0AB] border border-[#486A6E]/40">K-9 Mobile Unit</span></td>
+              <td class="font-mono text-slate-300">18:00 – 06:00</td>
+              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">ON-PATROL</span></td>
+              <td><button onclick="showToast('Vehicle GPS tracking link active', 'info')" class="px-3 py-1.5 rounded-lg bg-[#072832] text-[#7CB0AB] border border-[#7CB0AB]/40 hover:bg-[#7CB0AB] hover:text-[#0B171E] font-bold text-xs">Live GPS</button></td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -290,48 +428,53 @@
     <!-- SUB-TAB 3: OFFICER VETTING PIPELINE -->
     <div id="admin-tab-content-vetting" class="space-y-6 hidden">
       <div>
-        <h3 class="font-display font-bold text-xl text-white">7-Stage Background Vetting Command</h3>
-        <p class="text-xs text-slate-400 mt-0.5">Track and advance officer applicants through licensing, FBI criminal checks, and tactical academy training</p>
+        <h3 class="font-display font-bold text-xl text-white">7-Stage Officer Background Vetting Command</h3>
+        <p class="text-xs text-slate-400 mt-0.5">Track and advance candidates through FBI LiveScan, 10-panel drug screens, and tactical academy qualification</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="glass-card p-5 rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/80 space-y-4">
+        <div class="glass-card p-6 rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 space-y-4">
           <div class="flex items-center justify-between border-b border-[#486A6E]/30 pb-3">
             <h4 class="font-display font-bold text-white text-sm">Stage 1–3: Background &amp; FBI Check</h4>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300">14 APPLICANTS</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold">14 APPLICANTS</span>
           </div>
           <div class="space-y-3 text-xs">
-            <div class="p-3 rounded-xl bg-[#072832]/60 border border-[#486A6E]/30 space-y-1">
+            <div class="p-3.5 rounded-xl bg-[#072832]/80 border border-[#486A6E]/40 space-y-1.5">
               <div class="font-bold text-white">David K. Vance (Ex-Military Police)</div>
-              <div class="text-slate-400 text-[11px]">Guard Card #CA-994102 · Stage: FBI LiveScan Pending</div>
-              <button class="mt-2 text-[10px] font-bold text-[#7CB0AB] hover:underline" onclick="showToast('Advanced David K. Vance to Drug Screening', 'success')">Advance to Stage 4 →</button>
+              <div class="text-slate-400 text-[11px]">Guard Card #CA-994102 · FBI LiveScan Pending</div>
+              <button class="mt-2 text-xs font-bold text-[#7CB0AB] hover:underline" onclick="showToast('Advanced David K. Vance to Stage 4: 10-Panel Drug Screen', 'success')">Advance to Stage 4 →</button>
+            </div>
+            <div class="p-3.5 rounded-xl bg-[#072832]/80 border border-[#486A6E]/40 space-y-1.5">
+              <div class="font-bold text-white">Rachel Gomez (Federal Protection)</div>
+              <div class="text-slate-400 text-[11px]">Guard Card #NY-448102 · Background Clearance Verified</div>
+              <button class="mt-2 text-xs font-bold text-[#7CB0AB] hover:underline" onclick="showToast('Advanced Rachel Gomez to Stage 4: Medical Screening', 'success')">Advance to Stage 4 →</button>
             </div>
           </div>
         </div>
 
-        <div class="glass-card p-5 rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/80 space-y-4">
+        <div class="glass-card p-6 rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 space-y-4">
           <div class="flex items-center justify-between border-b border-[#486A6E]/30 pb-3">
             <h4 class="font-display font-bold text-white text-sm">Stage 4–6: Screening &amp; Academy</h4>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-blue-500/20 text-blue-300">9 RECRUITS</span>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-blue-500/20 text-blue-300 border border-blue-500/40 font-bold">9 RECRUITS</span>
           </div>
           <div class="space-y-3 text-xs">
-            <div class="p-3 rounded-xl bg-[#072832]/60 border border-[#486A6E]/30 space-y-1">
-              <div class="font-bold text-white">Sarah T. Jensen (Executive Protection)</div>
-              <div class="text-slate-400 text-[11px]">Tactical Defense Training: Week 3 of 4</div>
-              <button class="mt-2 text-[10px] font-bold text-[#7CB0AB] hover:underline" onclick="showToast('Certified Sarah T. Jensen for Active Post', 'success')">Certify &amp; Deploy →</button>
+            <div class="p-3.5 rounded-xl bg-[#072832]/80 border border-[#486A6E]/40 space-y-1.5">
+              <div class="font-bold text-white">Sarah T. Jensen (Executive Detail)</div>
+              <div class="text-slate-400 text-[11px]">Tactical Defense Academy: Week 3 of 4</div>
+              <button class="mt-2 text-xs font-bold text-[#7CB0AB] hover:underline" onclick="showToast('Certified Sarah T. Jensen for Active Post', 'success')">Certify &amp; Deploy →</button>
             </div>
           </div>
         </div>
 
-        <div class="glass-card p-5 rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/80 space-y-4">
+        <div class="glass-card p-6 rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 space-y-4">
           <div class="flex items-center justify-between border-b border-[#486A6E]/30 pb-3">
-            <h4 class="font-display font-bold text-white text-sm">Stage 7: Ready for Post Deployment</h4>
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-300">15 OFFICERS</span>
+            <h4 class="font-display font-bold text-white text-sm">Stage 7: Certified for Post</h4>
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">15 OFFICERS</span>
           </div>
           <div class="space-y-3 text-xs">
-            <div class="p-3 rounded-xl bg-[#072832]/60 border border-[#486A6E]/30 space-y-1">
+            <div class="p-3.5 rounded-xl bg-[#072832]/80 border border-[#486A6E]/40 space-y-1.5">
               <div class="font-bold text-white">Officer Marcus Ramirez (Badge BW-7190)</div>
-              <div class="text-slate-400 text-[11px]">Fully Vetted &amp; Armed Certified · Ready for Assignment</div>
-              <span class="inline-block mt-1 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">READY FOR DISPATCH</span>
+              <div class="text-slate-400 text-[11px]">Fully Vetted &amp; Armed Certified · Standing By</div>
+              <span class="inline-block mt-2 px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold border border-emerald-500/40">READY FOR IMMEDIATE DEPLOYMENT</span>
             </div>
           </div>
         </div>
@@ -340,31 +483,82 @@
 
     <!-- SUB-TAB 4: INCIDENTS DESK -->
     <div id="admin-tab-content-incidents" class="space-y-6 hidden">
-      <div class="flex items-center justify-between">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h3 class="font-display font-bold text-xl text-white">Global Incident Dispatch Desk</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Real-time alerts, physical breach logs, and officer escalation feeds</p>
+          <p class="text-xs text-slate-400 mt-0.5">Live emergency alerts, physical breach logs, and triage actions</p>
         </div>
       </div>
-      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E]/90 shadow-2xl">
+      <div class="overflow-x-auto rounded-2xl border border-[#486A6E]/40 bg-[#0B171E] shadow-2xl">
         <table class="portal-table w-full text-left text-xs">
-          <thead class="bg-[#072832] text-slate-300 font-mono uppercase text-[11px]">
+          <thead>
             <tr>
-              <th class="py-3 px-4">Incident ID</th>
-              <th class="py-3 px-4">Post / Facility</th>
-              <th class="py-3 px-4">Title &amp; Summary</th>
-              <th class="py-3 px-4">Severity</th>
-              <th class="py-3 px-4">Reporting Officer</th>
-              <th class="py-3 px-4">Status</th>
-              <th class="py-3 px-4">Command Action</th>
+              <th>Incident ID</th>
+              <th>Post / Site</th>
+              <th>Title &amp; Summary</th>
+              <th>Severity</th>
+              <th>Reporting Officer</th>
+              <th>Status</th>
+              <th>Command Action</th>
             </tr>
           </thead>
           <tbody id="admin-incidents-tbody" class="divide-y divide-[#486A6E]/20 text-slate-200">
-            <!-- Dynamically populated from Supabase -->
+            <tr>
+              <td><span class="font-mono font-bold text-red-400">INC-2026-0081</span></td>
+              <td><span class="font-mono font-bold text-white">Post P-402</span><br/><span class="text-[10px] text-slate-400">Level B2 Storage</span></td>
+              <td><div class="font-semibold text-white">Unauthorized Access Attempt at Loading Bay Door</div><div class="text-[10px] text-slate-400">Individual challenged by officer; fled without entry.</div></td>
+              <td><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-red-500/20 text-red-300 border border-red-500/40">HIGH PRIORITY</span></td>
+              <td>Officer K. Brooks (BW-6512)</td>
+              <td><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-500/20 text-amber-300">INVESTIGATING</span></td>
+              <td>
+                <button onclick="showToast('Incident INC-2026-0081 marked resolved.', 'success')" class="px-3 py-1.5 rounded-lg bg-emerald-950 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-800 font-bold text-xs transition-all">
+                  Resolve Incident
+                </button>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
     </div>
+
+  </div>
+</div>
+
+<!-- MODAL: EMERGENCY DISPATCH (Admin Console) -->
+<div id="dispatch-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md hidden p-4">
+  <div class="glass-card rounded-2xl border border-red-700/60 bg-[#072832] p-6 max-w-lg w-full space-y-5 text-white shadow-2xl">
+    <div class="flex items-center justify-between border-b border-[#486A6E]/40 pb-3">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🚨</span>
+        <h3 class="font-display font-bold text-lg text-red-400">Emergency Unit Fast-Dispatch</h3>
+      </div>
+      <button id="close-dispatch-modal" class="text-slate-400 hover:text-white text-lg">✕</button>
+    </div>
+    <form id="emergency-dispatch-form" class="space-y-4 text-xs">
+      <div>
+        <label class="hire-form-label text-slate-300" for="disp-sector">Target Sector / Facility</label>
+        <select id="disp-sector" class="hire-form-input bg-[#0B171E] border-[#486A6E]/50 text-white">
+          <option value="Sector 1 — NYC Financial Center">Sector 1 — NYC Financial Center</option>
+          <option value="Sector 2 — Chicago Logistics Hub">Sector 2 — Chicago Logistics Hub</option>
+          <option value="Sector 3 — Los Angeles Harbor Terminal">Sector 3 — Los Angeles Harbor Terminal</option>
+        </select>
+      </div>
+      <div>
+        <label class="hire-form-label text-slate-300" for="disp-unit-type">Unit Type to Deploy</label>
+        <select id="disp-unit-type" class="hire-form-input bg-[#0B171E] border-[#486A6E]/50 text-white">
+          <option value="Armed Mobile Patrol SUV">Armed Mobile Patrol SUV (2 Officers)</option>
+          <option value="K-9 Detection Unit">K-9 Detection Unit + Handler</option>
+          <option value="Tactical Relief Officer">Tactical Armed Relief Officer</option>
+        </select>
+      </div>
+      <div>
+        <label class="hire-form-label text-slate-300" for="disp-reason">Dispatch Reason / Priority Brief</label>
+        <textarea id="disp-reason" rows="2" class="hire-form-input bg-[#0B171E] border-[#486A6E]/50 text-white" placeholder="Immediate reinforcement for perimeter alarm..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary w-full justify-center py-3 bg-red-700 hover:bg-red-600 border border-red-500 font-bold text-white shadow-xl shadow-red-900/40">
+        Transmit Immediate Dispatch Signal →
+      </button>
+    </form>
   </div>
 </div>
 
@@ -1075,41 +1269,46 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('guard-dar-text').value = '';
   });
 
-  // Guard Incident Modal
-  const incModal = document.getElementById('incident-modal');
-  document.getElementById('guard-incident-btn')?.addEventListener('click', () => {
-    incModal.classList.remove('hidden');
+  // Admin Emergency Dispatch Modal
+  const dispatchModal = document.getElementById('dispatch-modal');
+  document.getElementById('btn-open-dispatch')?.addEventListener('click', () => {
+    dispatchModal?.classList.remove('hidden');
   });
-  document.getElementById('close-incident-modal')?.addEventListener('click', () => {
-    incModal.classList.add('hidden');
+  document.getElementById('close-dispatch-modal')?.addEventListener('click', () => {
+    dispatchModal?.classList.add('hidden');
   });
-
-  document.getElementById('guard-incident-form')?.addEventListener('submit', (e) => {
+  document.getElementById('emergency-dispatch-form')?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const severity = document.getElementById('inc-severity').value;
-    const title = document.getElementById('inc-title').value.trim();
-    const desc = document.getElementById('inc-desc').value.trim();
-
-    const incident = {
-      postCode: 'P-401',
-      severity,
-      title,
-      description: desc,
-      officerName: 'Officer D. Reeves',
-      status: 'open'
-    };
-
-    if (window.BulwarkDB) {
-      window.BulwarkDB.logIncident(incident).then(() => {
-        incModal.classList.add('hidden');
-        showToast('🚨 Incident alert logged & dispatched to Command!', 'error');
-        document.getElementById('guard-incident-form').reset();
-      });
-    } else {
-      incModal.classList.add('hidden');
-      showToast('🚨 Incident logged to local feed.', 'error');
-    }
+    const sector = document.getElementById('disp-sector').value;
+    const unit = document.getElementById('disp-unit-type').value;
+    dispatchModal?.classList.add('hidden');
+    showToast(`🚨 Priority Dispatch Transmitted: ${unit} deployed to ${sector}`, 'error');
   });
+
+  // Threat Posture Controls
+  const postStd = document.getElementById('admin-posture-std');
+  const postOverdrive = document.getElementById('admin-posture-overdrive');
+  const postLockdown = document.getElementById('admin-posture-lockdown');
+
+  function setPosture(btn, label, toastType) {
+    [postStd, postOverdrive, postLockdown].forEach(b => {
+      b.className = 'px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition-all';
+    });
+    if (label === 'Standard') {
+      btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 transition-all';
+      showToast('Threat Posture set to STANDARD: Routine patrol frequencies active.', 'success');
+    } else if (label === 'Overdrive') {
+      btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 transition-all';
+      showToast('Threat Posture set to OVERDRIVE: Patrol frequency doubled across all posts.', 'warning');
+    } else {
+      btn.className = 'px-3 py-1.5 rounded-lg text-xs font-bold bg-red-500/20 text-red-300 border border-red-500/40 transition-all';
+      showToast('🚨 Threat Posture set to LOCKDOWN: Access gates sealed, all armed units on perimeter.', 'error');
+    }
+  }
+
+  postStd?.addEventListener('click', () => setPosture(postStd, 'Standard'));
+  postOverdrive?.addEventListener('click', () => setPosture(postOverdrive, 'Overdrive'));
+  postLockdown?.addEventListener('click', () => setPosture(postLockdown, 'Lockdown'));
 });
 </script>
 </body>
