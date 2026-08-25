@@ -91,54 +91,54 @@ function initGlobalAuthUI() {
     return;
   }
 
-  // Find desktop navigation container
-  const navContainer = document.querySelector('header nav .hidden.sm\\:flex') || document.querySelector('header nav div:last-child');
+  // Target the existing portal link in desktop navbar
+  const portalLink = document.querySelector('header nav a[href="portal.html"]') || document.querySelector('header nav a[href="portal"]');
   const mobileDrawerLinks = document.querySelector('#mobile-drawer .flex-col');
 
   if (role) {
-    // Role styling
-    let roleLabel = 'CLIENT';
-    let roleBg = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
-    if (role === 'admin') {
-      roleLabel = '👑 ADMIN';
-      roleBg = 'bg-amber-500/20 text-amber-300 border-amber-500/40';
-    } else if (role === 'guard') {
-      roleLabel = '🛡️ GUARD';
-      roleBg = 'bg-blue-500/20 text-blue-300 border-blue-500/40';
-    } else {
-      roleLabel = '🏢 CLIENT';
-      roleBg = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
-    }
+    // Transform desktop portal button into active dashboard link + compact logout
+    if (portalLink && !document.getElementById('global-signout-btn')) {
+      let roleText = '🏢 Client Portal';
+      let roleHref = 'portal.html';
+      let roleClasses = 'text-[#7CB0AB] border-[#7CB0AB]/40 bg-[#072832]/80 hover:bg-[#072832]';
 
-    // Add Desktop Sign Out button if not already present
-    if (navContainer && !document.getElementById('global-signout-btn')) {
-      const authDiv = document.createElement('div');
-      authDiv.id = 'global-auth-controls';
-      authDiv.className = 'flex items-center gap-2.5';
-      authDiv.innerHTML = `
-        <span class="hidden md:inline-flex px-2.5 py-1 rounded-md text-[11px] font-mono font-bold uppercase border ${roleBg}">
-          ${roleLabel}
-        </span>
-        <button id="global-signout-btn" class="px-3.5 py-2 rounded-xl text-xs font-bold text-red-300 bg-red-950/60 hover:bg-red-900/80 border border-red-800/60 transition-all flex items-center gap-1.5 shadow-sm">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-          Sign Out
-        </button>
+      if (role === 'admin') {
+        roleText = '👑 Admin Command';
+        roleHref = 'portal.html?role=admin';
+        roleClasses = 'text-amber-300 border-amber-500/40 bg-amber-950/40 hover:bg-amber-900/60';
+      } else if (role === 'guard') {
+        roleText = '🛡️ Guard Terminal';
+        roleHref = 'portal.html?role=guard';
+        roleClasses = 'text-blue-300 border-blue-500/40 bg-blue-950/40 hover:bg-blue-900/60';
+      }
+
+      portalLink.href = roleHref;
+      portalLink.className = `px-3.5 py-2.5 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 whitespace-nowrap shadow-sm ${roleClasses}`;
+      portalLink.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> ${roleText}`;
+
+      // Insert compact Sign Out button right after
+      const signoutBtn = document.createElement('button');
+      signoutBtn.id = 'global-signout-btn';
+      signoutBtn.className = 'px-3 py-2.5 rounded-xl text-xs font-bold text-slate-400 hover:text-red-300 hover:bg-red-950/40 border border-slate-700/60 hover:border-red-800/60 transition-all flex items-center gap-1.5 whitespace-nowrap shadow-sm';
+      signoutBtn.innerHTML = `
+        <svg class="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        Sign Out
       `;
-      navContainer.appendChild(authDiv);
-
-      document.getElementById('global-signout-btn')?.addEventListener('click', () => {
+      signoutBtn.addEventListener('click', () => {
         sessionStorage.removeItem('bulwark_auth_role');
         sessionStorage.removeItem('bulwark_auth_user');
         window.location.href = 'index.html';
       });
+
+      portalLink.parentNode.insertBefore(signoutBtn, portalLink.nextSibling);
     }
 
     // Add Mobile Drawer Sign Out button
     if (mobileDrawerLinks && !document.getElementById('mobile-signout-link')) {
       const mobileBtn = document.createElement('button');
       mobileBtn.id = 'mobile-signout-link';
-      mobileBtn.className = 'drawer-link py-3 px-4 rounded-xl bg-red-950/40 text-red-300 hover:bg-red-900/50 border border-red-800/40 font-bold flex items-center justify-between text-left mt-2';
-      mobileBtn.innerHTML = `<span>🚪 Sign Out (${roleLabel})</span> <span>→</span>`;
+      mobileBtn.className = 'drawer-link py-3 px-4 rounded-xl bg-red-950/40 text-red-300 hover:bg-red-900/50 border border-red-800/40 font-bold flex items-center justify-between text-left mt-3 text-xs uppercase tracking-wider';
+      mobileBtn.innerHTML = `<span>🚪 Sign Out (${role.toUpperCase()})</span> <span>→</span>`;
       mobileBtn.addEventListener('click', () => {
         sessionStorage.removeItem('bulwark_auth_role');
         sessionStorage.removeItem('bulwark_auth_user');

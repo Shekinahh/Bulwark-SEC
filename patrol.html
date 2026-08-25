@@ -15,7 +15,7 @@
 <body class="text-slate-900 dark:text-slate-100 dark:text-slate-100 transition-colors duration-300 font-sans antialiased overflow-x-hidden flex flex-col min-h-screen">
 
 <!-- TICKER -->
-<aside class="bg-slate-900 dark:bg-black py-2 px-4 text-xs font-mono text-white border-b border-slate-800 z-50"><div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2"><div class="flex items-center gap-3"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span></span><span class="font-bold text-emerald-400 uppercase tracking-wider">GUARD DISPATCH ACTIVE Â· 24/7 PATROL OPS</span><span class="hidden md:inline text-slate-400">|  Active Officers: 5,420 On Post</span></div><div class="flex items-center gap-4"><a href="tel:+18005550911" class="text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1 transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>+1 (800) 555-0911</a><span class="hidden sm:inline text-slate-400" id="live-utc-clock">UTC 00:00:00</span></div></div></aside>
+<aside class="bg-slate-900 dark:bg-black py-2 px-4 text-xs font-mono text-white border-b border-slate-800 z-50"><div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2"><div class="flex items-center gap-3"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span></span><span class="font-bold text-emerald-400 uppercase tracking-wider">GUARD DISPATCH ACTIVE · 24/7 PATROL OPS</span><span class="hidden md:inline text-slate-400">|  Active Officers: 5,420 On Post</span></div><div class="flex items-center gap-4"><a href="tel:+18005550911" class="text-brand-400 hover:text-brand-300 font-semibold flex items-center gap-1 transition-colors"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>+1 (800) 555-0911</a><span class="hidden sm:inline text-slate-400" id="live-utc-clock">UTC 00:00:00</span></div></div></aside>
 
 <!-- NAV -->
 <header class="sticky top-0 z-40 bg-white/95 dark:bg-obsidian-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-colors duration-300">
@@ -36,7 +36,7 @@
     </div>
     <div class="flex items-center gap-2 lg:hidden"><button id="mobile-theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg></button><button id="mobile-menu-btn" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
   </nav>
-  <div id="mobile-drawer" class="fixed inset-0 z-50 translate-x-full transition-transform duration-300 lg:hidden"><div id="drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div><div class="relative w-4/5 max-w-sm ml-auto h-full bg-white dark:bg-obsidian-800 border-l border-slate-200 dark:border-slate-800 shadow-2xl p-6 flex flex-col z-10"><div class="flex items-center justify-between pb-5 border-b border-slate-200 dark:border-slate-800 mb-5"><span class="font-display font-bold text-slate-900 dark:text-white">Bulwark SEC</span><button id="close-drawer-btn" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div><div class="flex flex-col gap-2 font-medium text-slate-800 dark:text-slate-200 flex-1"><a href="index.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ  Home</a><a href="services.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ›¡ï¸ Guard Services</a><a href="patrol.html" class="drawer-link py-3 px-4 rounded-xl bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-300 font-semibold">ðŸš” Patrol Operations</a><a href="estimator.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ“Š Staffing Estimator</a><a href="vetting.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">âœ… Officer Vetting</a><a href="hire.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ“‹ Hire Guards</a><a href="portal.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ” Sign In / Portals</a></div><a href="hire.html" class="drawer-link mt-6 block text-center py-3.5 rounded-xl bg-brand-600 text-white font-bold shadow-lg shadow-brand-600/30">Deploy Guard Forces â†’</a></div></div>
+  <div id="mobile-drawer" class="fixed inset-0 z-50 translate-x-full transition-transform duration-300 lg:hidden"><div id="drawer-backdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div><div class="relative w-4/5 max-w-sm ml-auto h-full bg-white dark:bg-obsidian-800 border-l border-slate-200 dark:border-slate-800 shadow-2xl p-6 flex flex-col z-10"><div class="flex items-center justify-between pb-5 border-b border-slate-200 dark:border-slate-800 mb-5"><span class="font-display font-bold text-slate-900 dark:text-white">Bulwark SEC</span><button id="close-drawer-btn" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 dark:hover:text-white"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button></div><div class="flex flex-col gap-2 font-medium text-slate-800 dark:text-slate-200 flex-1"><a href="index.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ  Home</a><a href="services.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ›¡ï¸ Guard Services</a><a href="patrol.html" class="drawer-link py-3 px-4 rounded-xl bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-300 font-semibold">🚓 Patrol Operations</a><a href="estimator.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">📊 Staffing Estimator</a><a href="vetting.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">✅ Officer Vetting</a><a href="hire.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">📋 Hire Guards</a><a href="portal.html" class="drawer-link py-3 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">ðŸ” Sign In / Portals</a></div><a href="hire.html" class="drawer-link mt-6 block text-center py-3.5 rounded-xl bg-brand-600 text-white font-bold shadow-lg shadow-brand-600/30">Deploy Guard Forces →</a></div></div>
 </header>
 
 <!-- PAGE HERO -->
@@ -122,27 +122,27 @@
           <!-- Guard Post Nodes -->
           <div class="absolute inset-0">
             <!-- NYC -->
-            <button class="threat-node absolute" style="left:23%;top:32%;" data-city="New York â€” Financial District" data-status="3 Guards On Post" data-traffic="HIGH SECURITY">
+            <button class="threat-node absolute" style="left:23%;top:32%;" data-city="New York — Financial District" data-status="3 Guards On Post" data-traffic="HIGH SECURITY">
               <span class="flex h-5 w-5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span><span class="relative inline-flex rounded-full h-5 w-5 bg-emerald-500 border-2 border-white shadow-lg shadow-emerald-500/50"></span></span>
             </button>
             <!-- London -->
-            <button class="threat-node absolute" style="left:44%;top:22%;" data-city="London â€” Corporate Campus" data-status="4 Guards On Post" data-traffic="CORPORATE">
+            <button class="threat-node absolute" style="left:44%;top:22%;" data-city="London — Corporate Campus" data-status="4 Guards On Post" data-traffic="CORPORATE">
               <span class="flex h-5 w-5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-60"></span><span class="relative inline-flex rounded-full h-5 w-5 bg-brand-500 border-2 border-white shadow-lg shadow-brand-500/50"></span></span>
             </button>
             <!-- Zurich -->
-            <button class="threat-node absolute" style="left:49%;top:26%;" data-city="Zurich â€” Vault Facility" data-status="2 Armed Guards + K9" data-traffic="MAXIMUM SECURE">
+            <button class="threat-node absolute" style="left:49%;top:26%;" data-city="Zurich — Vault Facility" data-status="2 Armed Guards + K9" data-traffic="MAXIMUM SECURE">
               <span class="flex h-5 w-5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-60"></span><span class="relative inline-flex rounded-full h-5 w-5 bg-amber-500 border-2 border-white shadow-lg shadow-amber-500/50"></span></span>
             </button>
             <!-- Dubai -->
-            <button class="threat-node absolute" style="left:59%;top:40%;" data-city="Dubai â€” Logistics Hub" data-status="5 Guards + 2 Patrol" data-traffic="CARGO ACTIVE">
+            <button class="threat-node absolute" style="left:59%;top:40%;" data-city="Dubai — Logistics Hub" data-status="5 Guards + 2 Patrol" data-traffic="CARGO ACTIVE">
               <span class="flex h-5 w-5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"></span><span class="relative inline-flex rounded-full h-5 w-5 bg-emerald-500 border-2 border-white shadow-lg shadow-emerald-500/50"></span></span>
             </button>
             <!-- Singapore -->
-            <button class="threat-node absolute" style="left:72%;top:52%;" data-city="Singapore â€” Port Authority" data-status="6 Guards On Dock" data-traffic="PORT PATROL">
+            <button class="threat-node absolute" style="left:72%;top:52%;" data-city="Singapore — Port Authority" data-status="6 Guards On Dock" data-traffic="PORT PATROL">
               <span class="flex h-5 w-5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-60"></span><span class="relative inline-flex rounded-full h-5 w-5 bg-brand-500 border-2 border-white shadow-lg shadow-brand-500/50"></span></span>
             </button>
             <!-- Tokyo -->
-            <button class="threat-node absolute" style="left:80%;top:30%;" data-city="Tokyo â€” Data Compound" data-status="4 Guards + CPO Detail" data-traffic="VIP PRESENT">
+            <button class="threat-node absolute" style="left:80%;top:30%;" data-city="Tokyo — Data Compound" data-status="4 Guards + CPO Detail" data-traffic="VIP PRESENT">
               <span class="flex h-5 w-5"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-60"></span><span class="relative inline-flex rounded-full h-5 w-5 bg-purple-500 border-2 border-white shadow-lg shadow-purple-500/50"></span></span>
             </button>
           </div>
@@ -151,8 +151,8 @@
           <div class="absolute bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 p-4 font-mono text-xs">
             <div class="flex flex-wrap items-center justify-between gap-3">
               <div><span class="text-slate-500">SELECTED POST:</span> <span class="text-white font-bold" id="inspect-city">Click a node to inspect</span></div>
-              <div><span class="text-slate-500">STATUS:</span> <span class="text-emerald-400 font-bold" id="inspect-status">â€”</span></div>
-              <div><span class="text-slate-500">TRAFFIC:</span> <span class="text-brand-400 font-bold" id="inspect-traffic">â€”</span></div>
+              <div><span class="text-slate-500">STATUS:</span> <span class="text-emerald-400 font-bold" id="inspect-status">—</span></div>
+              <div><span class="text-slate-500">TRAFFIC:</span> <span class="text-brand-400 font-bold" id="inspect-traffic">—</span></div>
             </div>
           </div>
         </div>
@@ -180,7 +180,7 @@
           </div>
           <div class="log-terminal-body" id="live-soc-stream">
             <div class="flex items-center justify-between p-2 rounded bg-slate-800/80 border border-slate-700/80 text-[11px]"><span class="text-slate-500">13:54:30</span><span class="text-slate-300 flex-1 mx-2">Officer Vance #402: North Gate Vehicle Checkpoint Cleared</span><span class="text-emerald-400 font-bold">VERIFIED</span></div>
-            <div class="flex items-center justify-between p-2 rounded bg-slate-800/80 border border-slate-700/80 text-[11px]"><span class="text-slate-500">13:53:15</span><span class="text-slate-300 flex-1 mx-2">Patrol Alpha-2: Industrial Park Sweep Complete â€” No Incidents</span><span class="text-emerald-400 font-bold">SECURE</span></div>
+            <div class="flex items-center justify-between p-2 rounded bg-slate-800/80 border border-slate-700/80 text-[11px]"><span class="text-slate-500">13:53:15</span><span class="text-slate-300 flex-1 mx-2">Patrol Alpha-2: Industrial Park Sweep Complete — No Incidents</span><span class="text-emerald-400 font-bold">SECURE</span></div>
             <div class="flex items-center justify-between p-2 rounded bg-slate-800/80 border border-slate-700/80 text-[11px]"><span class="text-slate-500">13:51:44</span><span class="text-slate-300 flex-1 mx-2">K9 Team Delta: Cargo Bay Explosive Sweep Nominal</span><span class="text-emerald-400 font-bold">ALL CLEAR</span></div>
             <div class="flex items-center justify-between p-2 rounded bg-slate-800/80 border border-slate-700/80 text-[11px]"><span class="text-slate-500">13:49:10</span><span class="text-slate-300 flex-1 mx-2">Lobby Concierge: Visitor Badge #VB-0041 Credential Logged</span><span class="text-brand-400 font-bold">AUTHORIZED</span></div>
             <div class="flex items-center justify-between p-2 rounded bg-slate-800/80 border border-slate-700/80 text-[11px]"><span class="text-slate-500">13:47:00</span><span class="text-slate-300 flex-1 mx-2">Supervisor Field Audit: Post #104 Guard Alert &amp; On Duty</span><span class="text-emerald-400 font-bold">VERIFIED</span></div>
@@ -212,7 +212,7 @@
                 <span class="text-xs font-mono font-bold text-slate-600 dark:text-slate-400">UNIT CHARLIE-3</span>
                 <span class="badge-amber px-2 py-0.5 rounded-full text-[10px] font-bold">RESPONDING</span>
               </div>
-              <div class="text-sm font-semibold text-slate-900 dark:text-white">North Harbor â€” Alarm</div>
+              <div class="text-sm font-semibold text-slate-900 dark:text-white">North Harbor — Alarm</div>
               <div class="text-xs text-slate-500 mt-1">ETA: 8 minutes</div>
             </div>
             <div class="p-4 rounded-xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800">
@@ -236,13 +236,13 @@
     <div class="text-center space-y-5 mb-20">
       <div class="section-label mx-auto">How It Works</div>
       <h2 class="font-display font-extrabold text-4xl sm:text-5xl text-slate-900 dark:text-white">The Bulwark Patrol Methodology</h2>
-      <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Every patrol is randomized, documented, and delivered with proof â€” no set patterns that criminals can exploit.</p>
+      <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Every patrol is randomized, documented, and delivered with proof — no set patterns that criminals can exploit.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
       <div class="space-y-4 text-center">
         <div class="w-16 h-16 mx-auto rounded-2xl bg-brand-50 dark:bg-brand-950/80 border border-brand-200 dark:border-brand-800 flex items-center justify-center"><svg class="w-8 h-8 text-brand-600 dark:text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg></div>
         <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">Random Schedule Generation</h3>
-        <p class="text-sm text-slate-500 leading-relaxed">Each shift's patrol schedule is algorithmically randomized so no two nights follow the same route â€” defeating surveillance by intruders.</p>
+        <p class="text-sm text-slate-500 leading-relaxed">Each shift's patrol schedule is algorithmically randomized so no two nights follow the same route — defeating surveillance by intruders.</p>
       </div>
       <div class="space-y-4 text-center">
         <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 flex items-center justify-center"><svg class="w-8 h-8 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
@@ -252,19 +252,19 @@
       <div class="space-y-4 text-center">
         <div class="w-16 h-16 mx-auto rounded-2xl bg-amber-50 dark:bg-amber-950/80 border border-amber-200 dark:border-amber-800 flex items-center justify-center"><svg class="w-8 h-8 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8H2a56.355 56.355 0 000 4h3m10-4h3a56.355 56.355 0 010 4h-3m-6-4h.01M9 16H5a2 2 0 00-2 2v2"/></svg></div>
         <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">NFC Checkpoint Scanning</h3>
-        <p class="text-sm text-slate-500 leading-relaxed">Officers tap NFC tags at mandatory physical checkpoints â€” creating an immutable, time-stamped log of every interior and exterior post visited.</p>
+        <p class="text-sm text-slate-500 leading-relaxed">Officers tap NFC tags at mandatory physical checkpoints — creating an immutable, time-stamped log of every interior and exterior post visited.</p>
       </div>
       <div class="space-y-4 text-center">
         <div class="w-16 h-16 mx-auto rounded-2xl bg-red-50 dark:bg-red-950/80 border border-red-200 dark:border-red-800 flex items-center justify-center"><svg class="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg></div>
         <h3 class="font-display font-bold text-xl text-slate-900 dark:text-white">Instant Alarm Dispatch</h3>
-        <p class="text-sm text-slate-500 leading-relaxed">When an alarm triggers, our nearest patrol unit is immediately dispatched â€” arriving in under 15 minutes to verify and respond before police.</p>
+        <p class="text-sm text-slate-500 leading-relaxed">When an alarm triggers, our nearest patrol unit is immediately dispatched — arriving in under 15 minutes to verify and respond before police.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="site-footer"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-2 md:grid-cols-4 gap-10 pb-12 border-b border-slate-800"><div class="col-span-2 md:col-span-1 space-y-4"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-brand-600 flex items-center justify-center"><svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg></div><span class="font-display font-bold text-white">BULWARK SEC</span></div><p class="text-sm text-slate-500 leading-relaxed">Fortifying Your Physical Assets. Licensed manned guarding since 2008.</p></div><div class="space-y-3"><h4 class="text-white font-bold text-sm uppercase tracking-wider">Services</h4><div class="space-y-2 text-sm text-slate-500"><a href="services.html" class="block hover:text-slate-300 transition-colors">Armed Officers</a><a href="services.html" class="block hover:text-slate-300 transition-colors">Executive Protection</a><a href="services.html" class="block hover:text-slate-300 transition-colors">Mobile Patrols</a><a href="services.html" class="block hover:text-slate-300 transition-colors">K-9 Units</a></div></div><div class="space-y-3"><h4 class="text-white font-bold text-sm uppercase tracking-wider">Company</h4><div class="space-y-2 text-sm text-slate-500"><a href="vetting.html" class="block hover:text-slate-300 transition-colors">Officer Vetting</a><a href="estimator.html" class="block hover:text-slate-300 transition-colors">Staffing Estimator</a><a href="portal.html" class="block hover:text-slate-300 transition-colors">Client Portal</a></div></div><div class="space-y-3"><h4 class="text-white font-bold text-sm uppercase tracking-wider">Contact</h4><div class="space-y-2 text-sm text-slate-500"><p>1 Guard Plaza, Suite 2400</p><p>New York, NY 10001</p><a href="hire.html" class="inline-block mt-3 px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold text-xs hover:bg-brand-700 transition-colors">Request Coverage â†’</a></div></div></div><div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600"><p>Â© 2026 Bulwark SEC, Inc. All rights reserved.</p></div></div></footer>
+<footer class="site-footer"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"><div class="grid grid-cols-2 md:grid-cols-4 gap-10 pb-12 border-b border-slate-800"><div class="col-span-2 md:col-span-1 space-y-4"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded-lg bg-brand-600 flex items-center justify-center"><svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 16l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg></div><span class="font-display font-bold text-white">BULWARK SEC</span></div><p class="text-sm text-slate-500 leading-relaxed">Fortifying Your Physical Assets. Licensed manned guarding since 2008.</p></div><div class="space-y-3"><h4 class="text-white font-bold text-sm uppercase tracking-wider">Services</h4><div class="space-y-2 text-sm text-slate-500"><a href="services.html" class="block hover:text-slate-300 transition-colors">Armed Officers</a><a href="services.html" class="block hover:text-slate-300 transition-colors">Executive Protection</a><a href="services.html" class="block hover:text-slate-300 transition-colors">Mobile Patrols</a><a href="services.html" class="block hover:text-slate-300 transition-colors">K-9 Units</a></div></div><div class="space-y-3"><h4 class="text-white font-bold text-sm uppercase tracking-wider">Company</h4><div class="space-y-2 text-sm text-slate-500"><a href="vetting.html" class="block hover:text-slate-300 transition-colors">Officer Vetting</a><a href="estimator.html" class="block hover:text-slate-300 transition-colors">Staffing Estimator</a><a href="portal.html" class="block hover:text-slate-300 transition-colors">Client Portal</a></div></div><div class="space-y-3"><h4 class="text-white font-bold text-sm uppercase tracking-wider">Contact</h4><div class="space-y-2 text-sm text-slate-500"><p>1 Guard Plaza, Suite 2400</p><p>New York, NY 10001</p><a href="hire.html" class="inline-block mt-3 px-4 py-2 rounded-lg bg-brand-600 text-white font-semibold text-xs hover:bg-brand-700 transition-colors">Request Coverage →</a></div></div></div><div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600"><p>Â© 2026 Bulwark SEC, Inc. All rights reserved.</p></div></div></footer>
 
 <div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
   simulateBtn?.addEventListener('click', () => {
     const events = [
       { txt: 'Unauthorized Perimeter Trespasser Detected', status: 'APPREHENDED', amber: true },
-      { txt: 'Loading Dock Alarm Trigger â€” Unit Bravo Responding', status: 'ON SCENE', amber: true },
+      { txt: 'Loading Dock Alarm Trigger — Unit Bravo Responding', status: 'ON SCENE', amber: true },
       { txt: 'VIP Convoy Departure Escort Initiated', status: 'CPO ACTIVE', amber: false },
       { txt: 'Suspicious Vehicle at North Gate', status: 'INTERCEPTED', amber: true },
     ];
@@ -316,16 +316,16 @@ document.addEventListener('DOMContentLoaded', () => {
     el.innerHTML = `<span class="text-slate-500">${t}</span><span class="text-slate-200 font-semibold flex-1 mx-2">${evt.txt}</span><span class="text-amber-400 font-bold">${evt.status}</span>`;
     socStream?.prepend(el);
     if (socStream && socStream.children.length > 8) socStream.removeChild(socStream.lastElementChild);
-    showToast(`INCIDENT: ${evt.txt} â€” ${evt.status}`, 'error');
+    showToast(`INCIDENT: ${evt.txt} — ${evt.status}`, 'error');
   });
 
   // Auto log feed
   const logEvents = [
     { msg: 'NFC Checkpoint Scanned at Post #202', status: 'CONFIRMED', node: 'NYC Tower' },
-    { msg: 'Perimeter Gate Locked â€” End of Business', status: 'SECURE', node: 'London Campus' },
-    { msg: 'Roving Foot Patrol Completed â€” Level 3', status: 'ALL CLEAR', node: 'Zurich Vault' },
-    { msg: 'Guard Shift Handover â€” New Officer On Post', status: 'VERIFIED', node: 'Singapore Port' },
-    { msg: 'CCTV Operator: Quad Feed Active â€” No Anomalies', status: 'NOMINAL', node: 'Tokyo Compound' },
+    { msg: 'Perimeter Gate Locked — End of Business', status: 'SECURE', node: 'London Campus' },
+    { msg: 'Roving Foot Patrol Completed — Level 3', status: 'ALL CLEAR', node: 'Zurich Vault' },
+    { msg: 'Guard Shift Handover — New Officer On Post', status: 'VERIFIED', node: 'Singapore Port' },
+    { msg: 'CCTV Operator: Quad Feed Active — No Anomalies', status: 'NOMINAL', node: 'Tokyo Compound' },
   ];
   setInterval(() => {
     const evt = logEvents[Math.floor(Math.random() * logEvents.length)];
