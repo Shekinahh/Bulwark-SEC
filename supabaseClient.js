@@ -26,7 +26,7 @@ const BulwarkDB = {
   },
 
   /**
-   * 1. HIRE & QUOTE REQUESTS (hire.html, estimator.html)
+   * 1. HIRE & QUOTE REQUESTS (hire.html, estimator.html, Admin Portal)
    */
   async submitGuardRequest(formData) {
     const client = getSupabaseClient();
@@ -63,6 +63,28 @@ const BulwarkDB = {
     return { success: true, data };
   },
 
+  async fetchGuardRequests() {
+    const client = getSupabaseClient();
+    if (!client) return { data: null, error: 'Client unavailable' };
+    const { data, error } = await client
+      .from('guard_requests')
+      .select('*')
+      .order('created_at', { ascending: false });
+    return { data, error };
+  },
+
+  async updateGuardRequestStatus(id, newStatus) {
+    const client = getSupabaseClient();
+    if (!client) return { success: true, simulated: true };
+    const { data, error } = await client
+      .from('guard_requests')
+      .update({ status: newStatus })
+      .eq('id', id)
+      .select();
+    if (error) throw error;
+    return { success: true, data };
+  },
+
   /**
    * 2. ACTIVE GUARD POSTS (portal.html, patrol.html)
    */
@@ -81,6 +103,18 @@ const BulwarkDB = {
 
     const { data, error } = await query;
     return { data, error };
+  },
+
+  async updatePostCheckin(postCode, status = 'ON_DUTY') {
+    const client = getSupabaseClient();
+    if (!client) return { success: true, simulated: true };
+    const { data, error } = await client
+      .from('guard_posts')
+      .update({ status, last_check_in: new Date().toISOString() })
+      .eq('post_code', postCode)
+      .select();
+    if (error) throw error;
+    return { success: true, data };
   },
 
   /**
@@ -127,6 +161,18 @@ const BulwarkDB = {
     return { success: true, data };
   },
 
+  async updateIncidentStatus(incidentNumber, status) {
+    const client = getSupabaseClient();
+    if (!client) return { success: true, simulated: true };
+    const { data, error } = await client
+      .from('incident_reports')
+      .update({ status })
+      .eq('incident_number', incidentNumber)
+      .select();
+    if (error) throw error;
+    return { success: true, data };
+  },
+
   /**
    * 4. GUARD TOUR & NFC CHECKPOINTS (portal.html)
    */
@@ -144,8 +190,32 @@ const BulwarkDB = {
     return { data, error };
   },
 
+  async logNfcScan(scanData) {
+    const client = getSupabaseClient();
+    if (!client) return { success: true, data: scanData, simulated: true };
+
+    const { data, error } = await client
+      .from('guard_tour_scans')
+      .insert([
+        {
+          post_code: scanData.postCode || 'P-401',
+          officer_name: scanData.officerName || 'Officer D. Reeves',
+          checkpoint_name: scanData.checkpointName,
+          nfc_tag_uid: scanData.nfcTag || ('NFC-' + Math.floor(Math.random()*900000+100000)),
+          gps_lat: scanData.gpsLat || 40.7580,
+          gps_lng: scanData.gpsLng || -73.9855,
+          status: 'VERIFIED',
+          scanned_at: new Date().toISOString()
+        }
+      ])
+      .select();
+
+    if (error) throw error;
+    return { success: true, data };
+  },
+
   /**
-   * 5. OFFICER RECRUITMENT & VETTING (vetting.html)
+   * 5. OFFICER RECRUITMENT & VETTING (vetting.html, Admin Portal)
    */
   async submitOfficerApplication(applicant) {
     const client = getSupabaseClient();
@@ -160,11 +230,38 @@ const BulwarkDB = {
           phone: applicant.phone,
           guard_card_number: applicant.guardCardNumber || null,
           military_law_enforcement_exp: !!applicant.priorService,
+          years_experience: parseInt(applicant.yearsExp || 0, 10),
           vetting_stage: 'stage_1_identity',
           status: 'under_review',
           applied_at: new Date().toISOString()
         }
       ])
+      .select();
+
+    if (error) throw error;
+    return { success: true, data };
+  },
+
+  async fetchOfficerApplicants() {
+    const client = getSupabaseClient();
+    if (!client) return { data: null, error: 'Client unavailable' };
+
+    const { data, error } = await client
+      .from('officer_applicants')
+      .select('*')
+      .order('applied_at', { ascending: false });
+
+    return { data, error };
+  },
+
+  async updateApplicantStage(applicantId, vetting_stage, status = 'under_review') {
+    const client = getSupabaseClient();
+    if (!client) return { success: true, simulated: true };
+
+    const { data, error } = await client
+      .from('officer_applicants')
+      .update({ vetting_stage, status })
+      .eq('id', applicantId)
       .select();
 
     if (error) throw error;
